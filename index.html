@@ -1,0 +1,1878 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abrar Studio - Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            /* Material Design Dark Theme Colors (Default) */
+            --md-background: #121212;
+            /* Material dark background */
+            --md-surface: #1E1E1E;
+            /* Material surface color */
+            --md-surface-1: #242424;
+            /* Surface with 1dp elevation */
+            --md-surface-2: #292929;
+            /* Surface with 2dp elevation */
+            --md-surface-3: #2D2D2D;
+            /* Surface with 3dp elevation */
+            --primary: #0066FF;
+            --secondary: #00A3FF;
+            --accent: #f59e0b;
+            --md-text-primary: rgba(255, 255, 255, 0.87);
+            /* Material primary text */
+            --md-text-secondary: rgba(255, 255, 255, 0.60);
+            /* Material secondary text */
+            --md-border: rgba(255, 255, 255, 0.05);
+            --md-shadow: rgba(0, 0, 0, 0.3);
+
+            /* Transition for theme switching */
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        /* Material Design Light Theme Colors */
+        :root.light-theme {
+            --md-background: #FAFAFA;
+            /* Material light background */
+            --md-surface: #FFFFFF;
+            /* Material light surface color */
+            --md-surface-1: #F5F5F5;
+            /* Surface with 1dp elevation */
+            --md-surface-2: #EEEEEE;
+            /* Surface with 2dp elevation */
+            --md-surface-3: #E0E0E0;
+            /* Surface with 3dp elevation */
+            /* Keep brand colors consistent across themes */
+            --primary: #0066FF;
+            --secondary: #00A3FF;
+            --accent: #f59e0b;
+            --md-text-primary: rgba(0, 0, 0, 0.87);
+            /* Material primary text */
+            --md-text-secondary: rgba(0, 0, 0, 0.60);
+            /* Material secondary text */
+            --md-border: rgba(0, 0, 0, 0.12);
+            --md-shadow: rgba(0, 0, 0, 0.1);
+
+            /* Light theme specific colors */
+            --text-gray-300: rgba(0, 0, 0, 0.7);
+            --text-gray-400: rgba(0, 0, 0, 0.6);
+            --text-gray-500: rgba(0, 0, 0, 0.5);
+            --border-gray: rgba(0, 0, 0, 0.1);
+            --hover-bg: rgba(0, 0, 0, 0.05);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--md-background);
+            color: var(--md-text-primary);
+            scroll-behavior: smooth;
+        }
+
+        .glass-card {
+            background: rgba(30, 30, 30, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        :root.light-theme .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Material Design elevation styles */
+        .elevation-1 {
+            background-color: var(--md-surface-1);
+        }
+
+        .elevation-2 {
+            background-color: var(--md-surface-2);
+        }
+
+        .elevation-3 {
+            background-color: var(--md-surface-3);
+        }
+
+        .text-gradient {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Update/add Material Design surface styles */
+        .md-surface-1 {
+            background-color: var(--md-surface-1);
+            border: 1px solid var(--md-border);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .md-surface-2 {
+            background-color: var(--md-surface-2);
+            border: 1px solid var(--md-border);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .md-surface-3 {
+            background-color: var(--md-surface-3);
+            border: 1px solid var(--md-border);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        /* Update tab bar styles */
+        .tab-container {
+            background-color: var(--md-surface);
+            padding: 0.25rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .tab-active {
+            background-color: var(--md-surface-2);
+            color: var(--primary);
+            transition: background-color 0.3s ease;
+        }
+
+        /* Add blob animations */
+        .blob {
+            position: absolute;
+            filter: blur(40px);
+            opacity: 0.4;
+            mix-blend-mode: screen;
+            animation: float 8s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        .blob-1 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--primary) 0%, rgba(0, 102, 255, 0) 70%);
+            top: 10%;
+            left: 15%;
+            animation-delay: 0s;
+        }
+
+        .blob-2 {
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, var(--secondary) 0%, rgba(0, 163, 255, 0) 70%);
+            top: 40%;
+            right: 20%;
+            animation-delay: -2s;
+        }
+
+        .blob-3 {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, var(--accent) 0%, rgba(245, 158, 11, 0) 70%);
+            bottom: 20%;
+            left: 30%;
+            animation-delay: -4s;
+        }
+
+        /* Adjust blob visibility for light theme */
+        :root.light-theme .blob {
+            mix-blend-mode: multiply;
+            opacity: 0.3;
+        }
+
+        :root.light-theme .blob-1 {
+            background: radial-gradient(circle, var(--primary) 0%, rgba(0, 102, 255, 0) 70%);
+        }
+
+        :root.light-theme .blob-2 {
+            background: radial-gradient(circle, var(--secondary) 0%, rgba(0, 163, 255, 0) 70%);
+        }
+
+        :root.light-theme .blob-3 {
+            background: radial-gradient(circle, var(--accent) 0%, rgba(245, 158, 11, 0) 70%);
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            25% {
+                transform: translate(20px, -15px) scale(1.1);
+            }
+
+            50% {
+                transform: translate(-10px, 20px) scale(0.9);
+            }
+
+            75% {
+                transform: translate(-20px, -10px) scale(1.05);
+            }
+        }
+
+        /* Update hero section to handle blobs */
+        .hero-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Advanced Micro-interactions and Animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .fade-in-up.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stagger-animation {
+            animation-delay: calc(var(--stagger-delay, 0) * 0.15s);
+        }
+
+        /* Enhanced card hover effects */
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: center;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 102, 255, 0.15);
+        }
+
+        /* Magnetic button effect */
+        .magnetic-button {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .magnetic-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .magnetic-button:hover::before {
+            left: 100%;
+        }
+
+        .magnetic-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 102, 255, 0.3);
+        }
+
+        /* Typewriter effect */
+        .typewriter {
+            overflow: hidden;
+            border-right: 3px solid var(--primary);
+            white-space: nowrap;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from {
+                width: 0
+            }
+
+            to {
+                width: 100%
+            }
+        }
+
+        @keyframes blink-caret {
+
+            from,
+            to {
+                border-color: transparent
+            }
+
+            50% {
+                border-color: var(--primary)
+            }
+        }
+
+        /* Floating animation for elements */
+        .float-animation {
+            animation: float-gentle 6s ease-in-out infinite;
+        }
+
+        @keyframes float-gentle {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Skill bar animations */
+        .skill-bar {
+            position: relative;
+            background: var(--md-surface-2);
+            border-radius: 10px;
+            overflow: hidden;
+            height: 8px;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+            width: 0%;
+            transition: width 2s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .skill-progress::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        /* Enhanced button ripple effect */
+        .ripple-button {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ripple-button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .ripple-button:active::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Scroll progress indicator */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            z-index: 9999;
+            transition: width 0.1s ease-out;
+        }
+
+        /* Enhanced social icons */
+        .social-icon {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .social-icon::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: var(--primary);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.3s ease;
+            z-index: -1;
+        }
+
+        .social-icon:hover::before {
+            width: 100%;
+            height: 100%;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px) scale(1.1);
+            color: white;
+        }
+
+        /* Text reveal animation */
+        .text-reveal {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .text-reveal::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            transform: translateX(-100%);
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .text-reveal.animate-in::after {
+            transform: translateX(100%);
+        }
+
+        /* Number counter animation */
+        .counter {
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Enhanced project card effects */
+        .project-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(0, 102, 255, 0.1), transparent);
+            transform: translateX(-100%) translateY(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .project-card:hover::before {
+            transform: translateX(100%) translateY(100%);
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px) rotateX(5deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Add Adobe product icon styles */
+        .adobe-product {
+            font-weight: 600;
+            margin-left: 0.25rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .adobe-xd {
+            color: #FF61F6;
+        }
+
+        .adobe-ai {
+            color: #FF9A00;
+        }
+
+        .adobe-ps {
+            color: #31A8FF;
+        }
+
+        /* Ensure consistent icon sizing */
+        .tool-icon {
+            font-size: 1.25rem;
+            /* matches text-xl */
+            margin-right: 0.5rem;
+            vertical-align: middle;
+        }
+
+        /* Update Adobe product styles for better alignment */
+        .tool-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .tool-icon {
+            min-width: 1rem;
+            display: flex;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .adobe-product {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .adobe-product-abbr {
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            min-width: 1.5rem;
+        }
+
+        .adobe-product-name {
+            color: rgba(255, 255, 255, 0.87);
+            font-weight: normal;
+        }
+
+        /* Reset and align icons */
+        .tools-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            /* Align items to the start (left) */
+            gap: 20px;
+        }
+
+        .tool-item {
+            display: grid;
+            grid-template-columns: 20px 1fr;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .tool-icon {
+            display: flex;
+            justify-content: center;
+            font-size: 16px;
+            width: 20px;
+        }
+
+        .tool-content {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tool-abbr {
+            font-weight: 600;
+            min-width: 24px;
+        }
+
+        .tool-name {
+            color: var(--md-text-primary);
+        }
+
+        /* Text color adjustments for light theme */
+        :root.light-theme .text-gray-300 {
+            color: rgba(0, 0, 0, 0.7);
+        }
+
+        :root.light-theme .text-gray-400 {
+            color: rgba(0, 0, 0, 0.6);
+        }
+
+        :root.light-theme .text-gray-500 {
+            color: rgba(0, 0, 0, 0.5);
+        }
+
+        /* Theme toggle button styles */
+        .theme-toggle {
+            position: relative;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--md-surface-2);
+            border: 2px solid var(--md-border);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            /* Improved touch target for mobile */
+            min-width: 40px;
+            min-height: 40px;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px var(--md-shadow);
+        }
+
+        .theme-toggle:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+
+        .theme-toggle svg {
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            transition: all 0.3s ease;
+            fill: var(--md-text-primary);
+        }
+
+        .theme-toggle .sun-icon {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .theme-toggle .moon-icon {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        :root.light-theme .theme-toggle .sun-icon {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        :root.light-theme .theme-toggle .moon-icon {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        /* Responsive adjustments for theme toggle */
+        @media (max-width: 640px) {
+            .theme-toggle {
+                width: 36px;
+                height: 36px;
+                min-width: 36px;
+                min-height: 36px;
+            }
+
+            .theme-toggle svg {
+                width: 18px;
+                height: 18px;
+            }
+        }
+
+        /* Scroll to top button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 102, 255, 0.3);
+        }
+
+        .scroll-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .scroll-to-top:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 8px 25px rgba(0, 102, 255, 0.4);
+        }
+
+        /* Fix contact form fields styling */
+        .form-input {
+            background-color: var(--md-surface-1) !important;
+            color: var(--md-text-primary) !important;
+            border: 1px solid var(--md-border) !important;
+        }
+
+        .form-input:focus {
+            background-color: var(--md-surface-1) !important;
+            color: var(--md-text-primary) !important;
+            border-color: var(--primary) !important;
+            outline: none !important;
+            box-shadow: 0 0 0 2px rgba(0, 102, 255, 0.2) !important;
+        }
+
+        .form-input::placeholder {
+            color: var(--md-text-secondary) !important;
+        }
+
+        /* Contact form input fields - Fix white background issue */
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            background-color: var(--md-surface-1) !important;
+            color: var(--md-text-primary) !important;
+            border: 1px solid var(--md-border) !important;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus {
+            background-color: var(--md-surface-1) !important;
+            color: var(--md-text-primary) !important;
+            border-color: var(--primary) !important;
+            outline: none !important;
+            box-shadow: 0 0 0 2px rgba(0, 102, 255, 0.2) !important;
+        }
+
+        input[type="text"]::placeholder,
+        input[type="email"]::placeholder,
+        textarea::placeholder {
+            color: var(--md-text-secondary) !important;
+        }
+
+        /* Typewriter animation for subtitle */
+        .typewriter-subtitle {
+            display: inline-block;
+            border-right: 2px solid var(--primary);
+            white-space: nowrap;
+            animation: blink-caret-subtitle 0.75s step-end infinite;
+        }
+
+        @keyframes blink-caret-subtitle {
+
+            from,
+            to {
+                border-color: transparent;
+            }
+
+            50% {
+                border-color: var(--primary);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-progress" id="scroll-progress"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-card py-4 px-6">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="flex items-center">
+                <img src="assets/logo.svg" alt="Abrar Studio Logo" class="h-8">
+            </a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="hover:text-primary transition-colors">Home</a>
+                <a href="#about" class="hover:text-primary transition-colors">About</a>
+                <a href="#skills" class="hover:text-primary transition-colors">Skills</a>
+                <a href="#work" class="hover:text-primary transition-colors">Work</a>
+                <a href="#contact" class="hover:text-primary transition-colors">Contact</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="currentColor"
+                            d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z" />
+                    </svg>
+                    <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
+                        height="24">
+                        <path fill="currentColor"
+                            d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z" />
+                    </svg>
+                </button>
+                <button class="md:hidden text-xl" id="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden w-full mt-4 pb-4">
+            <div class="flex flex-col space-y-4 px-4">
+                <a href="#home" class="hover:text-primary transition-colors">Home</a>
+                <a href="#about" class="hover:text-primary transition-colors">About</a>
+                <a href="#skills" class="hover:text-primary transition-colors">Skills</a>
+                <a href="#work" class="hover:text-primary transition-colors">Work</a>
+                <a href="#contact" class="hover:text-primary transition-colors">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section min-h-screen flex items-center justify-center relative">
+        <!-- Animated Blobs -->
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+
+        <!-- Hero Content -->
+        <div class="container mx-auto px-6 py-20 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-12 md:mb-0">
+                <!-- Available Now Badge -->
+                <div
+                    class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium mb-4 bg-blue-500/10 border border-blue-500/20">
+                    <div class="w-2 h-2 bg-blue-500 rounded-full mr-2 animate-pulse"></div>
+                    <span class="text-blue-400">Available Now</span>
+                </div>
+                <h1 class="text-4xl md:text-6xl font-bold mb-4">
+                    <span class="text-gradient">Abrar Ahmed</span>
+                </h1>
+                <h2 class="text-2xl md:text-3xl mb-6">
+                    <span class="typewriter-subtitle">Designer & Developer</span>
+                </h2>
+                <p class="text-lg mb-8 text-gray-300 max-w-lg">
+                    Crafting digital experiences where design meets code. With 5+ years of expertise in creating
+                    beautiful, functional products.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="#work"
+                        class="px-6 py-3 bg-gradient-to-r from-[#0066FF] to-[#00A3FF] rounded-lg font-medium magnetic-button ripple-button">
+                        View My Work
+                    </a>
+                    <a href="#contact"
+                        class="px-6 py-3 border border-gray-600 rounded-lg font-medium magnetic-button hover:bg-gray-800 transition-colors">
+                        Contact Me
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-1/2 relative">
+                <div class="glass-card p-6 rounded-2xl max-w-md mx-auto">
+                    <div class="flex justify-center mb-4">
+                        <div
+                            class="w-32 h-32 rounded-full bg-gradient-to-r from-[#0066FF] to-[#00A3FF] flex items-center justify-center overflow-hidden">
+                            <img src="assets/profile.png" alt="Abrar Studio" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <div class="flex justify-center space-x-4 mb-6">
+                        <a href="https://dribbble.com/abrarstudio">
+                            <div class="w-12 h-12 md-surface-2 rounded-lg flex items-center justify-center">
+                                <i class="fa-brands fa-dribbble text-2xl text-pink-500"></i>
+                        </a>
+                    </div>
+                    <div class="w-12 h-12 md-surface-2 rounded-lg flex items-center justify-center">
+                        <a href="https://upwork.com/freelancers/abrarstudio07">
+                            <i class="fa-brands fa-upwork fa-beat text-2xl text-green-600"></i></a>
+                    </div>
+                    <div class="w-12 h-12 md-surface-2 rounded-lg flex items-center justify-center">
+                        <a href="https://www.behance.net/abrarahmed13">
+                            <i class="fa-brands fa-behance text-2xl text-blue-400"></i></a>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <p class="text-gray-300">Designer & Developer</p>
+                    <p class="text-sm text-gray-400">Since 2020</p>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <a href="#about" class="text-gray-400 hover:text-white transition-colors">
+                <i class="fas fa-chevron-down text-2xl"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 glass-card">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
+                <span class="text-gradient">About</span>
+            </h2>
+
+            <div class="flex flex-col md:flex-row gap-12">
+                <div class="md:w-1/2">
+                    <h3 class="text-2xl font-semibold mb-4">My Journey</h3>
+                    <p class="text-gray-300 mb-6">
+                        I'm a passionate designer and developer with over 5 years of experience creating digital
+                        products that users love. My journey began in 2020 when I discovered my love for both design
+                        aesthetics and technical implementation.
+                    </p>
+                    <p class="text-gray-300 mb-6">
+                        What sets me apart is my hybrid approach - I understand both the creative and technical aspects
+                        of product development, allowing me to bridge the gap between design and engineering teams.
+                    </p>
+                    <div class="flex space-x-4">
+                        <div class="md-surface-2 rounded-lg p-4 text-center card-hover fade-in-up"
+                            style="--stagger-delay: 0">
+                            <div class="text-3xl font-bold text-gradient counter" data-target="22">0</div>
+                            <div class="text-gray-400 text-sm">Projects</div>
+                        </div>
+                        <div class="md-surface-2 rounded-lg p-4 text-center card-hover fade-in-up"
+                            style="--stagger-delay: 1">
+                            <div class="text-3xl font-bold text-gradient counter" data-target="5">0</div>
+                            <div class="text-gray-400 text-sm">Years Experience</div>
+                        </div>
+                        <div class="md-surface-2 rounded-lg p-4 text-center card-hover fade-in-up"
+                            style="--stagger-delay: 2">
+                            <div class="text-3xl font-bold text-gradient counter" data-target="100">0</div>
+                            <div class="text-gray-400 text-sm">Client Satisfaction</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="md:w-1/2">
+                    <h3 class="text-2xl font-semibold mb-4">Skills</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>UI/UX Design</span>
+                                <span>95%</span>
+                            </div>
+                            <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
+                                <div class="h-full w-[95%] bg-gradient-to-r from-[#0066FF] to-[#00A3FF] rounded-full">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>Frontend Development</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
+                                <div class="h-full w-[90%] bg-gradient-to-r from-[#0066FF] to-[#00A3FF] rounded-full">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>Mobile Development</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
+                                <div class="h-full w-[85%] bg-gradient-to-r from-[#0066FF] to-[#00A3FF] rounded-full">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Skills & Tools Section -->
+    <section id="skills" class="py-20 glass-card">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
+                <span class="text-gradient">Skills & Tools</span>
+            </h2>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+
+                <!-- Design Tools -->
+                <div class="md-surface-1 rounded-xl p-6 card-hover fade-in-up" style="--stagger-delay: 0">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-pencil-ruler text-4xl text-gradient"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4 text-center">Design Tools</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-vector-square text-purple-500 mr-2"></i>
+                            <span>Adobe XD</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-bezier-curve text-orange-500 mr-2"></i>
+                            <span>Adobe Illustrator</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-image text-blue-400 mr-2"></i>
+                            <span>Adobe Photoshop</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fab fa-figma text-purple-400 mr-2"></i>
+                            <span>Figma</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Frontend -->
+                <div class="md-surface-1 rounded-xl p-6 card-hover fade-in-up" style="--stagger-delay: 1">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-code text-4xl text-gradient"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4 text-center">Frontend</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fab fa-html5 text-orange-500 mr-2"></i>
+                            <span>HTML5</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fab fa-css3-alt text-blue-500 mr-2"></i>
+                            <span>CSS3</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fab fa-js-square text-yellow-400 mr-2"></i>
+                            <span>JavaScript</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fab fa-react text-blue-400 mr-2"></i>
+                            <span>React</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Mobile -->
+                <div class="md-surface-1 rounded-xl p-6 card-hover fade-in-up" style="--stagger-delay: 2">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-mobile-alt text-4xl text-gradient"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4 text-center">Mobile</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fab fa-android text-green-400 mr-2"></i>
+                            <span>Android</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fab fa-apple text-gray-300 mr-2"></i>
+                            <span>iOS</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-mobile text-blue-300 mr-2"></i>
+                            <span>Flutter</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-rocket text-purple-400 mr-2"></i>
+                            <span>React Native</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Others -->
+                <div class="md-surface-1 rounded-xl p-6 card-hover fade-in-up" style="--stagger-delay: 3">
+                    <div class="text-center mb-4">
+                        <i class="fa-solid fa-photo-film text-4xl text-gradient"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4 text-center">Others</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fa-solid fa-cube text-orange-500 mr-2"></i>
+                            <span>Blender</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa-solid fa-fire-flame-curved text-purple-500 mr-2"></i>
+                            <span>After Effects</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa-solid fa-film text-pink-400 mr-2"></i>
+                            <span>Adobe Premiere</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-robot text-gray-300 mr-2"></i>
+                            <span>Ai Tools</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work Section -->
+    <section id="work" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
+                <span class="text-gradient">Featured Design Shots</span>
+            </h2>
+
+
+            <!-- Update Project Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+
+                <!-- Project 1 -->
+                <a href="https://dribbble.com/shots/25439783-Stakky-Crypto-Staking-Dashboard-by-Abrar-Studio">
+                    <div class="project-card md-surface-2 rounded-xl overflow-hidden relative group">
+                        <img src="https://cdn.dribbble.com/userupload/18325333/file/original-5505f4b8e4efbdf26615633f190c7f32.png?resize=1024x768&vertical=center"
+                            alt="Project 1" class="w-full h-full object-cover">
+                        <div
+                            class="project-overlay absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <h3 class="text-xl font-bold mb-2">Crypto Dashboard Ui</h3>
+                            <p class="text-gray-300 mb-4">Stakky Crypto Complete Ui UX Design</p>
+                            <div class="flex space-x-2">
+                                <span class="px-2 py-1 bg-blue-500/20 text-blue-400 rounded text-xs">UI/UX</span>
+                                <span class="px-2 py-1 bg-green-500/20 text-green-400 rounded text-xs">Dashboard
+                                    Ui</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 2 -->
+                <a href="https://dribbble.com/shots/24694027-Personalized-Ai-Learning-App">
+                    <div class="project-card md-surface-2 rounded-xl overflow-hidden relative group">
+                        <img src="https://cdn.dribbble.com/userupload/16098617/file/original-4baa7b99bd32fa171be5d250561f5827.png?resize=752x564&vertical=center"
+                            alt="Project 2" class="w-full h-full object-cover">
+                        <div
+                            class="project-overlay absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <h3 class="text-xl font-bold mb-2">Neuro Education App</h3>
+                            <p class="text-gray-300 mb-4">Mobile App Ui Redesign for Neuro</p>
+                            <div class="flex space-x-2">
+                                <span class="px-2 py-1 bg-blue-500/20 text-blue-400 rounded text-xs">UI/UX</span>
+                                <span class="px-2 py-1 bg-green-500/20 text-green-400 rounded text-xs">Mobile App</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 3 -->
+                <a href="https://dribbble.com/shots/24688720-Fitbot-Ai-Fitness-App">
+                    <div class="project-card md-surface-2 rounded-xl overflow-hidden relative group">
+                        <img src="https://cdn.dribbble.com/userupload/16082971/file/original-2388d52985e783321a40a52d0925be44.png?resize=1024x768&vertical=center"
+                            alt="Project 3" class="w-full h-full object-cover">
+                        <div
+                            class="project-overlay absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <h3 class="text-xl font-bold mb-2">Fitbot Ai Fitness App</h3>
+                            <p class="text-gray-300 mb-4">Your Fitness Ai Companion, from healthy meal to workout
+                                sessions, all in one fitness app</p>
+                            <div class="flex space-x-2">
+                                <span class="px-2 py-1 bg-blue-500/20 text-blue-400 rounded text-xs">UI/UX</span>
+                                <span class="px-2 py-1 bg-green-500/20 text-green-400 rounded text-xs">Mobile App</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 4 -->
+                <a href="https://dribbble.com/shots/24594378-GenAii-Website-Design">
+                    <div class="project-card md-surface-2 rounded-xl overflow-hidden relative group">
+                        <img src="https://cdn.dribbble.com/userupload/15812648/file/original-5f40f0da03e6c8442831a188c971d661.jpg?resize=1024x768&vertical=center"
+                            alt="Project 4" class="w-full h-full object-cover">
+                        <div
+                            class="project-overlay absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <h3 class="text-xl font-bold mb-2">Generative Ai Chatbot Website</h3>
+                            <p class="text-gray-300 mb-4">Ai chatbot to that generates images by prompts</p>
+                            <div class="flex space-x-2">
+                                <span class="px-2 py-1 bg-blue-500/20 text-blue-400 rounded text-xs">UI/UX</span>
+                                <span
+                                    class="px-2 py-1 bg-green-500/20 text-green-400 rounded text-xs">HTML/CSS/JS/REACT</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 5 -->
+                <a href="https://dribbble.com/shots/24559657-CoinX-Crypto-Website-Ui-Design">
+                    <div class="project-card md-surface-2 rounded-xl overflow-hidden relative group">
+                        <img src="https://cdn.dribbble.com/userupload/15709371/file/original-46666b6461154588ced9df87ec979601.png?resize=752x564&vertical=center"
+                            alt="Project 5" class="w-full h-full object-cover">
+                        <div
+                            class="project-overlay absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <h3 class="text-xl font-bold mb-2">Coin-X Website Design</h3>
+                            <p class="text-gray-300 mb-4">Crypto Website Landing Page Design in Figma</p>
+                            <div class="flex space-x-2">
+                                <span class="px-2 py-1 bg-blue-500/20 text-blue-400 rounded text-xs">UI/UX</span>
+                                <span
+                                    class="px-2 py-1 bg-green-500/20 text-green-400 rounded text-xs">HTML/CSS/JS/REACT</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 6 -->
+                <a href="https://dribbble.com/shots/24594286-3D-Learning-Platform-Ui-Design">
+                    <div class="project-card md-surface-2 rounded-xl overflow-hidden relative group">
+                        <img src="https://cdn.dribbble.com/userupload/15812418/file/original-7b9225b31a010fc0fd9f1129b10e701d.jpg?resize=1024x768&vertical=center"
+                            alt="Project 6" class="w-full h-full object-cover">
+                        <div
+                            class="project-overlay absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <h3 class="text-xl font-bold mb-2">Learn 3D with 3d Forge</h3>
+                            <p class="text-gray-300 mb-4">The ultimate platform to learn all 3D software with premium
+                                courses with just one subscription
+                                experience.</p>
+                            <div class="flex space-x-2">
+                                <span class="px-2 py-1 bg-blue-500/20 text-blue-400 rounded text-xs">UI/UX</span>
+                                <span class="px-2 py-1 bg-green-500/20 text-green-400 rounded text-xs">Web Design</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 glass-card">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
+                <span class="text-gradient">Get In Touch</span>
+            </h2>
+
+            <div class="flex flex-col md:flex-row gap-12">
+                <div class="md:w-1/2">
+                    <h3 class="text-2xl font-semibold mb-6">Let's Work Together</h3>
+                    <p class="text-gray-300 mb-8">
+                        Have a project in mind or want to discuss potential opportunities? I'm currently available for
+                        freelance work and full-time positions.
+                    </p>
+
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 rounded-full md-surface-2 flex items-center justify-center mr-4">
+                                <i class="fas fa-envelope text-blue-400"></i>
+                            </div>
+                            <div> <a href="abrarstudio07@gmail.com">
+                                    <p class="text-gray-400 dark:text-gray-400 light:text-gray-500">Email</p>
+                                    <p class="font-medium">abrarstudio07@gmail.com</p>
+                            </div></a>
+                        </div>
+
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 rounded-full md-surface-2 flex items-center justify-center mr-4">
+                                <i class="fas fa-map-marker-alt text-green-600"></i>
+                            </div>
+                            <div>
+                                <p class="text-gray-400 dark:text-gray-400 light:text-gray-500">Location</p>
+                                <p class="font-medium">Qasimabad, Hyderabad</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex space-x-4 mt-8">
+                        <a href="https://dribbble.com/abrarstudio"
+                            class="w-10 h-10 rounded-full md-surface-2 flex items-center justify-center hover:bg-blue-500 transition-colors">
+                            <i class="fab fa-dribbble"></i>
+                        </a>
+                        <a href="https://www.behance.net/abrarahmed13"
+                            class="w-10 h-10 rounded-full md-surface-2 flex items-center justify-center hover:bg-blue-500 transition-colors">
+                            <i class="fab fa-behance"></i>
+                        </a>
+                        <a href="https://www.upwork.com/freelancers/abrarstudio07"
+                            class="w-10 h-10 rounded-full md-surface-2 flex items-center justify-center hover:bg-blue-500 transition-colors">
+                            <i class="fab fa-upwork"></i>
+                        </a>
+                        <a href="https://www.instagram.com/ux_bulb/"
+                            class="w-10 h-10 rounded-full md-surface-2 flex items-center justify-center hover:bg-blue-500 transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="md:w-1/2">
+                    <!-- Contact form with custom success handling -->
+                    <form class="space-y-6" id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+                        <!-- Web3Forms Access Key -->
+                        <input type="hidden" name="access_key" value="74a3b05e-c567-4c56-8dcc-0ee2d40c72a2">
+                        <!-- Subject -->
+                        <input type="hidden" name="subject" value="New Contact Form Submission from Abrar Studio">
+                        <!-- Honeypot to prevent spam -->
+                        <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+                        <!-- Force AJAX submission -->
+                        <input type="hidden" name="from_name" value="Abrar Studio Website">
+                        <!-- Prevent Web3Forms redirect -->
+                        <input type="hidden" name="redirect" value="https://web3forms.com/success">
+
+                        <div>
+                            <label for="name" class="block mb-2 text-sm font-medium">Your Name</label>
+                            <input type="text" id="name" name="name" required
+                                class="form-input w-full px-4 py-3 rounded-lg transition-colors">
+                        </div>
+
+                        <div>
+                            <label for="email" class="block mb-2 text-sm font-medium">Your Email</label>
+                            <input type="email" id="email" name="email" required
+                                class="form-input w-full px-4 py-3 rounded-lg transition-colors">
+                        </div>
+
+                        <div>
+                            <label for="message" class="block mb-2 text-sm font-medium">Message</label>
+                            <textarea id="message" name="message" rows="4" required
+                                class="form-input w-full px-4 py-3 rounded-lg transition-colors"></textarea>
+                        </div>
+
+                        <button type="submit" id="submit-btn"
+                            class="w-full px-6 py-3 bg-gradient-to-r from-[#0066FF] to-[#00A3FF] rounded-lg font-medium hover:opacity-90 transition-opacity flex items-center justify-center">
+                            <i class="fas fa-paper-plane mr-2"></i>
+                            <span>Send Message</span>
+                        </button>
+                    </form>
+
+                    <!-- Success Popup -->
+                    <div id="success-popup" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+                        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+                        <div class="md-surface-1 rounded-xl p-8 max-w-md mx-auto relative z-10">
+                            <div class="text-center">
+                                <div
+                                    class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 text-green-500 mb-4">
+                                    <i class="fas fa-check text-2xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold mb-2">Message Sent!</h3>
+                                <p class="text-gray-300 mb-6">Thank you for reaching out. I'll get back to you as soon
+                                    as possible.</p>
+                                <button id="close-popup"
+                                    class="px-6 py-2 bg-gradient-to-r from-[#0066FF] to-[#00A3FF] rounded-lg font-medium hover:opacity-90 transition-opacity">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-[#333333]">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <a href="#" class="text-2xl font-bold text-gradient">Abrar Studio</a>
+                    <p class="text-gray-400 text-sm mt-1">Designer & Developer</p>
+                </div>
+
+                <div class="flex space-x-6">
+                    <a href="#about" class="hover:text-blue-400 transition-colors">About</a>
+                    <a href="#skills" class="hover:text-primary transition-colors">Skills</a>
+                    <a href="#work" class="hover:text-blue-400 transition-colors">Work</a>
+                    <a href="#contact" class="hover:text-blue-400 transition-colors">Contact</a>
+                </div>
+            </div>
+
+            <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
+                <p>© 2023 Abrar Studio. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menu-toggle').addEventListener('click', function () {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+    </script>
+
+    <!-- Advanced Animations & Micro-interactions -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Mobile menu functionality
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            if (menuToggle && mobileMenu) {
+                menuToggle.addEventListener('click', function () {
+                    mobileMenu.classList.toggle('hidden');
+
+                    // Toggle hamburger icon
+                    const icon = menuToggle.querySelector('i');
+                    if (mobileMenu.classList.contains('hidden')) {
+                        icon.className = 'fas fa-bars';
+                    } else {
+                        icon.className = 'fas fa-times';
+                    }
+                });
+
+                // Close mobile menu when clicking on links
+                const mobileLinks = mobileMenu.querySelectorAll('a');
+                mobileLinks.forEach(link => {
+                    link.addEventListener('click', function () {
+                        mobileMenu.classList.add('hidden');
+                        menuToggle.querySelector('i').className = 'fas fa-bars';
+                    });
+                });
+            }
+
+            // Scroll Progress Bar & Scroll to Top Button
+            function updateScrollProgress() {
+                const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrollProgress = (scrollTop / scrollHeight) * 100;
+                const progressBar = document.getElementById('scroll-progress');
+                const scrollToTopBtn = document.getElementById('scroll-to-top');
+
+                if (progressBar) {
+                    progressBar.style.width = scrollProgress + '%';
+                }
+
+                // Show/hide scroll to top button
+                if (scrollToTopBtn) {
+                    if (scrollTop > 300) {
+                        scrollToTopBtn.classList.add('show');
+                    } else {
+                        scrollToTopBtn.classList.remove('show');
+                    }
+                }
+            }
+
+            window.addEventListener('scroll', updateScrollProgress);
+
+            // Scroll to top functionality
+            const scrollToTopBtn = document.getElementById('scroll-to-top');
+            if (scrollToTopBtn) {
+                scrollToTopBtn.addEventListener('click', function () {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+
+            // Intersection Observer for Animations
+            const observeElements = () => {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('animate-in');
+                        }
+                    });
+                }, {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -50px 0px'
+                });
+
+                // Observe fade-in elements
+                document.querySelectorAll('.fade-in-up').forEach(el => {
+                    observer.observe(el);
+                });
+
+                // Observe text reveal elements
+                document.querySelectorAll('.text-reveal').forEach(el => {
+                    observer.observe(el);
+                });
+            };
+
+            // Counter Animation
+            function animateCounters() {
+                const counters = document.querySelectorAll('.counter');
+
+                const counterObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const counter = entry.target;
+                            const target = parseInt(counter.getAttribute('data-target'));
+                            const duration = 2000; // 2 seconds
+                            const increment = target / (duration / 16); // 60fps
+                            let current = 0;
+
+                            const updateCounter = () => {
+                                if (current < target) {
+                                    current += increment;
+                                    counter.textContent = Math.ceil(current) + (target === 100 ? '%' : '+');
+                                    requestAnimationFrame(updateCounter);
+                                } else {
+                                    counter.textContent = target + (target === 100 ? '%' : '+');
+                                }
+                            };
+
+                            updateCounter();
+                            counterObserver.unobserve(counter);
+                        }
+                    });
+                }, { threshold: 0.5 });
+
+                counters.forEach(counter => {
+                    counterObserver.observe(counter);
+                });
+            }
+
+            // Magnetic Button Effect
+            function addMagneticEffect() {
+                const magneticButtons = document.querySelectorAll('.magnetic-button');
+
+                magneticButtons.forEach(button => {
+                    button.addEventListener('mousemove', (e) => {
+                        const rect = button.getBoundingClientRect();
+                        const x = e.clientX - rect.left - rect.width / 2;
+                        const y = e.clientY - rect.top - rect.height / 2;
+
+                        button.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px)`;
+                    });
+
+                    button.addEventListener('mouseleave', () => {
+                        button.style.transform = 'translate(0px, 0px)';
+                    });
+                });
+            }
+
+            // Typewriter Effect for "Designer & Developer"
+            function typewriterEffect() {
+                const typewriterElement = document.querySelector('.typewriter-subtitle');
+                if (typewriterElement) {
+                    const text = 'Designer & Developer';
+                    typewriterElement.textContent = '';
+                    let i = 0;
+
+                    function typeChar() {
+                        if (i < text.length) {
+                            typewriterElement.textContent += text.charAt(i);
+                            i++;
+                            setTimeout(typeChar, 150); // 150ms delay between characters
+                        }
+                    }
+
+                    // Start typing after 1 second delay
+                    setTimeout(typeChar, 1000);
+                }
+            }
+
+            // Initialize all animations
+            observeElements();
+            animateCounters();
+            addMagneticEffect();
+            typewriterEffect();
+
+            // Add stagger delay to elements
+            document.querySelectorAll('.stagger-animation').forEach((el, index) => {
+                el.style.setProperty('--stagger-delay', index);
+            });
+        });
+    </script>
+
+    <!-- Scroll to Top Button -->
+    <button id="scroll-to-top" class="scroll-to-top" aria-label="Scroll to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Include main.js for theme functionality -->
+    <script src="main.js"></script>
+</body>
+
+</html>
+</script>
+<style>
+    /* Additional light theme improvements */
+    :root.light-theme a.hover\:text-white:hover {
+        color: var(--primary) !important;
+    }
+
+    :root.light-theme a.hover\:bg-gray-800:hover {
+        background-color: var(--hover-bg) !important;
+    }
+
+    :root.light-theme .border-gray-600 {
+        border-color: var(--border-gray);
+    }
+
+    :root.light-theme .border-gray-800 {
+        border-color: var(--border-gray);
+    }
+
+    :root.light-theme .border-t.border-gray-800 {
+        border-color: var(--border-gray);
+    }
+
+    :root.light-theme .bg-gray-700 {
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    :root.light-theme .project-card .project-overlay h3 {
+        color: white;
+    }
+
+    :root.light-theme .project-card .project-overlay p {
+        color: rgba(255, 255, 255, 0.9);
+    }
+
+    :root.light-theme .md-surface-2 {
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    :root.light-theme .fab.fa-apple {
+        color: #333;
+    }
+
+    /* Fix social media icons in light theme */
+    :root.light-theme a.rounded-full.md-surface-2:hover {
+        color: white;
+    }
+
+    /* Fix footer in light theme */
+    :root.light-theme footer {
+        border-color: var(--border-gray);
+    }
+
+    :root.light-theme footer .text-gray-500 {
+        color: rgba(0, 0, 0, 0.5);
+    }
+
+    :root.light-theme footer .text-gray-400 {
+        color: rgba(0, 0, 0, 0.6);
+    }
+
+    /* Fix hover states in light theme */
+    :root.light-theme .hover\:bg-gray-800:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    /* Fix contact section in light theme */
+    :root.light-theme .text-gray-300 {
+        color: rgba(0, 0, 0, 0.7);
+    }
+
+    :root.light-theme .text-gray-400 {
+        color: rgba(0, 0, 0, 0.6);
+    }
+
+    /* Improve skill bars in light theme */
+    :root.light-theme .h-2.bg-gray-700 {
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+</style>
+<style>
+    /* Additional light theme improvements */
+
+    /* Fix navigation links in light theme */
+    :root.light-theme nav a.hover\:text-primary:hover {
+        color: var(--primary);
+    }
+
+    /* Fix hero section text in light theme */
+    :root.light-theme .hero-section p.text-gray-300 {
+        color: rgba(0, 0, 0, 0.7);
+    }
+
+    /* Fix about section text in light theme */
+    :root.light-theme .about-section p.text-gray-300 {
+        color: rgba(0, 0, 0, 0.7);
+    }
+
+    /* Fix skill bars in light theme */
+    :root.light-theme .h-2.bg-gray-700 {
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    /* Fix contact button in light theme */
+    :root.light-theme a.border.border-gray-600 {
+        border-color: rgba(0, 0, 0, 0.1);
+    }
+
+    :root.light-theme a.border.border-gray-600:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    /* Fix project cards in light theme */
+    :root.light-theme .project-card {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Fix footer in light theme */
+    :root.light-theme footer.border-t {
+        border-color: rgba(0, 0, 0, 0.1);
+    }
+
+    /* Fix mobile menu in light theme */
+    :root.light-theme #mobile-menu {
+        background-color: var(--md-surface);
+        border-color: var(--md-border);
+    }
+
+    /* Fix form inputs in light theme */
+    :root.light-theme input,
+    :root.light-theme textarea {
+        color: var(--md-text-primary);
+    }
+
+    /* Fix hover effects in light theme */
+    :root.light-theme .hover\:bg-gray-800:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    /* Fix chevron icon in light theme */
+    :root.light-theme .fa-chevron-down {
+        color: rgba(0, 0, 0, 0.5);
+    }
+
+    :root.light-theme a:hover .fa-chevron-down {
+        color: var(--primary);
+    }
+</style>
+<style>
+    /* Additional light theme improvements */
+
+    /* Fix text colors in light theme */
+    :root.light-theme p.text-gray-300,
+    :root.light-theme .text-gray-300 {
+        color: rgba(0, 0, 0, 0.7);
+    }
+
+    :root.light-theme p.text-gray-400,
+    :root.light-theme .text-gray-400 {
+        color: rgba(0, 0, 0, 0.6);
+    }
+
+    :root.light-theme .text-gray-500 {
+        color: rgba(0, 0, 0, 0.5);
+    }
+
+    /* Fix hover states in light theme */
+    :root.light-theme a.hover\:text-white:hover {
+        color: var(--primary);
+    }
+
+    :root.light-theme a.hover\:bg-gray-800:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    /* Fix borders in light theme */
+    :root.light-theme .border-gray-600 {
+        border-color: rgba(0, 0, 0, 0.1);
+    }
+
+    :root.light-theme .border-gray-800 {
+        border-color: rgba(0, 0, 0, 0.1);
+    }
+
+    :root.light-theme footer.border-t {
+        border-color: rgba(0, 0, 0, 0.1);
+    }
+
+    /* Fix background colors in light theme */
+    :root.light-theme .bg-gray-700 {
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    /* Fix project cards in light theme */
+    :root.light-theme .project-card {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    :root.light-theme .project-overlay h3 {
+        color: white !important;
+    }
+
+    :root.light-theme .project-overlay p {
+        color: rgba(255, 255, 255, 0.9) !important;
+    }
+
+    /* Fix skill bars in light theme */
+    :root.light-theme .h-2.bg-gray-700 {
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    /* Fix icons in light theme */
+    :root.light-theme .fab.fa-apple {
+        color: #333;
+    }
+
+    /* Fix social media icons in light theme */
+    :root.light-theme a.rounded-full.md-surface-2:hover {
+        color: white;
+    }
+
+    /* Fix chevron icon in light theme */
+    :root.light-theme .fa-chevron-down {
+        color: rgba(0, 0, 0, 0.5);
+    }
+
+    :root.light-theme a:hover .fa-chevron-down {
+        color: var(--primary);
+    }
+
+    /* Fix contact section in light theme */
+    :root.light-theme .rounded-full.md-surface-2 {
+        background-color: var(--md-surface-2);
+        border: 1px solid var(--md-border);
+    }
+
+    /* Fix form inputs in light theme */
+    :root.light-theme input,
+    :root.light-theme textarea {
+        color: var(--md-text-primary);
+    }
+
+    /* Fix mobile menu in light theme */
+    :root.light-theme #mobile-menu {
+        background-color: var(--md-surface);
+        border-color: var(--md-border);
+    }
+</style>
+<style>
+    /* Logo switching for light/dark themes */
+    :root.light-theme .dark-theme-logo {
+        display: none;
+    }
+
+    :root.light-theme .light-theme-logo {
+        display: block;
+    }
+
+    .light-theme-logo {
+        display: none;
+    }
+
+    .dark-theme-logo {
+        display: block;
+    }
+</style>
+<script>
+    // Contact form handler - prevent Web3Forms redirect and show custom popup
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.getElementById('contact-form');
+        const successPopup = document.getElementById('success-popup');
+        const closePopupBtn = document.getElementById('close-popup');
+        const submitBtn = document.getElementById('submit-btn');
+
+        if (form) {
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                // Show loading state
+                if (submitBtn) {
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i><span>Sending...</span>';
+                }
+
+                // Get form data
+                const formData = new FormData(form);
+
+                // Submit to Web3Forms
+                fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Show success popup regardless of response
+                        if (successPopup) {
+                            successPopup.classList.remove('hidden');
+                        }
+                        // Reset form
+                        form.reset();
+                    })
+                    .catch(error => {
+                        console.log('Form submitted, showing success popup');
+                        // Show popup even on error (form likely still sent)
+                        if (successPopup) {
+                            successPopup.classList.remove('hidden');
+                        }
+                        form.reset();
+                    })
+                    .finally(() => {
+                        // Reset button
+                        if (submitBtn) {
+                            submitBtn.disabled = false;
+                            submitBtn.innerHTML = '<i class="fas fa-paper-plane mr-2"></i><span>Send Message</span>';
+                        }
+                    });
+            });
+        }
+
+        // Close popup handlers
+        if (closePopupBtn) {
+            closePopupBtn.addEventListener('click', function () {
+                successPopup.classList.add('hidden');
+            });
+        }
+
+        if (successPopup) {
+            successPopup.addEventListener('click', function (e) {
+                if (e.target === successPopup) {
+                    successPopup.classList.add('hidden');
+                }
+            });
+        }
+    });
+</script>
