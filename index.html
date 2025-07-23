@@ -762,6 +762,167 @@
                 border-color: var(--primary);
             }
         }
+
+        /* Skills & Tools Section Styles */
+        .skill-tab {
+            background: transparent;
+            color: var(--md-text-secondary);
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            padding: 0.75rem 1.25rem;
+            border-radius: 1rem;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-width: 80px;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .skill-tab.active {
+            background: var(--md-surface-2);
+            color: var(--primary);
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(0, 102, 255, 0.15);
+        }
+
+        .skill-tab:hover {
+            color: var(--md-text-primary);
+            transform: translateY(-2px);
+            background: var(--md-surface-1);
+        }
+
+        .skill-panel {
+            display: none;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .skill-panel.active {
+            display: block;
+        }
+
+        .skill-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--md-border);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 102, 255, 0.1);
+            border-color: var(--primary);
+        }
+
+        .skill-progress-container {
+            margin-bottom: 1rem;
+        }
+
+        .skill-bar {
+            position: relative;
+            background: var(--md-surface-2);
+            border-radius: 10px;
+            overflow: hidden;
+            height: 6px;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+            width: 0%;
+            transition: width 2s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .skill-progress::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        .skill-tag {
+            background: var(--md-surface-2);
+            color: var(--md-text-secondary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            border: 1px solid var(--md-border);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .skill-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--md-border);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 102, 255, 0.1);
+            border-color: var(--primary);
+        }
+
+        .skill-progress-container {
+            position: relative;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--md-surface-2);
+            color: var(--md-text-secondary);
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Responsive adjustments for skills section */
+        @media (max-width: 640px) {
+            .skill-tab {
+                padding: 0.5rem 1rem;
+                font-size: 0.875rem;
+            }
+
+            .skill-tab span:first-child {
+                font-size: 1.5rem;
+            }
+        }
     </style>
 </head>
 
@@ -776,7 +937,6 @@
                 <img src="assets/logo.svg" alt="Abrar Studio Logo" class="h-8">
             </a>
             <div class="hidden md:flex space-x-8">
-                <a href="#home" class="hover:text-primary transition-colors">Home</a>
                 <a href="#about" class="hover:text-primary transition-colors">About</a>
                 <a href="#skills" class="hover:text-primary transition-colors">Skills</a>
                 <a href="#work" class="hover:text-primary transition-colors">Work</a>
@@ -802,7 +962,6 @@
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden w-full mt-4 pb-4">
             <div class="flex flex-col space-y-4 px-4">
-                <a href="#home" class="hover:text-primary transition-colors">Home</a>
                 <a href="#about" class="hover:text-primary transition-colors">About</a>
                 <a href="#skills" class="hover:text-primary transition-colors">Skills</a>
                 <a href="#work" class="hover:text-primary transition-colors">Work</a>
@@ -973,110 +1132,432 @@
                 <span class="text-gradient">Skills & Tools</span>
             </h2>
 
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <!-- Skills Navigation Tabs -->
+            <div class="flex justify-center mb-12">
+                <div class="md-surface-1 rounded-2xl p-2 inline-flex space-x-2">
+                    <button class="skill-tab active" data-tab="design">
+                        <span class="text-2xl mb-1">🎨</span>
+                        <span class="text-sm font-medium">Design</span>
+                    </button>
+                    <button class="skill-tab" data-tab="frontend">
+                        <span class="text-2xl mb-1">💻</span>
+                        <span class="text-sm font-medium">Frontend</span>
+                    </button>
+                    <button class="skill-tab" data-tab="mobile">
+                        <span class="text-2xl mb-1">📱</span>
+                        <span class="text-sm font-medium">Mobile</span>
+                    </button>
+                    <button class="skill-tab" data-tab="tools">
+                        <span class="text-2xl mb-1">🛠️</span>
+                        <span class="text-sm font-medium">Tools</span>
+                    </button>
+                </div>
+            </div>
 
-                <!-- Design Tools -->
-                <div class="md-surface-1 rounded-xl p-6 card-hover fade-in-up" style="--stagger-delay: 0">
-                    <div class="text-center mb-4">
-                        <i class="fas fa-pencil-ruler text-4xl text-gradient"></i>
+            <!-- Skills Content -->
+            <div class="skills-content">
+                <!-- Design Skills -->
+                <div class="skill-panel active" id="design-panel">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="skill-card md-surface-1 rounded-xl p-6 card-hover fade-in-up">
+                            <div class="flex items-center mb-4">
+                                <span class="text-4xl mr-4">🎭</span>
+                                <div>
+                                    <h3 class="text-xl font-semibold">UI/UX Design</h3>
+                                    <p class="text-sm text-gray-400">User Interface & Experience</p>
+                                </div>
+                            </div>
+                            <div class="skill-progress-container mb-4">
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm">Proficiency</span>
+                                    <span class="text-sm text-gradient font-semibold">95%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-width="95%"></div>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-tag">Figma</span>
+                                <span class="skill-tag">Adobe XD</span>
+                                <span class="skill-tag">Sketch</span>
+                            </div>
+                        </div>
+
+                        <div class="skill-card md-surface-1 rounded-xl p-6 card-hover fade-in-up">
+                            <div class="flex items-center mb-4">
+                                <span class="text-4xl mr-4">🖼️</span>
+                                <div>
+                                    <h3 class="text-xl font-semibold">Graphic Design</h3>
+                                    <p class="text-sm text-gray-400">Visual Communication</p>
+                                </div>
+                            </div>
+                            <div class="skill-progress-container mb-4">
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm">Proficiency</span>
+                                    <span class="text-sm text-gradient font-semibold">90%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-width="90%"></div>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-tag">Photoshop</span>
+                                <span class="skill-tag">Illustrator</span>
+                                <span class="skill-tag">Canva</span>
+                            </div>
+                        </div>
+
+                        <div class="skill-card md-surface-1 rounded-xl p-6 card-hover fade-in-up">
+                            <div class="flex items-center mb-4">
+                                <span class="text-4xl mr-4">🎬</span>
+                                <div>
+                                    <h3 class="text-xl font-semibold">Motion Graphics</h3>
+                                    <p class="text-sm text-gray-400">Animation & Video</p>
+                                </div>
+                            </div>
+                            <div class="skill-progress-container mb-4">
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm">Proficiency</span>
+                                    <span class="text-sm text-gradient font-semibold">85%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-width="85%"></div>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-tag">After Effects</span>
+                                <span class="skill-tag">Premiere Pro</span>
+                                <span class="skill-tag">Lottie</span>
+                            </div>
+                        </div>
+
+                        <div class="skill-card md-surface-1 rounded-xl p-6 card-hover fade-in-up">
+                            <div class="flex items-center mb-4">
+                                <span class="text-4xl mr-4">🎯</span>
+                                <div>
+                                    <h3 class="text-xl font-semibold">Brand Identity</h3>
+                                    <p class="text-sm text-gray-400">Logo & Brand Design</p>
+                                </div>
+                            </div>
+                            <div class="skill-progress-container mb-4">
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm">Proficiency</span>
+                                    <span class="text-sm text-gradient font-semibold">88%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-width="88%"></div>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-tag">Logo Design</span>
+                                <span class="skill-tag">Brand Guidelines</span>
+                                <span class="skill-tag">Typography</span>
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-semibold mb-4 text-center">Design Tools</h3>
-                    <ul class="space-y-2">
-                        <li class="flex items-center">
-                            <i class="fas fa-vector-square text-purple-500 mr-2"></i>
-                            <span>Adobe XD</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-bezier-curve text-orange-500 mr-2"></i>
-                            <span>Adobe Illustrator</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-image text-blue-400 mr-2"></i>
-                            <span>Adobe Photoshop</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fab fa-figma text-purple-400 mr-2"></i>
-                            <span>Figma</span>
-                        </li>
-                    </ul>
                 </div>
 
-                <!-- Frontend -->
-                <div class="md-surface-1 rounded-xl p-6 card-hover fade-in-up" style="--stagger-delay: 1">
-                    <div class="text-center mb-4">
-                        <i class="fas fa-code text-4xl text-gradient"></i>
+                <!-- Frontend Skills -->
+                <div class="skill-panel" id="frontend-panel">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="skill-card md-surface-1 rounded-xl p-6 card-hover fade-in-up">
+                            <div class="flex items-center mb-4">
+                                <span class="text-4xl mr-4">⚛️</span>
+                                <div>
+                                    <h3 class="text-xl font-semibold">React Development</h3>
+                                    <p class="text-sm text-gray-400">Modern JavaScript Framework</p>
+                                </div>
+                            </div>
+                            <div class="skill-progress-container mb-4">
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm">Proficiency</span>
+                                    <span class="text-sm text-gradient font-semibold">92%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-width="92%"></div>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-tag">React</span>
+                                <span class="skill-tag">Next.js</span>
+                                <span class="skill-tag">Redux</span>
+                            </div>
+                        </div>
+
+                        <div class="skill-card md-surface-1 rounded-xl p-6 card-hover fade-in-up">
+                            <div class="flex items-center mb-4">
+                                <span class="text-4xl mr-4">🌐</span>
+                                <div>
+                                    <h3 class="text-xl font-semibold">Web Technologies</h3>
+                                    <p class="text-sm text-gray-400">HTML, CSS, JavaScript</p>
+                                </div>
+                            </div>
+                            <div class="skill-progress-container mb-4">
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm">Proficiency</span>
+                                    <span class="text-sm text-gradient font-semibold">95%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-width="95%"></div>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-tag">HTML5</span>
+                                <span class="skill-tag">CSS3</span>
+                                <span class="skill-tag">JavaScript</span>
+                            </div>
+                        </div>
+
+                        <div class="skill-card md-surface-1 rounded-xl p-6 card-hover fade-in-up">
+                            <div class="flex items-center mb-4">
+                                <span class="text-4xl mr-4">🎨</span>
+                                <div>
+                                    <h3 class="text-xl font-semibold">CSS Frameworks</h3>
+                                    <p class="text-sm text-gray-400">Styling & Layout</p>
+                                </div>
+                            </div>
+                            <div class="skill-progress-container mb-4">
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm">Proficiency</span>
+                                    <span class="text-sm text-gradient font-semibold">90%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-width="90%"></div>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-tag">Tailwind CSS</span>
+                                <span class="skill-tag">Bootstrap</span>
+                                <span class="skill-tag">SASS</span>
+                            </div>
+                        </div>
+
+                        <div class="skill-card md-surface-1 rounded-xl p-6 card-hover fade-in-up">
+                            <div class="flex items-center mb-4">
+                                <span class="text-4xl mr-4">⚡</span>
+                                <div>
+                                    <h3 class="text-xl font-semibold">Performance</h3>
+                                    <p class="text-sm text-gray-400">Optimization & Speed</p>
+                                </div>
+                            </div>
+                            <div class="skill-progress-container mb-4">
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm">Proficiency</span>
+                                    <span class="text-sm text-gradient font-semibold">87%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-width="87%"></div>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-tag">Webpack</span>
+                                <span class="skill-tag">Vite</span>
+                                <span class="skill-tag">PWA</span>
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-semibold mb-4 text-center">Frontend</h3>
-                    <ul class="space-y-2">
-                        <li class="flex items-center">
-                            <i class="fab fa-html5 text-orange-500 mr-2"></i>
-                            <span>HTML5</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fab fa-css3-alt text-blue-500 mr-2"></i>
-                            <span>CSS3</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fab fa-js-square text-yellow-400 mr-2"></i>
-                            <span>JavaScript</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fab fa-react text-blue-400 mr-2"></i>
-                            <span>React</span>
-                        </li>
-                    </ul>
                 </div>
 
-                <!-- Mobile -->
-                <div class="md-surface-1 rounded-xl p-6 card-hover fade-in-up" style="--stagger-delay: 2">
-                    <div class="text-center mb-4">
-                        <i class="fas fa-mobile-alt text-4xl text-gradient"></i>
+                <!-- Mobile Skills -->
+                <div class="skill-panel" id="mobile-panel">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="skill-card md-surface-1 rounded-xl p-6 card-hover fade-in-up">
+                            <div class="flex items-center mb-4">
+                                <span class="text-4xl mr-4">📱</span>
+                                <div>
+                                    <h3 class="text-xl font-semibold">React Native</h3>
+                                    <p class="text-sm text-gray-400">Cross-platform Mobile</p>
+                                </div>
+                            </div>
+                            <div class="skill-progress-container mb-4">
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm">Proficiency</span>
+                                    <span class="text-sm text-gradient font-semibold">85%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-width="85%"></div>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-tag">React Native</span>
+                                <span class="skill-tag">Expo</span>
+                                <span class="skill-tag">Navigation</span>
+                            </div>
+                        </div>
+
+                        <div class="skill-card md-surface-1 rounded-xl p-6 card-hover fade-in-up">
+                            <div class="flex items-center mb-4">
+                                <span class="text-4xl mr-4">🦋</span>
+                                <div>
+                                    <h3 class="text-xl font-semibold">Flutter</h3>
+                                    <p class="text-sm text-gray-400">Google's UI Toolkit</p>
+                                </div>
+                            </div>
+                            <div class="skill-progress-container mb-4">
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm">Proficiency</span>
+                                    <span class="text-sm text-gradient font-semibold">80%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-width="80%"></div>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-tag">Flutter</span>
+                                <span class="skill-tag">Dart</span>
+                                <span class="skill-tag">Firebase</span>
+                            </div>
+                        </div>
+
+                        <div class="skill-card md-surface-1 rounded-xl p-6 card-hover fade-in-up">
+                            <div class="flex items-center mb-4">
+                                <span class="text-4xl mr-4">🍎</span>
+                                <div>
+                                    <h3 class="text-xl font-semibold">iOS Development</h3>
+                                    <p class="text-sm text-gray-400">Native iOS Apps</p>
+                                </div>
+                            </div>
+                            <div class="skill-progress-container mb-4">
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm">Proficiency</span>
+                                    <span class="text-sm text-gradient font-semibold">75%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-width="75%"></div>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-tag">Swift</span>
+                                <span class="skill-tag">SwiftUI</span>
+                                <span class="skill-tag">Xcode</span>
+                            </div>
+                        </div>
+
+                        <div class="skill-card md-surface-1 rounded-xl p-6 card-hover fade-in-up">
+                            <div class="flex items-center mb-4">
+                                <span class="text-4xl mr-4">🤖</span>
+                                <div>
+                                    <h3 class="text-xl font-semibold">Android Development</h3>
+                                    <p class="text-sm text-gray-400">Native Android Apps</p>
+                                </div>
+                            </div>
+                            <div class="skill-progress-container mb-4">
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm">Proficiency</span>
+                                    <span class="text-sm text-gradient font-semibold">78%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-width="78%"></div>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-tag">Kotlin</span>
+                                <span class="skill-tag">Java</span>
+                                <span class="skill-tag">Android Studio</span>
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-semibold mb-4 text-center">Mobile</h3>
-                    <ul class="space-y-2">
-                        <li class="flex items-center">
-                            <i class="fab fa-android text-green-400 mr-2"></i>
-                            <span>Android</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fab fa-apple text-gray-300 mr-2"></i>
-                            <span>iOS</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-mobile text-blue-300 mr-2"></i>
-                            <span>Flutter</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-rocket text-purple-400 mr-2"></i>
-                            <span>React Native</span>
-                        </li>
-                    </ul>
                 </div>
 
-                <!-- Others -->
-                <div class="md-surface-1 rounded-xl p-6 card-hover fade-in-up" style="--stagger-delay: 3">
-                    <div class="text-center mb-4">
-                        <i class="fa-solid fa-photo-film text-4xl text-gradient"></i>
+                <!-- Tools Skills -->
+                <div class="skill-panel" id="tools-panel">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="skill-card md-surface-1 rounded-xl p-6 card-hover fade-in-up">
+                            <div class="flex items-center mb-4">
+                                <span class="text-4xl mr-4">🔧</span>
+                                <div>
+                                    <h3 class="text-xl font-semibold">Development Tools</h3>
+                                    <p class="text-sm text-gray-400">Code Editors & IDEs</p>
+                                </div>
+                            </div>
+                            <div class="skill-progress-container mb-4">
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm">Proficiency</span>
+                                    <span class="text-sm text-gradient font-semibold">95%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-width="95%"></div>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-tag">VS Code</span>
+                                <span class="skill-tag">WebStorm</span>
+                                <span class="skill-tag">Git</span>
+                            </div>
+                        </div>
+
+                        <div class="skill-card md-surface-1 rounded-xl p-6 card-hover fade-in-up">
+                            <div class="flex items-center mb-4">
+                                <span class="text-4xl mr-4">🤖</span>
+                                <div>
+                                    <h3 class="text-xl font-semibold">AI Tools</h3>
+                                    <p class="text-sm text-gray-400">Artificial Intelligence</p>
+                                </div>
+                            </div>
+                            <div class="skill-progress-container mb-4">
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm">Proficiency</span>
+                                    <span class="text-sm text-gradient font-semibold">88%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-width="88%"></div>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-tag">ChatGPT</span>
+                                <span class="skill-tag">Midjourney</span>
+                                <span class="skill-tag">GitHub Copilot</span>
+                            </div>
+                        </div>
+
+                        <div class="skill-card md-surface-1 rounded-xl p-6 card-hover fade-in-up">
+                            <div class="flex items-center mb-4">
+                                <span class="text-4xl mr-4">☁️</span>
+                                <div>
+                                    <h3 class="text-xl font-semibold">Cloud Services</h3>
+                                    <p class="text-sm text-gray-400">Deployment & Hosting</p>
+                                </div>
+                            </div>
+                            <div class="skill-progress-container mb-4">
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm">Proficiency</span>
+                                    <span class="text-sm text-gradient font-semibold">82%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-width="82%"></div>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-tag">Vercel</span>
+                                <span class="skill-tag">Netlify</span>
+                                <span class="skill-tag">Firebase</span>
+                            </div>
+                        </div>
+
+                        <div class="skill-card md-surface-1 rounded-xl p-6 card-hover fade-in-up">
+                            <div class="flex items-center mb-4">
+                                <span class="text-4xl mr-4">🎥</span>
+                                <div>
+                                    <h3 class="text-xl font-semibold">3D & Animation</h3>
+                                    <p class="text-sm text-gray-400">3D Modeling & Animation</p>
+                                </div>
+                            </div>
+                            <div class="skill-progress-container mb-4">
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm">Proficiency</span>
+                                    <span class="text-sm text-gradient font-semibold">75%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-width="75%"></div>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-tag">Blender</span>
+                                <span class="skill-tag">Cinema 4D</span>
+                                <span class="skill-tag">Three.js</span>
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-semibold mb-4 text-center">Others</h3>
-                    <ul class="space-y-2">
-                        <li class="flex items-center">
-                            <i class="fa-solid fa-cube text-orange-500 mr-2"></i>
-                            <span>Blender</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fa-solid fa-fire-flame-curved text-purple-500 mr-2"></i>
-                            <span>After Effects</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fa-solid fa-film text-pink-400 mr-2"></i>
-                            <span>Adobe Premiere</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-robot text-gray-300 mr-2"></i>
-                            <span>Ai Tools</span>
-                        </li>
-                    </ul>
                 </div>
             </div>
         </div>
@@ -1518,11 +1999,66 @@
                 }
             }
 
+            // Skills Tab Functionality
+            function initSkillsTabs() {
+                const skillTabs = document.querySelectorAll('.skill-tab');
+                const skillPanels = document.querySelectorAll('.skill-panel');
+
+                skillTabs.forEach(tab => {
+                    tab.addEventListener('click', function () {
+                        const targetTab = this.getAttribute('data-tab');
+
+                        // Remove active class from all tabs and panels
+                        skillTabs.forEach(t => t.classList.remove('active'));
+                        skillPanels.forEach(p => p.classList.remove('active'));
+
+                        // Add active class to clicked tab and corresponding panel
+                        this.classList.add('active');
+                        document.getElementById(targetTab + '-panel').classList.add('active');
+
+                        // Trigger animations for the new panel
+                        const newPanel = document.getElementById(targetTab + '-panel');
+                        const skillCards = newPanel.querySelectorAll('.skill-card');
+                        skillCards.forEach((card, index) => {
+                            card.style.animationDelay = `${index * 0.1}s`;
+                            card.classList.remove('fade-in-up');
+                            setTimeout(() => {
+                                card.classList.add('fade-in-up', 'animate-in');
+                            }, 50);
+                        });
+                    });
+                });
+            }
+
+            // Animate skill progress bars when they come into view
+            function animateSkillBars() {
+                const skillBars = document.querySelectorAll('.skill-progress');
+
+                const skillObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const bar = entry.target;
+                            const width = bar.getAttribute('data-width');
+                            setTimeout(() => {
+                                bar.style.width = width;
+                            }, 200);
+                            skillObserver.unobserve(bar);
+                        }
+                    });
+                }, { threshold: 0.5 });
+
+                skillBars.forEach(bar => {
+                    skillObserver.observe(bar);
+                });
+            }
+
             // Initialize all animations
             observeElements();
             animateCounters();
             addMagneticEffect();
             typewriterEffect();
+            initSkillsTabs();
+            animateSkillBars();
 
             // Add stagger delay to elements
             document.querySelectorAll('.stagger-animation').forEach((el, index) => {
