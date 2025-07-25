@@ -22,8 +22,14 @@ class PortfolioApp {
     init() {
         this.setupNavigation();
         this.setupSmoothScrolling();
+        this.setupScrollProgress();
+        this.setupScrollToTop();
+        this.setupScrollBasedNavigation();
+        this.setupSkillProgressBars();
         this.setupCursorFollower();
         this.setupTimeGreeting();
+        this.setupFormValidation();
+        this.setupLazyLoading();
     }
 
     /**
@@ -95,6 +101,295 @@ class PortfolioApp {
                 });
             });
         }
+    }
+
+    /**
+     * Setup scroll progress indicator
+     */
+    setupScrollProgress() {
+        const progressBar = document.getElementById('scroll-progress');
+        
+        if (progressBar) {
+            const updateProgress = this.throttle(() => {
+                const scrollTop = window.scrollY;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPercent = (scrollTop / docHeight) * 100;
+                
+                progressBar.style.width = scrollPercent + '%';
+            }, 10);
+            
+            window.addEventListener('scroll', updateProgress);
+        }
+    }
+
+    /**
+     * Setup scroll to top button
+     */
+    setupScrollToTop() {
+        const scrollToTopBtn = document.querySelector('.scroll-to-top');
+        
+        if (scrollToTopBtn) {
+            const toggleVisibility = this.throttle(() => {
+                if (window.scrollY > 300) {
+                    scrollToTopBtn.classList.add('show');
+                } else {
+                    scrollToTopBtn.classList.remove('show');
+                }
+            }, 100);
+            
+            window.addEventListener('scroll', toggleVisibility);
+            
+            scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+    }
+
+    /**
+     * Setup form validation
+     */
+    setupFormValidation() {
+        const forms = document.querySelectorAll('form');
+        
+        forms.forEach(form => {
+            const inputs = form.querySelectorAll('input, textarea');
+            
+            inputs.forEach(input => {
+                input.addEventListener('blur', () => {
+                    this.validateField(input);
+                });
+                
+                input.addEventListener('input', () => {
+                    this.clearFieldError(input);
+                });
+            });
+        });
+    }
+
+    /**
+     * Validate individual form field
+     * @param {HTMLElement} field - Form field to validate
+     */
+    validateField(field) {
+        const value = field.value.trim();
+        const type = field.type;
+        const required = field.hasAttribute('required');
+        
+        // Clear previous errors
+        this.clearFieldError(field);
+        
+        // Required field validation
+        if (required && !value) {
+            this.showFieldError(field, 'This field is required');
+            return false;
+        }
+        
+        // Email validation
+        if (type === 'email' && value) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(value)) {
+                this.showFieldError(field, 'Please enter a valid email address');
+                return false;
+            }
+        }
+        
+        // Show success state
+        field.classList.add('success');
+        return true;
+    }
+
+    /**
+     * Show field error
+     * @param {HTMLElement} field - Form field
+     * @param {string} message - Error message
+     */
+    showFieldError(field, message) {
+        field.classList.add('error');
+        field.classList.remove('success');
+        
+        // Remove existing error message
+        const existingError = field.parentNode.querySelector('.error-message');
+        if (existingError) {
+            existingError.remove();
+        }
+        
+        // Add new error message
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'error-message';
+        errorDiv.textContent = message;
+        field.parentNode.appendChild(errorDiv);
+    }
+
+    /**
+     * Clear field error
+     * @param {HTMLElement} field - Form field
+     */
+    clearFieldError(field) {
+        field.classList.remove('error', 'success');
+        const errorMessage = field.parentNode.querySelector('.error-message');
+        if (errorMessage) {
+            errorMessage.remove();
+        }
+    }
+
+    /**
+     * Setup lazy loading for images
+     */
+    setupLazyLoading() {
+        const images = document.querySelectorAll('img[data-src]');
+        
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.remove('lazy');
+                        imageObserver.unobserve(img);
+                    }
+                });
+            });
+            
+            images.forEach(img => imageObserver.observe(img));
+        } else {
+            // Fallback for browsers without IntersectionObserver
+            images.forEach(img => {
+                img.src = img.dataset.src;
+                img.classList.remove('lazy');
+            });
+        }
+    }
+
+    /**
+     * Setup scroll-based navigation highlighting
+     */
+    setupScrollBasedNavigation() {
+        const sections = ['about', 'skills', 'work', 'testimonials', 'contact'];
+        const navLinks = {
+            about: document.querySelector('nav a[href="#about"]'),
+            skills: document.querySelector('nav a[href="#skills"]'),
+            work: document.querySelector('nav a[href="#work"]'),
+            testimonials: document.querySelector('nav a[href="#testimonials"]'),
+            contact: document.querySelector('nav a[href="#contact"]'),
+            pricing: document.querySelector('nav a[href="pricing.html"]')
+        };
+        
+        // Mobile nav links
+        const mobileNavLinks = {
+            about: document.querySelector('#mobile-menu a[href="#about"]'),
+            skills: document.querySelector('#mobile-menu a[href="#skills"]'),
+            work: document.querySelector('#mobile-menu a[href="#work"]'),
+            testimonials: document.querySelector('#mobile-menu a[href="#testimonials"]'),
+            contact: document.querySelector('#mobile-menu a[href="#contact"]'),
+            pricing: document.querySelector('#mobile-menu a[href="pricing.html"]')
+        };
+
+        const updateActiveNavigation = this.throttle(() => {
+            const scrollPosition = window.scrollY + 100; // Offset for navbar height
+            let activeSection = null;
+            
+            // Check if we're on the pricing page
+            const isPricingPage = window.location.pathname.includes('pricing.html');
+
+            // Only check sections if we're NOT on pricing page
+            if (!isPricingPage) {
+                sections.forEach(sectionId => {
+                    const section = document.getElementById(sectionId);
+                    if (section) {
+                        const sectionTop = section.offsetTop;
+                        const sectionBottom = sectionTop + section.offsetHeight;
+                        
+                        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                            activeSection = sectionId;
+                        }
+                    }
+                });
+            }
+
+            // Remove active class from ALL nav links first
+            Object.values(navLinks).forEach(link => {
+                if (link) {
+                    link.classList.remove('text-primary');
+                    link.style.fontWeight = '';
+                }
+            });
+            
+            Object.values(mobileNavLinks).forEach(link => {
+                if (link) {
+                    link.classList.remove('text-primary');
+                    link.style.fontWeight = '';
+                }
+            });
+
+            // Handle pricing page active state
+            if (isPricingPage) {
+                if (navLinks.pricing) {
+                    navLinks.pricing.classList.add('text-primary');
+                    navLinks.pricing.style.fontWeight = '600';
+                }
+                if (mobileNavLinks.pricing) {
+                    mobileNavLinks.pricing.classList.add('text-primary');
+                    mobileNavLinks.pricing.style.fontWeight = '600';
+                }
+            } else {
+                // Add active class to current section's nav link (only on homepage)
+                // Pricing should NEVER be active on homepage
+                if (activeSection && navLinks[activeSection]) {
+                    navLinks[activeSection].classList.add('text-primary');
+                    navLinks[activeSection].style.fontWeight = '600';
+                    
+                    if (mobileNavLinks[activeSection]) {
+                        mobileNavLinks[activeSection].classList.add('text-primary');
+                        mobileNavLinks[activeSection].style.fontWeight = '600';
+                    }
+                }
+            }
+        }, 50);
+
+        window.addEventListener('scroll', updateActiveNavigation);
+        
+        // Initial call to set correct active state on page load
+        updateActiveNavigation();
+    }
+
+    /**
+     * Setup skill progress bars animation
+     */
+    setupSkillProgressBars() {
+        const skillBars = document.querySelectorAll('.skill-progress');
+        
+        if (skillBars.length === 0) return;
+        
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const progressBar = entry.target;
+                    const targetWidth = progressBar.getAttribute('data-width');
+                    
+                    if (targetWidth) {
+                        // Animate the progress bar
+                        setTimeout(() => {
+                            progressBar.style.width = targetWidth;
+                        }, 200);
+                        
+                        // Unobserve after animation
+                        skillObserver.unobserve(progressBar);
+                    }
+                }
+            });
+        }, observerOptions);
+        
+        skillBars.forEach(bar => {
+            skillObserver.observe(bar);
+        });
     }
 
     /**

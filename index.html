@@ -7,6 +7,14 @@
     <title>Abrar Studio - Portfolio</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FORCE DARK THEME IMMEDIATELY -->
+    <script>
+        // IMMEDIATELY FORCE DARK THEME - NO LIGHT THEME ALLOWED
+        document.documentElement.classList.remove('light-theme');
+        document.body.classList.remove('light-theme');
+        localStorage.setItem('theme', 'dark');
+        localStorage.removeItem('light-theme');
+    </script>
     <!-- Google Fonts: Poppins -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
@@ -27,25 +35,14 @@
             <a href="#" class="flex items-center">
                 <img src="assets/logo.svg" alt="Abrar Studio Logo" class="h-8">
             </a>
-            <div class="hidden md:flex space-x-8">
-                <a href="#about" class="hover:text-primary transition-colors">About</a>
-                <a href="#skills" class="hover:text-primary transition-colors">Skills</a>
-                <a href="#work" class="hover:text-primary transition-colors">Work</a>
-                <a href="pricing.html" class="hover:text-primary transition-colors">Pricing</a>
-                <a href="#contact" class="hover:text-primary transition-colors">Contact</a>
-            </div>
             <div class="flex items-center space-x-4">
-                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
-                    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                        <path fill="currentColor"
-                            d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z" />
-                    </svg>
-                    <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
-                        height="24">
-                        <path fill="currentColor"
-                            d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z" />
-                    </svg>
-                </button>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#about" class="hover:text-primary transition-colors">About</a>
+                    <a href="#skills" class="hover:text-primary transition-colors">Skills</a>
+                    <a href="#work" class="hover:text-primary transition-colors">Work</a>
+                    <a href="#testimonials" class="hover:text-primary transition-colors">Testimonials</a>
+                    <a href="#contact" class="hover:text-primary transition-colors">Contact</a>
+                </div>
                 <button class="md:hidden text-xl" id="menu-toggle">
                     <i class="fas fa-bars"></i>
                 </button>
@@ -57,7 +54,7 @@
                 <a href="#about" class="hover:text-primary transition-colors">About</a>
                 <a href="#skills" class="hover:text-primary transition-colors">Skills</a>
                 <a href="#work" class="hover:text-primary transition-colors">Work</a>
-                <a href="pricing.html" class="hover:text-primary transition-colors">Pricing</a>
+                <a href="#testimonials" class="hover:text-primary transition-colors">Testimonials</a>
                 <a href="#contact" class="hover:text-primary transition-colors">Contact</a>
             </div>
         </div>
@@ -778,7 +775,7 @@
     </section>
 
     <!-- Testimonials Section -->
-    <section class="py-20 relative overflow-hidden testimonials-section">
+    <section id="testimonials" class="py-20 relative overflow-hidden testimonials-section">
         <!-- Theme-aware Background -->
         <div class="testimonials-bg absolute inset-0"></div>
 
@@ -1298,6 +1295,11 @@
         </div>
     </section>
 
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" aria-label="Scroll to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
     <!-- Footer -->
     <footer class="py-8 border-t" style="border-color: var(--md-border);">
         <div class="container mx-auto px-6">
@@ -1311,7 +1313,7 @@
                     <a href="#about" class="text-gray-400 hover:text-primary transition-colors">About</a>
                     <a href="#skills" class="text-gray-400 hover:text-primary transition-colors">Skills</a>
                     <a href="#work" class="text-gray-400 hover:text-primary transition-colors">Work</a>
-                    <a href="pricing.html" class="text-gray-400 hover:text-primary transition-colors">Pricing</a>
+                    <a href="#testimonials" class="text-gray-400 hover:text-primary transition-colors">Testimonials</a>
                     <a href="#contact" class="text-gray-400 hover:text-primary transition-colors">Contact</a>
                 </div>
             </div>
@@ -1540,6 +1542,30 @@
         });
     </script>
 
+    <!-- Success Popup -->
+    <div id="success-popup" class="fixed inset-0 hidden"
+        style="z-index: 99999; background-color: rgba(0, 0, 0, 0.5); display: none;">
+        <div class="flex items-center justify-center min-h-screen px-4">
+            <div class="md-surface-1 rounded-xl p-8 max-w-md w-full relative shadow-2xl border"
+                style="z-index: 100000; border-color: var(--md-border);">
+                <div class="text-center">
+                    <div
+                        class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 text-green-500 mb-4">
+                        <i class="fas fa-check text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2" style="color: var(--md-text-primary);">Message Sent!</h3>
+                    <p class="mb-6" style="color: var(--md-text-secondary);">Thank you for reaching out. I'll get back
+                        to you as soon as possible.
+                    </p>
+                    <button id="close-popup"
+                        class="px-6 py-2 bg-gradient-to-r from-[#0066FF] to-[#00A3FF] rounded-lg font-medium hover:opacity-90 transition-opacity text-white">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Scroll to Top Button -->
     <button id="scroll-to-top" class="scroll-to-top" aria-label="Scroll to top">
         <i class="fas fa-chevron-up"></i>
@@ -1550,262 +1576,95 @@
     <script src="js/animations.js"></script>
     <script src="js/testimonials.js"></script>
     <script src="main.js"></script>
+
+    <style>
+        /* Logo switching for light/dark themes */
+        :root.light-theme .dark-theme-logo {
+            display: none;
+        }
+
+        :root.light-theme .light-theme-logo {
+            display: block;
+        }
+
+        .light-theme-logo {
+            display: none;
+        }
+
+        .dark-theme-logo {
+            display: block;
+        }
+    </style>
+
+    <script>
+        // Contact form handler - prevent Web3Forms redirect and show custom popup
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('contact-form');
+            const successPopup = document.getElementById('success-popup');
+            const closePopupBtn = document.getElementById('close-popup');
+            const submitBtn = document.getElementById('submit-btn');
+
+            if (form) {
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+
+                    // Show loading state
+                    if (submitBtn) {
+                        submitBtn.disabled = true;
+                        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i><span>Sending...</span>';
+                    }
+
+                    // Get form data
+                    const formData = new FormData(form);
+
+                    // Submit to Web3Forms
+                    fetch('https://api.web3forms.com/submit', {
+                        method: 'POST',
+                        body: formData
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            // Show success popup regardless of response
+                            if (successPopup) {
+                                successPopup.classList.remove('hidden');
+                            }
+                            // Reset form
+                            form.reset();
+                        })
+                        .catch(error => {
+                            console.log('Form submitted, showing success popup');
+                            // Show popup even on error (form likely still sent)
+                            if (successPopup) {
+                                successPopup.classList.remove('hidden');
+                            }
+                            form.reset();
+                        })
+                        .finally(() => {
+                            // Reset button
+                            if (submitBtn) {
+                                submitBtn.disabled = false;
+                                submitBtn.innerHTML = '<i class="fas fa-paper-plane mr-2"></i><span>Send Message</span>';
+                            }
+                        });
+                });
+            }
+
+            // Close popup handlers
+            if (closePopupBtn) {
+                closePopupBtn.addEventListener('click', function () {
+                    successPopup.classList.add('hidden');
+                });
+            }
+
+            if (successPopup) {
+                successPopup.addEventListener('click', function (e) {
+                    if (e.target === successPopup) {
+                        successPopup.classList.add('hidden');
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>
-</style>
-<style>
-    /* Additional light theme improvements */
-
-    /* Fix navigation links in light theme */
-    :root.light-theme nav a.hover\:text-primary:hover {
-        color: var(--primary);
-    }
-
-    /* Fix hero section text in light theme */
-    :root.light-theme .hero-section p.text-gray-300 {
-        color: rgba(0, 0, 0, 0.7);
-    }
-
-    /* Fix about section text in light theme */
-    :root.light-theme .about-section p.text-gray-300 {
-        color: rgba(0, 0, 0, 0.7);
-    }
-
-    /* Fix skill bars in light theme */
-    :root.light-theme .h-2.bg-gray-700 {
-        background-color: rgba(0, 0, 0, 0.1);
-    }
-
-    /* Fix contact button in light theme */
-    :root.light-theme a.border.border-gray-600 {
-        border-color: rgba(0, 0, 0, 0.1);
-    }
-
-    :root.light-theme a.border.border-gray-600:hover {
-        background-color: rgba(0, 0, 0, 0.05);
-    }
-
-    /* Fix project cards in light theme */
-    :root.light-theme .project-card {
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    }
-
-    /* Fix footer in light theme */
-    :root.light-theme footer.border-t {
-        border-color: rgba(0, 0, 0, 0.1);
-    }
-
-    /* Fix mobile menu in light theme */
-    :root.light-theme #mobile-menu {
-        background-color: var(--md-surface);
-        border-color: var(--md-border);
-    }
-
-    /* Fix form inputs in light theme */
-    :root.light-theme input,
-    :root.light-theme textarea {
-        color: var(--md-text-primary);
-    }
-
-    /* Fix hover effects in light theme */
-    :root.light-theme .hover\:bg-gray-800:hover {
-        background-color: rgba(0, 0, 0, 0.05);
-    }
-
-    /* Fix chevron icon in light theme */
-    :root.light-theme .fa-chevron-down {
-        color: rgba(0, 0, 0, 0.5);
-    }
-
-    :root.light-theme a:hover .fa-chevron-down {
-        color: var(--primary);
-    }
-</style>
-<style>
-    /* Additional light theme improvements */
-
-    /* Fix text colors in light theme */
-    :root.light-theme p.text-gray-300,
-    :root.light-theme .text-gray-300 {
-        color: rgba(0, 0, 0, 0.7);
-    }
-
-    :root.light-theme p.text-gray-400,
-    :root.light-theme .text-gray-400 {
-        color: rgba(0, 0, 0, 0.6);
-    }
-
-    :root.light-theme .text-gray-500 {
-        color: rgba(0, 0, 0, 0.5);
-    }
-
-    /* Fix hover states in light theme */
-    :root.light-theme a.hover\:text-white:hover {
-        color: var(--primary);
-    }
-
-    :root.light-theme a.hover\:bg-gray-800:hover {
-        background-color: rgba(0, 0, 0, 0.05);
-    }
-
-    /* Fix borders in light theme */
-    :root.light-theme .border-gray-600 {
-        border-color: rgba(0, 0, 0, 0.1);
-    }
-
-    :root.light-theme .border-gray-800 {
-        border-color: rgba(0, 0, 0, 0.1);
-    }
-
-    :root.light-theme footer.border-t {
-        border-color: rgba(0, 0, 0, 0.1);
-    }
-
-    /* Fix background colors in light theme */
-    :root.light-theme .bg-gray-700 {
-        background-color: rgba(0, 0, 0, 0.1);
-    }
-
-    /* Fix project cards in light theme */
-    :root.light-theme .project-card {
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    }
-
-    :root.light-theme .project-overlay h3 {
-        color: white !important;
-    }
-
-    :root.light-theme .project-overlay p {
-        color: rgba(255, 255, 255, 0.9) !important;
-    }
-
-    /* Fix skill bars in light theme */
-    :root.light-theme .h-2.bg-gray-700 {
-        background-color: rgba(0, 0, 0, 0.1);
-    }
-
-    /* Fix icons in light theme */
-    :root.light-theme .fab.fa-apple {
-        color: #333;
-    }
-
-    /* Fix social media icons in light theme */
-    :root.light-theme a.rounded-full.md-surface-2:hover {
-        color: white;
-    }
-
-    /* Fix chevron icon in light theme */
-    :root.light-theme .fa-chevron-down {
-        color: rgba(0, 0, 0, 0.5);
-    }
-
-    :root.light-theme a:hover .fa-chevron-down {
-        color: var(--primary);
-    }
-
-    /* Fix contact section in light theme */
-    :root.light-theme .rounded-full.md-surface-2 {
-        background-color: var(--md-surface-2);
-        border: 1px solid var(--md-border);
-    }
-
-    /* Fix form inputs in light theme */
-    :root.light-theme input,
-    :root.light-theme textarea {
-        color: var(--md-text-primary);
-    }
-
-    /* Fix mobile menu in light theme */
-    :root.light-theme #mobile-menu {
-        background-color: var(--md-surface);
-        border-color: var(--md-border);
-    }
-</style>
-<style>
-    /* Logo switching for light/dark themes */
-    :root.light-theme .dark-theme-logo {
-        display: none;
-    }
-
-    :root.light-theme .light-theme-logo {
-        display: block;
-    }
-
-    .light-theme-logo {
-        display: none;
-    }
-
-    .dark-theme-logo {
-        display: block;
-    }
-</style>
-<script>
-    // Contact form handler - prevent Web3Forms redirect and show custom popup
-    document.addEventListener('DOMContentLoaded', function () {
-        const form = document.getElementById('contact-form');
-        const successPopup = document.getElementById('success-popup');
-        const closePopupBtn = document.getElementById('close-popup');
-        const submitBtn = document.getElementById('submit-btn');
-
-        if (form) {
-            form.addEventListener('submit', function (e) {
-                e.preventDefault();
-
-                // Show loading state
-                if (submitBtn) {
-                    submitBtn.disabled = true;
-                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i><span>Sending...</span>';
-                }
-
-                // Get form data
-                const formData = new FormData(form);
-
-                // Submit to Web3Forms
-                fetch('https://api.web3forms.com/submit', {
-                    method: 'POST',
-                    body: formData
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        // Show success popup regardless of response
-                        if (successPopup) {
-                            successPopup.classList.remove('hidden');
-                        }
-                        // Reset form
-                        form.reset();
-                    })
-                    .catch(error => {
-                        console.log('Form submitted, showing success popup');
-                        // Show popup even on error (form likely still sent)
-                        if (successPopup) {
-                            successPopup.classList.remove('hidden');
-                        }
-                        form.reset();
-                    })
-                    .finally(() => {
-                        // Reset button
-                        if (submitBtn) {
-                            submitBtn.disabled = false;
-                            submitBtn.innerHTML = '<i class="fas fa-paper-plane mr-2"></i><span>Send Message</span>';
-                        }
-                    });
-            });
-        }
-
-        // Close popup handlers
-        if (closePopupBtn) {
-            closePopupBtn.addEventListener('click', function () {
-                successPopup.classList.add('hidden');
-            });
-        }
-
-        if (successPopup) {
-            successPopup.addEventListener('click', function (e) {
-                if (e.target === successPopup) {
-                    successPopup.classList.add('hidden');
-                }
-            });
-        }
-    });
-</script>
