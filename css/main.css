@@ -1,0 +1,384 @@
+/**
+ * Abrar Studio - Main Stylesheet
+ * ================================
+ * 
+ * This file contains all the CSS styles for the Abrar Studio portfolio website.
+ * It includes theme variables, component styles, and responsive design rules.
+ * 
+ * Table of Contents:
+ * 1. CSS Variables & Theme System
+ * 2. Base Styles
+ * 3. Component Styles
+ * 4. Layout Styles
+ * 5. Animation & Effects
+ * 6. Responsive Design
+ * 7. Light Theme Overrides
+ */
+
+/* ================================
+   1. CSS Variables & Theme System
+   ================================ */
+
+:root {
+    /* Material Design Dark Theme Colors (Default) */
+    --md-background: #121212;
+    --md-surface: #1E1E1E;
+    --md-surface-1: #242424;
+    --md-surface-2: #292929;
+    --md-surface-3: #2D2D2D;
+    
+    /* Brand Colors */
+    --primary: #0066FF;
+    --secondary: #00A3FF;
+    --accent: #f59e0b;
+    
+    /* Text Colors */
+    --md-text-primary: rgba(255, 255, 255, 0.87);
+    --md-text-secondary: rgba(255, 255, 255, 0.60);
+    
+    /* UI Colors */
+    --md-border: rgba(255, 255, 255, 0.05);
+    --md-shadow: rgba(0, 0, 0, 0.3);
+    
+    /* Transitions */
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Material Design Light Theme Colors */
+:root.light-theme {
+    --md-background: #FAFAFA;
+    --md-surface: #FFFFFF;
+    --md-surface-1: #F5F5F5;
+    --md-surface-2: #EEEEEE;
+    --md-surface-3: #E0E0E0;
+    
+    /* Text Colors for Light Theme */
+    --md-text-primary: rgba(0, 0, 0, 0.87);
+    --md-text-secondary: rgba(0, 0, 0, 0.60);
+    
+    /* UI Colors for Light Theme */
+    --md-border: rgba(0, 0, 0, 0.12);
+    --md-shadow: rgba(0, 0, 0, 0.1);
+}
+
+/* ================================
+   2. Base Styles
+   ================================ */
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--md-background);
+    color: var(--md-text-primary);
+    scroll-behavior: smooth;
+    line-height: 1.6;
+}
+
+/* ================================
+   3. Component Styles
+   ================================ */
+
+/* Glass Card Effect */
+.glass-card {
+    background: rgba(30, 30, 30, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
+:root.light-theme .glass-card {
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Material Design Elevation Styles */
+.md-surface-1 {
+    background-color: var(--md-surface-1);
+    border: 1px solid var(--md-border);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.md-surface-2 {
+    background-color: var(--md-surface-2);
+    border: 1px solid var(--md-border);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.md-surface-3 {
+    background-color: var(--md-surface-3);
+    border: 1px solid var(--md-border);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Text Gradient Effect */
+.text-gradient {
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--md-surface-2);
+    border: 2px solid var(--md-border);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    min-width: 40px;
+    min-height: 40px;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px var(--md-shadow);
+}
+
+.theme-toggle:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--primary);
+}
+
+.theme-toggle svg {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    transition: all 0.3s ease;
+    fill: var(--md-text-primary);
+}
+
+.theme-toggle .sun-icon {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.theme-toggle .moon-icon {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+:root.light-theme .theme-toggle .sun-icon {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+:root.light-theme .theme-toggle .moon-icon {
+    opacity: 0;
+    transform: translateY(-20px);
+}
+
+/* ================================
+   4. Layout Styles
+   ================================ */
+
+/* Navigation Styles */
+nav {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* ================================
+   5. Animation & Effects
+   ================================ */
+
+/* Blob Animations */
+.blob {
+    position: absolute;
+    filter: blur(40px);
+    opacity: 0.4;
+    mix-blend-mode: screen;
+    animation: float 8s ease-in-out infinite;
+    z-index: -1;
+}
+
+.blob-1 {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, var(--primary) 0%, rgba(0, 102, 255, 0) 70%);
+    top: 10%;
+    left: 15%;
+    animation-delay: 0s;
+}
+
+.blob-2 {
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, var(--secondary) 0%, rgba(0, 163, 255, 0) 70%);
+    top: 40%;
+    right: 20%;
+    animation-delay: -2s;
+}
+
+.blob-3 {
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, var(--accent) 0%, rgba(245, 158, 11, 0) 70%);
+    bottom: 20%;
+    left: 30%;
+    animation-delay: -4s;
+}
+
+/* Adjust blob visibility for light theme */
+:root.light-theme .blob {
+    mix-blend-mode: multiply;
+    opacity: 0.3;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+    }
+    25% {
+        transform: translate(20px, -15px) scale(1.1);
+    }
+    50% {
+        transform: translate(-10px, 20px) scale(0.9);
+    }
+    75% {
+        transform: translate(-20px, -10px) scale(1.05);
+    }
+}
+
+/* ================================
+   6. Responsive Design
+   ================================ */
+
+@media (max-width: 640px) {
+    .theme-toggle {
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+        min-height: 36px;
+    }
+
+    .theme-toggle svg {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+/* ================================
+   7. Light Theme Overrides
+   ================================ */
+
+/* Fix text contrast issues in light theme */
+:root.light-theme .text-gray-300 {
+    color: rgba(0, 0, 0, 0.75) !important;
+}
+
+:root.light-theme .text-gray-400 {
+    color: rgba(0, 0, 0, 0.65) !important;
+}
+
+:root.light-theme .text-gray-500 {
+    color: rgba(0, 0, 0, 0.55) !important;
+}
+
+:root.light-theme .text-white {
+    color: rgba(0, 0, 0, 0.87) !important;
+}
+
+/* Form input styles for theme compatibility */
+.form-input {
+    background-color: var(--md-surface-1) !important;
+    color: var(--md-text-primary) !important;
+    border: 1px solid var(--md-border) !important;
+}
+
+.form-input:focus {
+    background-color: var(--md-surface-1) !important;
+    color: var(--md-text-primary) !important;
+    border-color: var(--primary) !important;
+    outline: none !important;
+    box-shadow: 0 0 0 2px rgba(0, 102, 255, 0.2) !important;
+}
+
+.form-input::placeholder {
+    color: var(--md-text-secondary) !important;
+}
+
+/* Contact form input fields - Fix white background issue */
+input[type="text"],
+input[type="email"],
+textarea {
+    background-color: var(--md-surface-1) !important;
+    color: var(--md-text-primary) !important;
+    border: 1px solid var(--md-border) !important;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+    background-color: var(--md-surface-1) !important;
+    color: var(--md-text-primary) !important;
+    border-color: var(--primary) !important;
+    outline: none !important;
+    box-shadow: 0 0 0 2px rgba(0, 102, 255, 0.2) !important;
+}
+
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+textarea::placeholder {
+    color: var(--md-text-secondary) !important;
+}
+
+/* ================================
+   Scroll to Top Button
+   ================================ */
+
+.scroll-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0, 102, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.scroll-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.scroll-to-top:hover {
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0 8px 25px rgba(0, 102, 255, 0.4);
+}
+
+.scroll-to-top:active {
+    transform: translateY(-1px) scale(0.95);
+}
+
+/* Responsive adjustments for scroll to top button */
+@media (max-width: 768px) {
+    .scroll-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+    }
+}
