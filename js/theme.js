@@ -1,9 +1,8 @@
 /**
- * Abrar Studio - Theme Management
+ * Abrar Studio - DARK THEME ONLY
  * ===============================
  * 
- * This module handles light/dark theme switching functionality.
- * It manages theme persistence, system theme detection, and UI updates.
+ * This module FORCES dark theme only - NO light theme support.
  */
 
 class ThemeManager {
@@ -12,118 +11,123 @@ class ThemeManager {
     }
 
     /**
-     * Initialize theme system
+     * Initialize DARK THEME ONLY
      */
     init() {
-        this.applyTheme(this.getStoredTheme() || this.detectSystemTheme());
-        this.setupEventListeners();
-        this.updateProjectOverlays(this.isLightTheme());
+        // FORCE DARK THEME ONLY
+        this.forceDarkTheme();
     }
 
     /**
-     * Apply theme to the document
-     * @param {string} theme - 'light' or 'dark'
+     * Force dark theme and remove any light theme classes
      */
-    applyTheme(theme) {
-        if (theme === 'light') {
-            document.documentElement.classList.add('light-theme');
-            localStorage.setItem('theme', 'light');
-        } else {
-            document.documentElement.classList.remove('light-theme');
-            localStorage.setItem('theme', 'dark');
-        }
+    forceDarkTheme() {
+        // Remove light theme class if it exists
+        document.documentElement.classList.remove('light-theme');
+        
+        // Clear any stored theme preference
+        localStorage.removeItem('theme');
+        localStorage.setItem('theme', 'dark');
+        
+        // Ensure dark theme is applied
+        document.documentElement.classList.remove('light-theme');
+        document.body.classList.remove('light-theme');
+        
+        // Force dark theme styles
+        document.documentElement.style.setProperty('--md-background', '#121212');
+        document.documentElement.style.setProperty('--md-surface', '#1E1E1E');
+        document.documentElement.style.setProperty('--md-text-primary', 'rgba(255, 255, 255, 0.87)');
     }
 
     /**
-     * Detect system theme preference
-     * @returns {string} 'light' or 'dark'
+     * DISABLED - No theme detection
      */
     detectSystemTheme() {
-        return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        return 'dark'; // ALWAYS RETURN DARK
     }
 
     /**
-     * Get stored theme from localStorage
-     * @returns {string|null} Stored theme or null
+     * DISABLED - Always return dark
      */
     getStoredTheme() {
-        return localStorage.getItem('theme');
+        return 'dark'; // ALWAYS RETURN DARK
     }
 
     /**
-     * Check if current theme is light
-     * @returns {boolean} True if light theme is active
+     * DISABLED - Always return false (never light theme)
      */
     isLightTheme() {
-        return document.documentElement.classList.contains('light-theme');
+        return false; // NEVER LIGHT THEME
     }
 
     /**
-     * Toggle between light and dark themes
+     * DISABLED - No theme toggling
      */
     toggleTheme() {
-        const isLight = this.isLightTheme();
-        this.applyTheme(isLight ? 'dark' : 'light');
-        this.updateProjectOverlays(!isLight);
-        
-        // Add animation effect to the theme toggle button
-        const themeToggle = document.getElementById('theme-toggle');
-        if (themeToggle) {
-            themeToggle.classList.add('animate-pulse');
-            setTimeout(() => {
-                themeToggle.classList.remove('animate-pulse');
-            }, 500);
-        }
+        // DO NOTHING - DARK THEME ONLY
+        this.forceDarkTheme();
     }
 
     /**
-     * Update project overlay colors based on theme
-     * @param {boolean} isLight - Whether light theme is active
+     * DISABLED - No theme switching
      */
-    updateProjectOverlays(isLight) {
+    updateProjectOverlays() {
+        // Force dark theme overlays
         document.querySelectorAll('.project-overlay').forEach(overlay => {
-            if (isLight) {
-                overlay.classList.remove('bg-gradient-to-t', 'from-black');
-                overlay.classList.add('bg-gradient-to-t', 'from-gray-900');
-            } else {
-                overlay.classList.remove('bg-gradient-to-t', 'from-gray-900');
-                overlay.classList.add('bg-gradient-to-t', 'from-black');
-            }
+            overlay.classList.remove('bg-gradient-to-t', 'from-gray-900');
+            overlay.classList.add('bg-gradient-to-t', 'from-black');
         });
     }
 
     /**
-     * Setup event listeners for theme functionality
+     * DISABLED - No event listeners needed
      */
     setupEventListeners() {
-        // Theme toggle button - with retry mechanism
-        const setupThemeToggle = () => {
-            const themeToggle = document.getElementById('theme-toggle');
-            if (themeToggle) {
-                themeToggle.addEventListener('click', () => {
-                    this.toggleTheme();
-                });
-                console.log('Theme toggle button initialized successfully');
-            } else {
-                console.warn('Theme toggle button not found, retrying...');
-                // Retry after a short delay
-                setTimeout(setupThemeToggle, 100);
-            }
-        };
-
-        setupThemeToggle();
-
-        // Listen for system theme changes
-        window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', e => {
-            if (!this.getStoredTheme()) {
-                this.applyTheme(e.matches ? 'light' : 'dark');
-                this.updateProjectOverlays(e.matches);
-            }
-        });
+        // DO NOTHING - NO THEME SWITCHING ALLOWED
+        console.log('Dark theme only - no event listeners needed');
     }
 }
 
-// Initialize theme manager when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    window.themeManager = new ThemeManager();
+// Initialize theme manager when DOM is loaded or immediately if already loaded
+function initializeThemeManager() {
+    if (!window.themeManager) {
+        window.themeManager = new ThemeManager();
+        console.log('ThemeManager initialized');
+    }
+}
+
+// Manual initialization function that can be called from anywhere
+window.initTheme = initializeThemeManager;
+
+// Try multiple initialization methods to ensure it works
+if (document.readyState === 'loading') {
+    // DOM is still loading
+    document.addEventListener('DOMContentLoaded', initializeThemeManager);
+} else {
+    // DOM is already loaded
+    initializeThemeManager();
+}
+
+// Additional event listeners for different loading states
+window.addEventListener('load', () => {
+    if (!window.themeManager) {
+        console.log('Window loaded, initializing theme manager...');
+        initializeThemeManager();
+    }
 });
+
+// Fallback initialization after a short delay
+setTimeout(() => {
+    if (!window.themeManager) {
+        console.warn('ThemeManager not initialized, trying fallback...');
+        initializeThemeManager();
+    }
+}, 500);
+
+// Final fallback after a longer delay
+setTimeout(() => {
+    if (!window.themeManager) {
+        console.error('ThemeManager still not initialized, forcing initialization...');
+        initializeThemeManager();
+    }
+}, 2000);

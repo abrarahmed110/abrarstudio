@@ -19,6 +19,7 @@ class AnimationManager {
         this.setupCounterAnimations();
         this.setupScrollToTop();
         this.setupFadeInAnimations();
+        this.setupSkillProgressBars();
     }
 
     /**
@@ -140,6 +141,79 @@ class AnimationManager {
 
         fadeElements.forEach(element => {
             observer.observe(element);
+        });
+    }
+
+    /**
+     * Setup skill progress bar animations
+     */
+    setupSkillProgressBars() {
+        const skillBars = document.querySelectorAll('.skill-progress');
+        
+        const observerOptions = {
+            threshold: 0.3,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const progressBar = entry.target.querySelector('.skill-progress-bar');
+                    const skillCard = entry.target.closest('.skill-card');
+                    
+                    if (progressBar && skillCard) {
+                        // Get the data-width attribute or calculate from data-level
+                        const dataWidth = progressBar.getAttribute('data-width');
+                        const dataLevel = skillCard.getAttribute('data-level');
+                        
+                        let targetWidth = '0%';
+                        
+                        if (dataWidth) {
+                            targetWidth = dataWidth;
+                        } else if (dataLevel) {
+                            switch (dataLevel) {
+                                case 'beginner': targetWidth = '30%'; break;
+                                case 'intermediate': targetWidth = '60%'; break;
+                                case 'advanced': targetWidth = '85%'; break;
+                                case 'expert': targetWidth = '95%'; break;
+                                default: targetWidth = '50%';
+                            }
+                        }
+                        
+                        // Animate the progress bar
+                        setTimeout(() => {
+                            progressBar.style.width = targetWidth;
+                        }, 200);
+                    }
+                    
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        skillBars.forEach(bar => {
+            observer.observe(bar);
+        });
+
+        // Also handle the existing skill progress elements
+        const existingSkillProgress = document.querySelectorAll('.skill-progress[data-width]');
+        
+        const existingObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const targetWidth = entry.target.getAttribute('data-width');
+                    if (targetWidth) {
+                        setTimeout(() => {
+                            entry.target.style.width = targetWidth;
+                        }, 200);
+                    }
+                    existingObserver.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        existingSkillProgress.forEach(progress => {
+            existingObserver.observe(progress);
         });
     }
 
