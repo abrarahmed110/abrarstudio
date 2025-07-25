@@ -12,918 +12,9 @@
         rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        :root {
-            /* Material Design Dark Theme Colors (Default) */
-            --md-background: #121212;
-            /* Material dark background */
-            --md-surface: #1E1E1E;
-            /* Material surface color */
-            --md-surface-1: #242424;
-            /* Surface with 1dp elevation */
-            --md-surface-2: #292929;
-            /* Surface with 2dp elevation */
-            --md-surface-3: #2D2D2D;
-            /* Surface with 3dp elevation */
-            --primary: #0066FF;
-            --secondary: #00A3FF;
-            --accent: #f59e0b;
-            --md-text-primary: rgba(255, 255, 255, 0.87);
-            /* Material primary text */
-            --md-text-secondary: rgba(255, 255, 255, 0.60);
-            /* Material secondary text */
-            --md-border: rgba(255, 255, 255, 0.05);
-            --md-shadow: rgba(0, 0, 0, 0.3);
-
-            /* Transition for theme switching */
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-        }
-
-        /* Material Design Light Theme Colors */
-        :root.light-theme {
-            --md-background: #FAFAFA;
-            /* Material light background */
-            --md-surface: #FFFFFF;
-            /* Material light surface color */
-            --md-surface-1: #F5F5F5;
-            /* Surface with 1dp elevation */
-            --md-surface-2: #EEEEEE;
-            /* Surface with 2dp elevation */
-            --md-surface-3: #E0E0E0;
-            /* Surface with 3dp elevation */
-            /* Keep brand colors consistent across themes */
-            --primary: #0066FF;
-            --secondary: #00A3FF;
-            --accent: #f59e0b;
-            --md-text-primary: rgba(0, 0, 0, 0.87);
-            /* Material primary text */
-            --md-text-secondary: rgba(0, 0, 0, 0.60);
-            /* Material secondary text */
-            --md-border: rgba(0, 0, 0, 0.12);
-            --md-shadow: rgba(0, 0, 0, 0.1);
-
-            /* Light theme specific colors */
-            --text-gray-300: rgba(0, 0, 0, 0.7);
-            --text-gray-400: rgba(0, 0, 0, 0.6);
-            --text-gray-500: rgba(0, 0, 0, 0.5);
-            --border-gray: rgba(0, 0, 0, 0.1);
-            --hover-bg: rgba(0, 0, 0, 0.05);
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--md-background);
-            color: var(--md-text-primary);
-            scroll-behavior: smooth;
-        }
-
-        .glass-card {
-            background: rgba(30, 30, 30, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: background-color 0.3s ease, border-color 0.3s ease;
-        }
-
-        :root.light-theme .glass-card {
-            background: rgba(255, 255, 255, 0.8);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        }
-
-        /* Material Design elevation styles */
-        .elevation-1 {
-            background-color: var(--md-surface-1);
-        }
-
-        .elevation-2 {
-            background-color: var(--md-surface-2);
-        }
-
-        .elevation-3 {
-            background-color: var(--md-surface-3);
-        }
-
-        .text-gradient {
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        /* Update/add Material Design surface styles */
-        .md-surface-1 {
-            background-color: var(--md-surface-1);
-            border: 1px solid var(--md-border);
-            transition: background-color 0.3s ease, border-color 0.3s ease;
-        }
-
-        .md-surface-2 {
-            background-color: var(--md-surface-2);
-            border: 1px solid var(--md-border);
-            transition: background-color 0.3s ease, border-color 0.3s ease;
-        }
-
-        .md-surface-3 {
-            background-color: var(--md-surface-3);
-            border: 1px solid var(--md-border);
-            transition: background-color 0.3s ease, border-color 0.3s ease;
-        }
-
-        /* Update tab bar styles */
-        .tab-container {
-            background-color: var(--md-surface);
-            padding: 0.25rem;
-            border-radius: 0.5rem;
-            transition: background-color 0.3s ease;
-        }
-
-        .tab-active {
-            background-color: var(--md-surface-2);
-            color: var(--primary);
-            transition: background-color 0.3s ease;
-        }
-
-        /* Add blob animations */
-        .blob {
-            position: absolute;
-            filter: blur(40px);
-            opacity: 0.4;
-            mix-blend-mode: screen;
-            animation: float 8s ease-in-out infinite;
-            z-index: -1;
-        }
-
-        .blob-1 {
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, var(--primary) 0%, rgba(0, 102, 255, 0) 70%);
-            top: 10%;
-            left: 15%;
-            animation-delay: 0s;
-        }
-
-        .blob-2 {
-            width: 250px;
-            height: 250px;
-            background: radial-gradient(circle, var(--secondary) 0%, rgba(0, 163, 255, 0) 70%);
-            top: 40%;
-            right: 20%;
-            animation-delay: -2s;
-        }
-
-        .blob-3 {
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, var(--accent) 0%, rgba(245, 158, 11, 0) 70%);
-            bottom: 20%;
-            left: 30%;
-            animation-delay: -4s;
-        }
-
-        /* Adjust blob visibility for light theme */
-        :root.light-theme .blob {
-            mix-blend-mode: multiply;
-            opacity: 0.3;
-        }
-
-        :root.light-theme .blob-1 {
-            background: radial-gradient(circle, var(--primary) 0%, rgba(0, 102, 255, 0) 70%);
-        }
-
-        :root.light-theme .blob-2 {
-            background: radial-gradient(circle, var(--secondary) 0%, rgba(0, 163, 255, 0) 70%);
-        }
-
-        :root.light-theme .blob-3 {
-            background: radial-gradient(circle, var(--accent) 0%, rgba(245, 158, 11, 0) 70%);
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translate(0, 0) scale(1);
-            }
-
-            25% {
-                transform: translate(20px, -15px) scale(1.1);
-            }
-
-            50% {
-                transform: translate(-10px, 20px) scale(0.9);
-            }
-
-            75% {
-                transform: translate(-20px, -10px) scale(1.05);
-            }
-        }
-
-        /* Update hero section to handle blobs */
-        .hero-section {
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Advanced Micro-interactions and Animations */
-        .fade-in-up {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .fade-in-up.animate-in {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .stagger-animation {
-            animation-delay: calc(var(--stagger-delay, 0) * 0.15s);
-        }
-
-        /* Enhanced card hover effects */
-        .card-hover {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            transform-origin: center;
-        }
-
-        .card-hover:hover {
-            transform: translateY(-12px) scale(1.02);
-            box-shadow: 0 25px 50px rgba(0, 102, 255, 0.15);
-        }
-
-        /* Magnetic button effect */
-        .magnetic-button {
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .magnetic-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.5s;
-        }
-
-        .magnetic-button:hover::before {
-            left: 100%;
-        }
-
-        .magnetic-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 102, 255, 0.3);
-        }
-
-        /* Typewriter effect */
-        .typewriter {
-            overflow: hidden;
-            border-right: 3px solid var(--primary);
-            white-space: nowrap;
-            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
-        }
-
-        @keyframes typing {
-            from {
-                width: 0
-            }
-
-            to {
-                width: 100%
-            }
-        }
-
-        @keyframes blink-caret {
-
-            from,
-            to {
-                border-color: transparent
-            }
-
-            50% {
-                border-color: var(--primary)
-            }
-        }
-
-        /* Floating animation for elements */
-        .float-animation {
-            animation: float-gentle 6s ease-in-out infinite;
-        }
-
-        @keyframes float-gentle {
-
-            0%,
-            100% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        /* Skill bar animations */
-        .skill-bar {
-            position: relative;
-            background: var(--md-surface-2);
-            border-radius: 10px;
-            overflow: hidden;
-            height: 8px;
-        }
-
-        .skill-progress {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            border-radius: 10px;
-            width: 0%;
-            transition: width 2s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-        }
-
-        .skill-progress::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            animation: shimmer 2s infinite;
-        }
-
-        @keyframes shimmer {
-            0% {
-                transform: translateX(-100%);
-            }
-
-            100% {
-                transform: translateX(100%);
-            }
-        }
-
-        /* Enhanced button ripple effect */
-        .ripple-button {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .ripple-button::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-
-        .ripple-button:active::after {
-            width: 300px;
-            height: 300px;
-        }
-
-        /* Scroll progress indicator */
-        .scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            z-index: 9999;
-            transition: width 0.1s ease-out;
-        }
-
-        /* Enhanced social icons */
-        .social-icon {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-        }
-
-        .social-icon::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: var(--primary);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: all 0.3s ease;
-            z-index: -1;
-        }
-
-        .social-icon:hover::before {
-            width: 100%;
-            height: 100%;
-        }
-
-        .social-icon:hover {
-            transform: translateY(-3px) scale(1.1);
-            color: white;
-        }
-
-        /* Text reveal animation */
-        .text-reveal {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .text-reveal::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--primary);
-            transform: translateX(-100%);
-            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .text-reveal.animate-in::after {
-            transform: translateX(100%);
-        }
-
-        /* Number counter animation */
-        .counter {
-            font-variant-numeric: tabular-nums;
-        }
-
-        /* Enhanced project card effects */
-        .project-card {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, transparent, rgba(0, 102, 255, 0.1), transparent);
-            transform: translateX(-100%) translateY(-100%);
-            transition: transform 0.6s ease;
-        }
-
-        .project-card:hover::before {
-            transform: translateX(100%) translateY(100%);
-        }
-
-        .project-card:hover {
-            transform: translateY(-8px) rotateX(5deg);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Add Adobe product icon styles */
-        .adobe-product {
-            font-weight: 600;
-            margin-left: 0.25rem;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .adobe-xd {
-            color: #FF61F6;
-        }
-
-        .adobe-ai {
-            color: #FF9A00;
-        }
-
-        .adobe-ps {
-            color: #31A8FF;
-        }
-
-        /* Ensure consistent icon sizing */
-        .tool-icon {
-            font-size: 1.25rem;
-            /* matches text-xl */
-            margin-right: 0.5rem;
-            vertical-align: middle;
-        }
-
-        /* Update Adobe product styles for better alignment */
-        .tool-item {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .tool-icon {
-            min-width: 1rem;
-            display: flex;
-            justify-content: center;
-            font-size: 1rem;
-        }
-
-        .adobe-product {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .adobe-product-abbr {
-            font-weight: 600;
-            font-family: 'Poppins', sans-serif;
-            min-width: 1.5rem;
-        }
-
-        .adobe-product-name {
-            color: rgba(255, 255, 255, 0.87);
-            font-weight: normal;
-        }
-
-        /* Reset and align icons */
-        .tools-list {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: flex-start;
-            /* Align items to the start (left) */
-            gap: 20px;
-        }
-
-        .tool-item {
-            display: grid;
-            grid-template-columns: 20px 1fr;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .tool-icon {
-            display: flex;
-            justify-content: center;
-            font-size: 16px;
-            width: 20px;
-        }
-
-        .tool-content {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .tool-abbr {
-            font-weight: 600;
-            min-width: 24px;
-        }
-
-        .tool-name {
-            color: var(--md-text-primary);
-        }
-
-        /* Text color adjustments for light theme */
-        :root.light-theme .text-gray-300 {
-            color: rgba(0, 0, 0, 0.7);
-        }
-
-        :root.light-theme .text-gray-400 {
-            color: rgba(0, 0, 0, 0.6);
-        }
-
-        :root.light-theme .text-gray-500 {
-            color: rgba(0, 0, 0, 0.5);
-        }
-
-        /* Theme toggle button styles */
-        .theme-toggle {
-            position: relative;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--md-surface-2);
-            border: 2px solid var(--md-border);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            /* Improved touch target for mobile */
-            min-width: 40px;
-            min-height: 40px;
-        }
-
-        .theme-toggle:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 10px var(--md-shadow);
-        }
-
-        .theme-toggle:focus {
-            outline: none;
-            box-shadow: 0 0 0 2px var(--primary);
-        }
-
-        .theme-toggle svg {
-            width: 20px;
-            height: 20px;
-            position: absolute;
-            transition: all 0.3s ease;
-            fill: var(--md-text-primary);
-        }
-
-        .theme-toggle .sun-icon {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        .theme-toggle .moon-icon {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        :root.light-theme .theme-toggle .sun-icon {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        :root.light-theme .theme-toggle .moon-icon {
-            opacity: 0;
-            transform: translateY(-20px);
-        }
-
-        /* Responsive adjustments for theme toggle */
-        @media (max-width: 640px) {
-            .theme-toggle {
-                width: 36px;
-                height: 36px;
-                min-width: 36px;
-                min-height: 36px;
-            }
-
-            .theme-toggle svg {
-                width: 18px;
-                height: 18px;
-            }
-        }
-
-        /* Scroll to top button */
-        .scroll-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border: none;
-            border-radius: 50%;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(20px);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0, 102, 255, 0.3);
-        }
-
-        .scroll-to-top.show {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .scroll-to-top:hover {
-            transform: translateY(-3px) scale(1.1);
-            box-shadow: 0 8px 25px rgba(0, 102, 255, 0.4);
-        }
-
-        /* Fix contact form fields styling */
-        .form-input {
-            background-color: var(--md-surface-1) !important;
-            color: var(--md-text-primary) !important;
-            border: 1px solid var(--md-border) !important;
-        }
-
-        .form-input:focus {
-            background-color: var(--md-surface-1) !important;
-            color: var(--md-text-primary) !important;
-            border-color: var(--primary) !important;
-            outline: none !important;
-            box-shadow: 0 0 0 2px rgba(0, 102, 255, 0.2) !important;
-        }
-
-        .form-input::placeholder {
-            color: var(--md-text-secondary) !important;
-        }
-
-        /* Contact form input fields - Fix white background issue */
-        input[type="text"],
-        input[type="email"],
-        textarea {
-            background-color: var(--md-surface-1) !important;
-            color: var(--md-text-primary) !important;
-            border: 1px solid var(--md-border) !important;
-        }
-
-        input[type="text"]:focus,
-        input[type="email"]:focus,
-        textarea:focus {
-            background-color: var(--md-surface-1) !important;
-            color: var(--md-text-primary) !important;
-            border-color: var(--primary) !important;
-            outline: none !important;
-            box-shadow: 0 0 0 2px rgba(0, 102, 255, 0.2) !important;
-        }
-
-        input[type="text"]::placeholder,
-        input[type="email"]::placeholder,
-        textarea::placeholder {
-            color: var(--md-text-secondary) !important;
-        }
-
-        /* Typewriter animation for subtitle */
-        .typewriter-subtitle {
-            display: inline-block;
-            border-right: 2px solid var(--primary);
-            white-space: nowrap;
-            animation: blink-caret-subtitle 0.75s step-end infinite;
-        }
-
-        @keyframes blink-caret-subtitle {
-
-            from,
-            to {
-                border-color: transparent;
-            }
-
-            50% {
-                border-color: var(--primary);
-            }
-        }
-
-        /* Skills & Tools Section Styles */
-        .skill-tab {
-            background: transparent;
-            color: var(--md-text-secondary);
-            border: none;
-            cursor: pointer;
-            font-weight: 500;
-            padding: 0.75rem 1.25rem;
-            border-radius: 1rem;
-            display: inline-flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-width: 80px;
-            text-align: center;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .skill-tab.active {
-            background: var(--md-surface-2);
-            color: var(--primary);
-            transform: scale(1.05);
-            box-shadow: 0 4px 20px rgba(0, 102, 255, 0.15);
-        }
-
-        .skill-tab:hover {
-            color: var(--md-text-primary);
-            transform: translateY(-2px);
-            background: var(--md-surface-1);
-        }
-
-        .skill-panel {
-            display: none;
-            animation: fadeInUp 0.6s ease-out;
-        }
-
-        .skill-panel.active {
-            display: block;
-        }
-
-        .skill-card {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid var(--md-border);
-        }
-
-        .skill-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0, 102, 255, 0.1);
-            border-color: var(--primary);
-        }
-
-        .skill-progress-container {
-            margin-bottom: 1rem;
-        }
-
-        .skill-bar {
-            position: relative;
-            background: var(--md-surface-2);
-            border-radius: 10px;
-            overflow: hidden;
-            height: 6px;
-        }
-
-        .skill-progress {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            border-radius: 10px;
-            width: 0%;
-            transition: width 2s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-        }
-
-        .skill-progress::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            animation: shimmer 2s infinite;
-        }
-
-        .skill-tag {
-            background: var(--md-surface-2);
-            color: var(--md-text-secondary);
-            padding: 0.25rem 0.75rem;
-            border-radius: 1rem;
-            font-size: 0.75rem;
-            font-weight: 500;
-            border: 1px solid var(--md-border);
-            transition: all 0.3s ease;
-        }
-
-        .skill-tag:hover {
-            background: var(--primary);
-            color: white;
-            transform: scale(1.05);
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .skill-card {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid var(--md-border);
-        }
-
-        .skill-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0, 102, 255, 0.1);
-            border-color: var(--primary);
-        }
-
-        .skill-progress-container {
-            position: relative;
-        }
-
-        .skill-tag {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            background: var(--md-surface-2);
-            color: var(--md-text-secondary);
-            border-radius: 1rem;
-            font-size: 0.75rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .skill-tag:hover {
-            background: var(--primary);
-            color: white;
-            transform: scale(1.05);
-        }
-
-        /* Responsive adjustments for skills section */
-        @media (max-width: 640px) {
-            .skill-tab {
-                padding: 0.5rem 1rem;
-                font-size: 0.875rem;
-            }
-
-            .skill-tab span:first-child {
-                font-size: 1.5rem;
-            }
-        }
-    </style>
+    <!-- Custom Stylesheets -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
 </head>
 
 <body>
@@ -934,12 +25,13 @@
     <nav class="fixed w-full z-50 glass-card py-4 px-6">
         <div class="container mx-auto flex justify-between items-center">
             <a href="#" class="flex items-center">
-                <img src="assets/Logo.svg" alt="Abrar Studio Logo" class="h-8">
+                <img src="assets/logo.svg" alt="Abrar Studio Logo" class="h-8">
             </a>
             <div class="hidden md:flex space-x-8">
                 <a href="#about" class="hover:text-primary transition-colors">About</a>
                 <a href="#skills" class="hover:text-primary transition-colors">Skills</a>
                 <a href="#work" class="hover:text-primary transition-colors">Work</a>
+                <a href="pricing.html" class="hover:text-primary transition-colors">Pricing</a>
                 <a href="#contact" class="hover:text-primary transition-colors">Contact</a>
             </div>
             <div class="flex items-center space-x-4">
@@ -965,6 +57,7 @@
                 <a href="#about" class="hover:text-primary transition-colors">About</a>
                 <a href="#skills" class="hover:text-primary transition-colors">Skills</a>
                 <a href="#work" class="hover:text-primary transition-colors">Work</a>
+                <a href="pricing.html" class="hover:text-primary transition-colors">Pricing</a>
                 <a href="#contact" class="hover:text-primary transition-colors">Contact</a>
             </div>
         </div>
@@ -1684,6 +777,413 @@
             </div>
     </section>
 
+    <!-- Testimonials Section -->
+    <section class="py-20 relative overflow-hidden testimonials-section">
+        <!-- Theme-aware Background -->
+        <div class="testimonials-bg absolute inset-0"></div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                    <span class="text-gradient">What Clients Say</span>
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    Don't just take my word for it. Here's what some of my amazing clients have to say about working
+                    with me.
+                </p>
+            </div>
+
+            <!-- Horizontal Scrolling Testimonials -->
+            <div class="testimonials-container relative mb-12">
+                <!-- Navigation Buttons -->
+                <button
+                    class="testimonial-nav testimonial-nav-left absolute left-4 top-1/2 transform -translate-y-1/2 z-20 w-12 h-12 rounded-full glass-card flex items-center justify-center hover:bg-primary/20 transition-all duration-300"
+                    id="testimonial-prev">
+                    <i class="fas fa-chevron-left text-lg"></i>
+                </button>
+                <button
+                    class="testimonial-nav testimonial-nav-right absolute right-4 top-1/2 transform -translate-y-1/2 z-20 w-12 h-12 rounded-full glass-card flex items-center justify-center hover:bg-primary/20 transition-all duration-300"
+                    id="testimonial-next">
+                    <i class="fas fa-chevron-right text-lg"></i>
+                </button>
+
+                <div class="testimonials-track flex gap-8 animate-scroll" id="testimonials-track">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial-card glass-card p-8 rounded-2xl relative flex-shrink-0 w-80 md:w-96">
+                        <div class="absolute top-4 left-4 text-6xl text-blue-500/20 font-serif">"</div>
+
+                        <!-- Star Rating -->
+                        <div class="flex mb-4 relative z-10">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+
+                        <p class="text-gray-300 mb-6 relative z-10 leading-relaxed">
+                            "Very talented UI/UX designer! I've worked with Abrar for a year now and I continue hiring
+                            him
+                            for more projects. 10/10 recommend!"
+                        </p>
+
+                        <div class="flex items-center relative z-10">
+                            <div
+                                class="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center mr-4">
+                                <span class="text-white font-semibold text-lg">BC</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white">Brett Cofman</h4>
+                                <p class="text-gray-400 text-sm">CEO, Tastybike and BMC Juris</p>
+                            </div>
+                        </div>
+
+                        <div class="flex space-x-2 mt-4 relative z-10">
+                            <span class="px-2 py-1 bg-blue-500/20 text-blue-400 rounded text-xs">UI/UX</span>
+                            <span class="px-2 py-1 bg-green-500/20 text-green-400 rounded text-xs">Website Design</span>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial-card glass-card p-8 rounded-2xl relative flex-shrink-0 w-80 md:w-96">
+                        <div class="absolute top-4 left-4 text-6xl text-blue-500/20 font-serif">"</div>
+
+                        <!-- Star Rating -->
+                        <div class="flex mb-4 relative z-10">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+
+                        <p class="text-gray-300 mb-6 relative z-10 leading-relaxed">
+                            "Working with Abrar was a fantastic experience. He transformed our mobile app concept into a
+                            beautiful, user-friendly design. His creativity and professionalism are top-notch."
+                        </p>
+
+                        <div class="flex items-center relative z-10">
+                            <div
+                                class="w-12 h-12 rounded-full bg-gradient-to-r from-green-500 to-blue-500 flex items-center justify-center mr-4">
+                                <span class="text-white font-semibold text-lg">ES</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white">Eesha Shaikh</h4>
+                                <p class="text-gray-400 text-sm">Playpal Ltd, Lahore</p>
+                            </div>
+                        </div>
+
+                        <div class="flex space-x-2 mt-4 relative z-10">
+                            <span class="px-2 py-1 bg-blue-500/20 text-blue-400 rounded text-xs">Mobile App</span>
+                            <span class="px-2 py-1 bg-purple-500/20 text-purple-400 rounded text-xs">Fitness</span>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div class="testimonial-card glass-card p-8 rounded-2xl relative flex-shrink-0 w-80 md:w-96">
+                        <div class="absolute top-4 left-4 text-6xl text-blue-500/20 font-serif">"</div>
+
+                        <!-- Star Rating -->
+                        <div class="flex mb-4 relative z-10">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+
+                        <p class="text-gray-300 mb-6 relative z-10 leading-relaxed">
+                            "Abrar's design skills are incredible! He created a stunning website design that perfectly
+                            captured our brand vision. The final result was beyond what we imagined."
+                        </p>
+
+                        <div class="flex items-center relative z-10">
+                            <div
+                                class="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center mr-4">
+                                <span class="text-white font-semibold text-lg">J</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white">Javeria</h4>
+                                <p class="text-gray-400 text-sm">Remote Client</p>
+                            </div>
+                        </div>
+
+                        <div class="flex space-x-2 mt-4 relative z-10">
+                            <span class="px-2 py-1 bg-blue-500/20 text-blue-400 rounded text-xs">Web Design</span>
+                            <span class="px-2 py-1 bg-orange-500/20 text-orange-400 rounded text-xs">Education</span>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 4 -->
+                    <div class="testimonial-card glass-card p-8 rounded-2xl relative flex-shrink-0 w-80 md:w-96">
+                        <div class="absolute top-4 left-4 text-6xl text-blue-500/20 font-serif">"</div>
+
+                        <!-- Star Rating -->
+                        <div class="flex mb-4 relative z-10">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+
+                        <p class="text-gray-300 mb-6 relative z-10 leading-relaxed">
+                            "Outstanding work! Abrar's ability to understand our requirements and translate them into
+                            beautiful designs is remarkable. Highly recommend for any design project."
+                        </p>
+
+                        <div class="flex items-center relative z-10">
+                            <div
+                                class="w-12 h-12 rounded-full bg-gradient-to-r from-orange-500 to-red-500 flex items-center justify-center mr-4">
+                                <span class="text-white font-semibold text-lg">NH</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white">Noor ul Hassan</h4>
+                                <p class="text-gray-400 text-sm">Founder, Emaratics Digital, UAE</p>
+                            </div>
+                        </div>
+
+                        <div class="flex space-x-2 mt-4 relative z-10">
+                            <span class="px-2 py-1 bg-blue-500/20 text-blue-400 rounded text-xs">Product Design</span>
+                            <span class="px-2 py-1 bg-red-500/20 text-red-400 rounded text-xs">Website Design</span>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 5 -->
+                    <div class="testimonial-card glass-card p-8 rounded-2xl relative flex-shrink-0 w-80 md:w-96">
+                        <div class="absolute top-4 left-4 text-6xl text-blue-500/20 font-serif">"</div>
+
+                        <!-- Star Rating -->
+                        <div class="flex mb-4 relative z-10">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+
+                        <p class="text-gray-300 mb-6 relative z-10 leading-relaxed">
+                            "Professional, creative, and delivers on time. Abrar transformed our e-commerce platform
+                            with an intuitive and modern design that increased our conversion rates significantly."
+                        </p>
+
+                        <div class="flex items-center relative z-10">
+                            <div
+                                class="w-12 h-12 rounded-full bg-gradient-to-r from-teal-500 to-cyan-500 flex items-center justify-center mr-4">
+                                <span class="text-white font-semibold text-lg">WS</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white">Waleed Saleem</h4>
+                                <p class="text-gray-400 text-sm">Manager, JMM Innovations, Saudi</p>
+                            </div>
+                        </div>
+
+                        <div class="flex space-x-2 mt-4 relative z-10">
+                            <span class="px-2 py-1 bg-blue-500/20 text-blue-400 rounded text-xs">E-commerce</span>
+                            <span class="px-2 py-1 bg-teal-500/20 text-teal-400 rounded text-xs">Conversion</span>
+                        </div>
+                    </div>
+
+                    <!-- Duplicate testimonials for seamless loop -->
+                    <div class="testimonial-card glass-card p-8 rounded-2xl relative flex-shrink-0 w-80 md:w-96">
+                        <div class="absolute top-4 left-4 text-6xl text-blue-500/20 font-serif">"</div>
+
+                        <!-- Star Rating -->
+                        <div class="flex mb-4 relative z-10">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+
+                        <p class="text-gray-300 mb-6 relative z-10 leading-relaxed">
+                            "Abrar delivered an exceptional UI/UX design for our crypto platform. His attention to
+                            detail and modern design approach exceeded our expectations. The user experience is seamless
+                            and intuitive."
+                        </p>
+
+                        <div class="flex items-center relative z-10">
+                            <div
+                                class="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center mr-4">
+                                <span class="text-white font-semibold text-lg">SM</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white">Sarah Mitchell</h4>
+                                <p class="text-gray-400 text-sm">CEO, CryptoTech Solutions</p>
+                            </div>
+                        </div>
+
+                        <div class="flex space-x-2 mt-4 relative z-10">
+                            <span class="px-2 py-1 bg-blue-500/20 text-blue-400 rounded text-xs">UI/UX Design</span>
+                            <span class="px-2 py-1 bg-green-500/20 text-green-400 rounded text-xs">Dashboard</span>
+                        </div>
+                    </div>
+
+                    <!-- Duplicate Testimonial 2 -->
+                    <div class="testimonial-card glass-card p-8 rounded-2xl relative flex-shrink-0 w-80 md:w-96">
+                        <div class="absolute top-4 left-4 text-6xl text-blue-500/20 font-serif">"</div>
+
+                        <!-- Star Rating -->
+                        <div class="flex mb-4 relative z-10">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+
+                        <p class="text-gray-300 mb-6 relative z-10 leading-relaxed">
+                            "Working with Abrar was a fantastic experience. He transformed our mobile app concept into a
+                            beautiful, user-friendly design. His creativity and professionalism are top-notch."
+                        </p>
+
+                        <div class="flex items-center relative z-10">
+                            <div
+                                class="w-12 h-12 rounded-full bg-gradient-to-r from-green-500 to-blue-500 flex items-center justify-center mr-4">
+                                <span class="text-white font-semibold text-lg">MJ</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white">Zack Huang</h4>
+                                <p class="text-gray-400 text-sm">Founder, FitTech Innovations</p>
+                            </div>
+                        </div>
+
+                        <div class="flex space-x-2 mt-4 relative z-10">
+                            <span class="px-2 py-1 bg-blue-500/20 text-blue-400 rounded text-xs">Mobile App</span>
+                            <span class="px-2 py-1 bg-purple-500/20 text-purple-400 rounded text-xs">Fitness</span>
+                        </div>
+                    </div>
+
+                    <!-- Duplicate Testimonial 3 -->
+                    <div class="testimonial-card glass-card p-8 rounded-2xl relative flex-shrink-0 w-80 md:w-96">
+                        <div class="absolute top-4 left-4 text-6xl text-blue-500/20 font-serif">"</div>
+
+                        <!-- Star Rating -->
+                        <div class="flex mb-4 relative z-10">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+
+                        <p class="text-gray-300 mb-6 relative z-10 leading-relaxed">
+                            "Abrar's design skills are incredible! He created a stunning website design that perfectly
+                            captured our brand vision. The final result was beyond what we imagined."
+                        </p>
+
+                        <div class="flex items-center relative z-10">
+                            <div
+                                class="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center mr-4">
+                                <span class="text-white font-semibold text-lg">ER</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white">Emily Rodriguez</h4>
+                                <p class="text-gray-400 text-sm">Marketing Director, EduLearn</p>
+                            </div>
+                        </div>
+
+                        <div class="flex space-x-2 mt-4 relative z-10">
+                            <span class="px-2 py-1 bg-blue-500/20 text-blue-400 rounded text-xs">Web Design</span>
+                            <span class="px-2 py-1 bg-orange-500/20 text-orange-400 rounded text-xs">Education</span>
+                        </div>
+                    </div>
+
+                    <!-- Duplicate Testimonial 4 -->
+                    <div class="testimonial-card glass-card p-8 rounded-2xl relative flex-shrink-0 w-80 md:w-96">
+                        <div class="absolute top-4 left-4 text-6xl text-blue-500/20 font-serif">"</div>
+
+                        <!-- Star Rating -->
+                        <div class="flex mb-4 relative z-10">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+
+                        <p class="text-gray-300 mb-6 relative z-10 leading-relaxed">
+                            "Outstanding work! Abrar's ability to understand our requirements and translate them into
+                            beautiful designs is remarkable. Highly recommend for any design project."
+                        </p>
+
+                        <div class="flex items-center relative z-10">
+                            <div
+                                class="w-12 h-12 rounded-full bg-gradient-to-r from-orange-500 to-red-500 flex items-center justify-center mr-4">
+                                <span class="text-white font-semibold text-lg">DL</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white">David Lee</h4>
+                                <p class="text-gray-400 text-sm">Product Manager, TechFlow</p>
+                            </div>
+                        </div>
+
+                        <div class="flex space-x-2 mt-4 relative z-10">
+                            <span class="px-2 py-1 bg-blue-500/20 text-blue-400 rounded text-xs">Product Design</span>
+                            <span class="px-2 py-1 bg-red-500/20 text-red-400 rounded text-xs">SaaS</span>
+                        </div>
+                    </div>
+
+                    <!-- Duplicate Testimonial 5 -->
+                    <div class="testimonial-card glass-card p-8 rounded-2xl relative flex-shrink-0 w-80 md:w-96">
+                        <div class="absolute top-4 left-4 text-6xl text-blue-500/20 font-serif">"</div>
+
+                        <!-- Star Rating -->
+                        <div class="flex mb-4 relative z-10">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+
+                        <p class="text-gray-300 mb-6 relative z-10 leading-relaxed">
+                            "Professional, creative, and delivers on time. Abrar transformed our e-commerce platform
+                            with an intuitive and modern design that increased our conversion rates significantly."
+                        </p>
+
+                        <div class="flex items-center relative z-10">
+                            <div
+                                class="w-12 h-12 rounded-full bg-gradient-to-r from-teal-500 to-cyan-500 flex items-center justify-center mr-4">
+                                <span class="text-white font-semibold text-lg">AS</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white">Anna Smith</h4>
+                                <p class="text-gray-400 text-sm">E-commerce Director, ShopSmart</p>
+                            </div>
+                        </div>
+
+                        <div class="flex space-x-2 mt-4 relative z-10">
+                            <span class="px-2 py-1 bg-blue-500/20 text-blue-400 rounded text-xs">E-commerce</span>
+                            <span class="px-2 py-1 bg-teal-500/20 text-teal-400 rounded text-xs">Conversion</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Section -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="group">
+                    <div class="text-3xl md:text-4xl font-bold text-gradient mb-2 counter" data-target="22">0</div>
+                    <p class="text-gray-400">Happy Clients</p>
+                </div>
+                <div class="group">
+                    <div class="text-3xl md:text-4xl font-bold text-gradient mb-2 counter" data-target="100">0</div>
+                    <p class="text-gray-400">Projects Completed</p>
+                </div>
+                <div class="group">
+                    <div class="text-3xl md:text-4xl font-bold text-gradient mb-2 counter" data-target="5">0</div>
+                    <p class="text-gray-400">Years Experience</p>
+                </div>
+                <div class="group">
+                    <div class="text-3xl md:text-4xl font-bold text-gradient mb-2">4.9</div>
+                    <p class="text-gray-400">Average Rating</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact" class="py-20 glass-card">
         <div class="container mx-auto px-6">
@@ -1700,103 +1200,96 @@
                     </p>
 
                     <div class="space-y-4">
-                        <div class="flex items-center">
+                        <div class="contact-info-item flex items-center">
                             <div class="w-12 h-12 rounded-full md-surface-2 flex items-center justify-center mr-4">
-                                <i class="fas fa-envelope text-blue-400"></i>
-                            </div>
-                            <div> <a href="abrarstudio07@gmail.com">
-                                    <p class="text-gray-400 dark:text-gray-400 light:text-gray-500">Email</p>
-                                    <p class="font-medium">abrarstudio07@gmail.com</p>
-                            </div></a>
-                        </div>
-
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 rounded-full md-surface-2 flex items-center justify-center mr-4">
-                                <i class="fas fa-map-marker-alt text-green-600"></i>
+                                <i class="fas fa-envelope text-primary"></i>
                             </div>
                             <div>
-                                <p class="text-gray-400 dark:text-gray-400 light:text-gray-500">Location</p>
+                                <a href="mailto:abrarstudio07@gmail.com" class="hover:text-primary transition-colors">
+                                    <p class="text-gray-400">Email</p>
+                                    <p class="font-medium">abrarstudio07@gmail.com</p>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="contact-info-item flex items-center">
+                            <div class="w-12 h-12 rounded-full md-surface-2 flex items-center justify-center mr-4">
+                                <i class="fas fa-map-marker-alt text-accent"></i>
+                            </div>
+                            <div>
+                                <p class="text-gray-400">Location</p>
                                 <p class="font-medium">Qasimabad, Hyderabad</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="flex space-x-4 mt-8">
-                        <a href="https://dribbble.com/abrarstudio"
-                            class="w-10 h-10 rounded-full md-surface-2 flex items-center justify-center hover:bg-blue-500 transition-colors">
+                        <a href="https://dribbble.com/abrarstudio" target="_blank" rel="noopener noreferrer"
+                            class="social-icon w-10 h-10 rounded-full md-surface-2 flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300">
                             <i class="fab fa-dribbble"></i>
                         </a>
-                        <a href="https://www.behance.net/abrarahmed13"
-                            class="w-10 h-10 rounded-full md-surface-2 flex items-center justify-center hover:bg-blue-500 transition-colors">
+                        <a href="https://www.behance.net/abrarahmed13" target="_blank" rel="noopener noreferrer"
+                            class="social-icon w-10 h-10 rounded-full md-surface-2 flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300">
                             <i class="fab fa-behance"></i>
                         </a>
-                        <a href="https://www.upwork.com/freelancers/abrarstudio07"
-                            class="w-10 h-10 rounded-full md-surface-2 flex items-center justify-center hover:bg-blue-500 transition-colors">
+                        <a href="https://www.upwork.com/freelancers/abrarstudio07" target="_blank"
+                            rel="noopener noreferrer"
+                            class="social-icon w-10 h-10 rounded-full md-surface-2 flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300">
                             <i class="fab fa-upwork"></i>
                         </a>
-                        <a href="https://www.instagram.com/ux_bulb/"
-                            class="w-10 h-10 rounded-full md-surface-2 flex items-center justify-center hover:bg-blue-500 transition-colors">
+                        <a href="https://www.instagram.com/ux_bulb/" target="_blank" rel="noopener noreferrer"
+                            class="social-icon w-10 h-10 rounded-full md-surface-2 flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300">
                             <i class="fab fa-instagram"></i>
                         </a>
                     </div>
                 </div>
 
                 <div class="md:w-1/2">
-                    <!-- Contact form with custom success handling -->
-                    <form class="space-y-6" id="contact-form" action="https://api.web3forms.com/submit" method="POST">
-                        <!-- Web3Forms Access Key -->
-                        <input type="hidden" name="access_key" value="74a3b05e-c567-4c56-8dcc-0ee2d40c72a2">
-                        <!-- Subject -->
-                        <input type="hidden" name="subject" value="New Contact Form Submission from Abrar Studio">
-                        <!-- Honeypot to prevent spam -->
-                        <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
-                        <!-- Force AJAX submission -->
-                        <input type="hidden" name="from_name" value="Abrar Studio Website">
-                        <!-- Prevent Web3Forms redirect -->
-                        <input type="hidden" name="redirect" value="https://web3forms.com/success">
+                    <!-- Pricing CTA Section -->
+                    <div class="glass-card p-8 rounded-2xl">
+                        <h3 class="text-2xl font-semibold mb-6">Ready to Start Your Project?</h3>
+                        <p class="text-gray-300 mb-8">
+                            Choose from our flexible pricing plans designed to fit your needs and budget. From simple
+                            designs to complete development solutions.
+                        </p>
 
-                        <div>
-                            <label for="name" class="block mb-2 text-sm font-medium">Your Name</label>
-                            <input type="text" id="name" name="name" required
-                                class="form-input w-full px-4 py-3 rounded-lg transition-colors">
-                        </div>
-
-                        <div>
-                            <label for="email" class="block mb-2 text-sm font-medium">Your Email</label>
-                            <input type="email" id="email" name="email" required
-                                class="form-input w-full px-4 py-3 rounded-lg transition-colors">
-                        </div>
-
-                        <div>
-                            <label for="message" class="block mb-2 text-sm font-medium">Message</label>
-                            <textarea id="message" name="message" rows="4" required
-                                class="form-input w-full px-4 py-3 rounded-lg transition-colors"></textarea>
-                        </div>
-
-                        <button type="submit" id="submit-btn"
-                            class="w-full px-6 py-3 bg-gradient-to-r from-[#0066FF] to-[#00A3FF] rounded-lg font-medium hover:opacity-90 transition-opacity flex items-center justify-center">
-                            <i class="fas fa-paper-plane mr-2"></i>
-                            <span>Send Message</span>
-                        </button>
-                    </form>
-
-                    <!-- Success Popup -->
-                    <div id="success-popup" class="fixed inset-0 flex items-center justify-center z-50 hidden">
-                        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
-                        <div class="md-surface-1 rounded-xl p-8 max-w-md mx-auto relative z-10">
-                            <div class="text-center">
-                                <div
-                                    class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 text-green-500 mb-4">
-                                    <i class="fas fa-check text-2xl"></i>
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-center justify-between p-4 md-surface-1 rounded-lg">
+                                <div>
+                                    <h4 class="font-semibold">Website Design & Development</h4>
+                                    <p class="text-sm text-gray-400">Starting from 20,000 PKR</p>
                                 </div>
-                                <h3 class="text-xl font-bold mb-2">Message Sent!</h3>
-                                <p class="text-gray-300 mb-6">Thank you for reaching out. I'll get back to you as soon
-                                    as possible.</p>
-                                <button id="close-popup"
-                                    class="px-6 py-2 bg-gradient-to-r from-[#0066FF] to-[#00A3FF] rounded-lg font-medium hover:opacity-90 transition-opacity">
-                                    Close
-                                </button>
+                                <i class="fas fa-desktop text-primary text-xl"></i>
                             </div>
+
+                            <div class="flex items-center justify-between p-4 md-surface-1 rounded-lg">
+                                <div>
+                                    <h4 class="font-semibold">Mobile App Design</h4>
+                                    <p class="text-sm text-gray-400">Starting from 55,000 PKR</p>
+                                </div>
+                                <i class="fas fa-mobile-screen text-primary text-xl"></i>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <a href="pricing.html"
+                                class="w-full px-6 py-3 bg-gradient-to-r from-[#0066FF] to-[#00A3FF] rounded-lg font-medium hover:opacity-90 transition-opacity flex items-center justify-center">
+                                <i class="fas fa-tag mr-2"></i>
+                                <span>View All Pricing Plans</span>
+                            </a>
+
+                            <a href="pricing.html#contact"
+                                class="w-full px-6 py-3 border-2 border-primary text-primary rounded-lg font-medium hover:bg-primary hover:text-white transition-all flex items-center justify-center">
+                                <i class="fas fa-envelope mr-2"></i>
+                                <span>Get Custom Quote</span>
+                            </a>
+                        </div>
+
+                        <div class="mt-6 pt-6 border-t" style="border-color: var(--md-border);">
+                            <p class="text-sm text-gray-400 text-center">
+                                <i class="fas fa-clock mr-2"></i>
+                                Quick response within 24 hours
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -1806,7 +1299,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="py-8 border-t border-[#333333]">
+    <footer class="py-8 border-t" style="border-color: var(--md-border);">
         <div class="container mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="mb-4 md:mb-0">
@@ -1815,15 +1308,16 @@
                 </div>
 
                 <div class="flex space-x-6">
-                    <a href="#about" class="hover:text-blue-400 transition-colors">About</a>
-                    <a href="#skills" class="hover:text-primary transition-colors">Skills</a>
-                    <a href="#work" class="hover:text-blue-400 transition-colors">Work</a>
-                    <a href="#contact" class="hover:text-blue-400 transition-colors">Contact</a>
+                    <a href="#about" class="text-gray-400 hover:text-primary transition-colors">About</a>
+                    <a href="#skills" class="text-gray-400 hover:text-primary transition-colors">Skills</a>
+                    <a href="#work" class="text-gray-400 hover:text-primary transition-colors">Work</a>
+                    <a href="pricing.html" class="text-gray-400 hover:text-primary transition-colors">Pricing</a>
+                    <a href="#contact" class="text-gray-400 hover:text-primary transition-colors">Contact</a>
                 </div>
             </div>
 
-            <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
-                <p>© 2023 Abrar Studio. All rights reserved.</p>
+            <div class="mt-8 pt-8 border-t text-center text-gray-500 text-sm" style="border-color: var(--md-border);">
+                <p>© 2024 Abrar Studio. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -1866,40 +1360,19 @@
                 });
             }
 
-            // Scroll Progress Bar & Scroll to Top Button
+            // Scroll Progress Bar (scroll-to-top is handled by animations.js)
             function updateScrollProgress() {
                 const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
                 const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
                 const scrollProgress = (scrollTop / scrollHeight) * 100;
                 const progressBar = document.getElementById('scroll-progress');
-                const scrollToTopBtn = document.getElementById('scroll-to-top');
 
                 if (progressBar) {
                     progressBar.style.width = scrollProgress + '%';
                 }
-
-                // Show/hide scroll to top button
-                if (scrollToTopBtn) {
-                    if (scrollTop > 300) {
-                        scrollToTopBtn.classList.add('show');
-                    } else {
-                        scrollToTopBtn.classList.remove('show');
-                    }
-                }
             }
 
             window.addEventListener('scroll', updateScrollProgress);
-
-            // Scroll to top functionality
-            const scrollToTopBtn = document.getElementById('scroll-to-top');
-            if (scrollToTopBtn) {
-                scrollToTopBtn.addEventListener('click', function () {
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
-                    });
-                });
-            }
 
             // Intersection Observer for Animations
             const observeElements = () => {
@@ -2072,90 +1545,14 @@
         <i class="fas fa-chevron-up"></i>
     </button>
 
-    <!-- Include main.js for theme functionality -->
+    <!-- Modular JavaScript Files -->
+    <script src="js/theme.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/testimonials.js"></script>
     <script src="main.js"></script>
 </body>
 
 </html>
-</script>
-<style>
-    /* Additional light theme improvements */
-    :root.light-theme a.hover\:text-white:hover {
-        color: var(--primary) !important;
-    }
-
-    :root.light-theme a.hover\:bg-gray-800:hover {
-        background-color: var(--hover-bg) !important;
-    }
-
-    :root.light-theme .border-gray-600 {
-        border-color: var(--border-gray);
-    }
-
-    :root.light-theme .border-gray-800 {
-        border-color: var(--border-gray);
-    }
-
-    :root.light-theme .border-t.border-gray-800 {
-        border-color: var(--border-gray);
-    }
-
-    :root.light-theme .bg-gray-700 {
-        background-color: rgba(0, 0, 0, 0.1);
-    }
-
-    :root.light-theme .project-card .project-overlay h3 {
-        color: white;
-    }
-
-    :root.light-theme .project-card .project-overlay p {
-        color: rgba(255, 255, 255, 0.9);
-    }
-
-    :root.light-theme .md-surface-2 {
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    }
-
-    :root.light-theme .fab.fa-apple {
-        color: #333;
-    }
-
-    /* Fix social media icons in light theme */
-    :root.light-theme a.rounded-full.md-surface-2:hover {
-        color: white;
-    }
-
-    /* Fix footer in light theme */
-    :root.light-theme footer {
-        border-color: var(--border-gray);
-    }
-
-    :root.light-theme footer .text-gray-500 {
-        color: rgba(0, 0, 0, 0.5);
-    }
-
-    :root.light-theme footer .text-gray-400 {
-        color: rgba(0, 0, 0, 0.6);
-    }
-
-    /* Fix hover states in light theme */
-    :root.light-theme .hover\:bg-gray-800:hover {
-        background-color: rgba(0, 0, 0, 0.05);
-    }
-
-    /* Fix contact section in light theme */
-    :root.light-theme .text-gray-300 {
-        color: rgba(0, 0, 0, 0.7);
-    }
-
-    :root.light-theme .text-gray-400 {
-        color: rgba(0, 0, 0, 0.6);
-    }
-
-    /* Improve skill bars in light theme */
-    :root.light-theme .h-2.bg-gray-700 {
-        background-color: rgba(0, 0, 0, 0.1);
-    }
 </style>
 <style>
     /* Additional light theme improvements */

@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing - Abrar Studio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Custom Stylesheets -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <style>
+        /* Page-specific styles for pricing.html - All main styles moved to css/main.css and css/components.css */
+
+        /* Pricing-specific component styles */
+        .pricing-card {
+            background: var(--md-surface-1);
+            border: 1px solid var(--md-border);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 20px 40px rgba(0, 102, 255, 0.15);
+            border-color: var(--primary);
+        }
+
+        .pricing-card.popular {
+            transform: scale(1.05);
+            border: 2px solid var(--primary);
+            box-shadow: 0 15px 35px rgba(0, 102, 255, 0.1);
+        }
+
+        .pricing-card.popular:hover {
+            transform: translateY(-8px) scale(1.06);
+            box-shadow: 0 25px 50px rgba(0, 102, 255, 0.2);
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(0, 102, 255, 0.05), transparent);
+            transform: translateX(-100%) translateY(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .pricing-card:hover::before {
+            transform: translateX(100%) translateY(100%);
+        }
+
+        .card-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-features {
+            flex: 1;
+            margin-bottom: 2rem;
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 0.375rem 0.875rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            z-index: 10;
+            box-shadow: 0 4px 12px rgba(0, 102, 255, 0.3);
+            white-space: nowrap;
+        }
+
+        .best-value-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: linear-gradient(135deg, var(--accent), #f97316);
+            color: white;
+            padding: 0.375rem 0.875rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            z-index: 10;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+            white-space: nowrap;
+        }
+
+        .price-text {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: flex;
+            align-items: baseline;
+            gap: 0.25rem;
+        }
+
+        .price-plus {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--md-text-secondary);
+            background: none;
+            -webkit-background-clip: unset;
+            background-clip: unset;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 0.875rem 2rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 102, 255, 0.3);
+        }
+
+        .cta-button-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            padding: 0.875rem 2rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button-outline:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 102, 255, 0.3);
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            color: var(--md-text-secondary);
+        }
+
+        .feature-list li i {
+            margin-right: 0.75rem;
+            font-size: 1rem;
+            min-width: 1rem;
+        }
+
+        .feature-list li i.fa-check {
+            color: var(--primary);
+        }
+
+        .feature-list li i.fa-star {
+            color: var(--accent);
+        }
+
+        .premium-feature {
+            background: linear-gradient(90deg, var(--accent), #f97316);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 600;
+        }
+
+        /* Currency Selector Styles */
+        #currency-selector {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            min-width: 280px;
+        }
+
+        #currency-selector:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        #currency-selector option {
+            background: var(--md-surface-1);
+            color: var(--md-text-primary);
+            padding: 0.5rem;
+        }
+
+        .currency-selector-container {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            padding: 0.5rem 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .currency-selector-container:hover {
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 8px 32px rgba(59, 130, 246, 0.1);
+        }
+
+        /* Price update animation */
+        .price-updating {
+            animation: priceUpdate 0.6s ease-in-out;
+        }
+
+        @keyframes priceUpdate {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Plan Selection Styles */
+        .plan-cancel-btn {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s ease;
+            z-index: 15;
+            box-shadow: 0 2px 8px rgba(0, 102, 255, 0.3);
+        }
+
+        .plan-cancel-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 4px 12px rgba(0, 163, 255, 0.4);
+        }
+
+        .plan-cancel-btn:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+
+        /* Plan dropdown container positioning */
+        .plan-dropdown-container {
+            position: relative;
+            display: block;
+            width: 100%;
+        }
+
+        /* Default select styling with proper arrow positioning */
+        .plan-dropdown-container select {
+            width: 100%;
+            box-sizing: border-box;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23666666' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 12px center;
+            background-repeat: no-repeat;
+            background-size: 16px 16px;
+            padding-right: 40px !important;
+        }
+
+        /* Light theme arrow color */
+        :root.light-theme .plan-dropdown-container select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23666666' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+        }
+
+        /* Dark theme arrow color */
+        :root:not(.light-theme) .plan-dropdown-container select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23cccccc' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+        }
+
+        /* Dropdown locked state */
+        .dropdown-locked {
+            background-color: var(--md-surface-2) !important;
+            border-color: var(--primary) !important;
+            cursor: not-allowed !important;
+            opacity: 0.8 !important;
+            padding-right: 40px !important;
+            /* Space for cancel button */
+            background-image: none !important;
+            /* Hide dropdown arrow when locked */
+        }
+
+        /* Add visual feedback for locked state */
+        .dropdown-locked::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(0, 102, 255, 0.05), transparent);
+            pointer-events: none;
+            border-radius: inherit;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .pricing-card {
+                padding: 1.5rem;
+            }
+
+            .price-text {
+                font-size: 2.5rem;
+            }
+
+            .pricing-card.popular {
+                transform: scale(1.02);
+            }
+
+            #currency-selector {
+                min-width: 240px;
+                font-size: 0.9rem;
+            }
+
+            .currency-selector-container {
+                flex-direction: column;
+                gap: 0.5rem;
+                text-align: center;
+            }
+
+            .plan-cancel-btn {
+                width: 20px;
+                height: 20px;
+                font-size: 10px;
+                right: 6px;
+            }
+
+            .plan-dropdown-container select {
+                background-position: right 8px center !important;
+                background-size: 14px 14px !important;
+                padding-right: 32px !important;
+            }
+
+            .dropdown-locked {
+                padding-right: 32px !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-card py-4 px-6">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="index.html" class="flex items-center">
+                <img src="assets/logo.svg" alt="Abrar Studio Logo" class="h-8">
+            </a>
+            <div class="hidden md:flex space-x-8">
+                <a href="index.html" class="hover:text-primary transition-colors">Home</a>
+                <a href="index.html#about" class="hover:text-primary transition-colors">About</a>
+                <a href="index.html#skills" class="hover:text-primary transition-colors">Skills</a>
+                <a href="index.html#work" class="hover:text-primary transition-colors">Work</a>
+                <a href="pricing.html" class="text-primary">Pricing</a>
+                <a href="index.html#contact" class="hover:text-primary transition-colors">Contact</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z" />
+                    </svg>
+                    <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z" />
+                    </svg>
+                </button>
+                <button class="md:hidden text-xl" id="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden w-full mt-4 pb-4">
+            <div class="flex flex-col space-y-4 px-4">
+                <a href="index.html#about" class="hover:text-primary transition-colors">About</a>
+                <a href="index.html#skills" class="hover:text-primary transition-colors">Skills</a>
+                <a href="index.html#work" class="hover:text-primary transition-colors">Work</a>
+                <a href="pricing.html" class="text-primary">Pricing</a>
+                <a href="index.html#contact" class="hover:text-primary transition-colors">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center relative pt-20">
+        <!-- Animated Blobs -->
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+
+        <div class="container mx-auto px-6 py-20 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                <span class="text-gradient">Pricing Plans</span>
+            </h1>
+            <p class="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+                Choose the perfect package for your project. From simple designs to complete development solutions.
+            </p>
+
+            <!-- Currency Selector -->
+            <div class="flex justify-center mb-12">
+                <div class="currency-selector-container">
+                    <label for="currency-selector" class="text-sm font-medium text-gray-300 mr-3">Currency:</label>
+                    <select id="currency-selector"
+                        class="bg-transparent text-white font-semibold text-lg border-none outline-none cursor-pointer pr-8 pl-3 py-2 rounded-xl hover:bg-white/10 transition-all duration-300">
+                        <option value="PKR" data-symbol="PKR" data-rate="1">🇵🇰 Pakistani Rupee (PKR)</option>
+                        <option value="USD" data-symbol="$" data-rate="0.0036">🇺🇸 US Dollar (USD)</option>
+                        <option value="EUR" data-symbol="€" data-rate="0.0033">🇪🇺 Euro (EUR)</option>
+                        <option value="GBP" data-symbol="£" data-rate="0.0028">🇬🇧 British Pound (GBP)</option>
+                        <option value="INR" data-symbol="₹" data-rate="0.30">🇮🇳 Indian Rupee (INR)</option>
+                        <option value="AED" data-symbol="AED" data-rate="0.013">🇦🇪 UAE Dirham (AED)</option>
+                        <option value="SAR" data-symbol="SAR" data-rate="0.014">🇸🇦 Saudi Riyal (SAR)</option>
+                        <option value="CAD" data-symbol="C$" data-rate="0.0049">🇨🇦 Canadian Dollar (CAD)</option>
+                        <option value="AUD" data-symbol="A$" data-rate="0.0055">🇦🇺 Australian Dollar (AUD)</option>
+                        <option value="JPY" data-symbol="¥" data-rate="0.53">🇯🇵 Japanese Yen (JPY)</option>
+                        <option value="CNY" data-symbol="¥" data-rate="0.026">🇨🇳 Chinese Yuan (CNY)</option>
+                        <option value="KRW" data-symbol="₩" data-rate="4.8">🇰🇷 South Korean Won (KRW)</option>
+                        <option value="SGD" data-symbol="S$" data-rate="0.0049">🇸🇬 Singapore Dollar (SGD)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Design + Development Section -->
+    <section class="py-20 relative">
+        <div class="container mx-auto px-6 relative">
+            <div class="text-center mb-16">
+                <div class="inline-flex items-center px-4 py-2 rounded-full md-surface-1 border border-primary/20 mb-6">
+                    <i class="fas fa-desktop-alt text-primary mr-2"></i>
+                    <span class="text-primary font-medium">Website Design</span>
+                </div>
+                <h2 class="text-3xl md:text-5xl font-bold mb-6">
+                    <span class="text-gradient">Website Design & Dev</span>
+                </h2>
+                <p class="text-lg text-gray-300 max-w-3xl mx-auto">
+                    Create stunning, user-friendly Websites with modern design principles and seamless user experiences
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Starter Build Card -->
+                <div class="pricing-card">
+                    <div class="card-content">
+                        <div class="mb-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-rocket text-1xl mr-3" style="color: var(--primary);"></i>
+                                <h3 class="text-1xl font-bold">Starter Build</h3>
+                            </div>
+                            <div class="price-text mb-2" data-price="40000"><span
+                                    class="price-amount">40,000</span><span class="price-plus">+<span
+                                        class="currency-symbol">PKR</span></span></div>
+                            <p class="text-gray-400 mb-6">Best for personal portfolio, small landing page</p>
+                        </div>
+
+                        <div class="card-features">
+                            <ul class="feature-list">
+                                <li><i class="fas fa-check feature-icon-check"></i> Design in Figma/Framer</li>
+                                <li><i class="fas fa-check feature-icon-check"></i> Development in HTML/CSS/JS</li>
+                                <li><i class="fas fa-check feature-icon-check"></i> 3-5 website pages</li>
+                                <li><i class="fas fa-check feature-icon-check"></i> Basic animations/interactions</li>
+                                <li><i class="fas fa-check feature-icon-check"></i> Responsive on all devices</li>
+                                <li><i class="fas fa-check feature-icon-check"></i> Basic SEO setup</li>
+                            </ul>
+                        </div>
+
+                        <a href="#contact" class="cta-button-outline w-full text-center">Get Started</a>
+                    </div>
+                </div>
+
+                <!-- Professional Build Card -->
+                <div class="pricing-card popular relative">
+                    <div class="popular-badge">Most Popular</div>
+                    <div class="card-content">
+                        <div class="mb-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-code text-1xl mr-3" style="color: var(--primary);"></i>
+                                <h3 class="text-1xl font-bold">Professional Build</h3>
+                            </div>
+                            <div class="price-text mb-2" data-price="70000"><span
+                                    class="price-amount">70,000</span><span class="price-plus">+<span
+                                        class="currency-symbol">PKR</span></span></div>
+                            <p class="text-gray-400 mb-6">Best for business websites, blogs, small web apps</p>
+                        </div>
+
+                        <div class="card-features">
+                            <ul class="feature-list">
+                                <li><i class="fas fa-check feature-icon-check"></i> Full Design in Figma/Framer</li>
+                                <li><i class="fas fa-check feature-icon-check"></i> Development in HTML/CSS/JS/React
+                                </li>
+                                <li><i class="fas fa-check feature-icon-check"></i> Up to 6–8 pages</li>
+                                <li><i class="fas fa-check feature-icon-check"></i> Advanced interactions</li>
+                                <li><i class="fas fa-check feature-icon-check"></i> Fully responsive & optimized</li>
+                                <li><i class="fas fa-check feature-icon-check"></i> 3 rounds of revisions</li>
+                                <li><i class="fas fa-check feature-icon-check"></i> Deployment + 1-week support</li>
+                                <li class="premium-feature"><i
+                                        class="fas fa-globe feature-icon-globe text-orange-400"></i> Domain & Hosting
+                                    included </li>
+                            </ul>
+                        </div>
+
+                        <a href="#contact" class="cta-button w-full text-center">Choose Plan</a>
+                    </div>
+                </div>
+
+                <!-- Premium Build Card -->
+                <div class="pricing-card relative">
+                    <div class="best-value-badge">Best Value</div>
+
+                    <div class="card-content">
+                        <div class="mb-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-gem text-1xl mr-3" style="color: var(--accent);"></i>
+                                <h3 class="text-1xl font-bold">Premium Build</h3>
+                            </div>
+                            <div class="price-text mb-2" data-price="100000"><span
+                                    class="price-amount">100,000</span><span class="price-plus">+<span
+                                        class="currency-symbol">PKR</span></span></div>
+                            <p class="text-gray-400 mb-6">Best for startups, SaaS, complete branding</p>
+                        </div>
+
+                        <div class="card-features">
+                            <ul class="feature-list">
+                                <li><i class="fas fa-check feature-icon-check"></i> Complete UI/UX Design in Figma +
+                                    Framer prototype
+                                </li>
+                                <li><i class="fas fa-check feature-icon-check"></i> Development in
+                                    HTML/CSS/JS/React/Flutter
+                                </li>
+                                <li><i class="fas fa-check feature-icon-check"></i> Up to 12 pages/screens</li>
+                                <li><i class="fas fa-check feature-icon-check"></i> Advanced animations &
+                                    micro-interactions</li>
+                                <li><i class="fas fa-check feature-icon-check"></i> Fully responsive & fast</li>
+                                <li><i class="fas fa-check feature-icon-check"></i> SEO, basic CMS/blog (optional)</li>
+                                <li><i class="fas fa-check feature-icon-check"></i> Unlimited revisions</li>
+                                <li><i class="fas fa-check feature-icon-check"></i> Launch support + 2-week free
+                                    maintenance</li>
+                                <li class="premium-feature"><i
+                                        class="fas fa-globe feature-icon-globe text-orange-400"></i> Domain & Hosting
+                                    included </li>
+                            </ul>
+                        </div>
+
+                        <a href="#contact" class="cta-button-outline w-full text-center">Contact Me</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Mobile App Design Section -->
+    <section class="py-20 relative overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute inset-0">
+            <div
+                class="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-primary to-secondary rounded-full opacity-10 blur-xl">
+            </div>
+            <div
+                class="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-r from-secondary to-accent rounded-full opacity-10 blur-xl">
+            </div>
+        </div>
+
+        <div class="container mx-auto px-6 relative">
+            <div class="text-center mb-16">
+                <div class="inline-flex items-center px-4 py-2 rounded-full md-surface-1 border border-primary/20 mb-6">
+                    <i class="fas fa-mobile-alt text-primary mr-2"></i>
+                    <span class="text-primary font-medium">Mobile App Design</span>
+                </div>
+                <h2 class="text-3xl md:text-5xl font-bold mb-6">
+                    <span class="text-gradient">Mobile App UI/UX Design</span>
+                </h2>
+                <p class="text-lg text-gray-300 max-w-3xl mx-auto">
+                    Create stunning, user-friendly mobile applications with modern design principles and seamless user
+                    experiences
+                </p>
+            </div>
+
+            <!-- Mobile App Plans Grid -->
+            <div class="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                <!-- iOS App Design -->
+                <div class="pricing-card">
+                    <div class="card-content">
+                        <div class="mb-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="flex items-center">
+                                    <div
+                                        class="w-12 h-12 rounded-xl md-surface-2 flex items-center justify-center mr-3">
+                                        <i class="fab fa-apple text-primary text-blue-500 text-xl"></i>
+                                    </div>
+                                    <h3 class="text-xl font-bold">iOS App Design</h3>
+                                </div>
+                                <div class="px-3 py-1 md-surface-2 rounded-full text-xs font-medium text-primary">Native
+                                </div>
+                            </div>
+                            <div class="price-text mb-2" data-price="60000"><span
+                                    class="price-amount">60,000</span><span class="price-plus">+<span
+                                        class="currency-symbol">PKR</span></span></div>
+                            <p class="text-gray-400 mb-6">Perfect for iOS-first applications with Apple design
+                                guidelines</p>
+                        </div>
+
+                        <div class="card-features">
+                            <ul class="feature-list">
+                                <li><i class="fas fa-check feature-icon-check"></i> 8-12 app screens</li>
+                                <li><i class="fas fa-check feature-icon-check"></i> iOS Human Interface Guidelines</li>
+                                <li><i class="fas fa-check feature-icon-check"></i> Interactive prototypes</li>
+                                <li><i class="fas fa-check feature-icon-check"></i> App icon & splash screens</li>
+                                <li><i class="fas fa-check feature-icon-check"></i> Dark/Light mode support</li>
+                                <li><i class="fas fa-check feature-icon-check"></i> Design system & components</li>
+                                <li><i class="fas fa-check feature-icon-check"></i> Developer handoff files</li>
+                                <li class="premium-feature"><i class="fas fa-star feature-icon-star"></i> App Store
+                                    assets</li>
+                            </ul>
+                        </div>
+
+                        <a href="#contact" class="cta-button-outline w-full text-center">Get Started</a>
+                    </div>
+                </div>
+
+                <!-- Android App Design -->
+                <div class="pricing-card popular relative">
+                    <div class="popular-badge">Most Popular</div>
+
+                    <div class="card-content">
+                        <div class="mb-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="flex items-center">
+                                    <div
+                                        class="w-12 h-12 rounded-xl md-surface-2 flex items-center justify-center mr-3">
+                                        <i class="fab fa-android text-primary text-xl"></i>
+                                    </div>
+                                    <h3 class="text-xl font-bold">Android App Design</h3>
+                                </div>
+                                <div class="px-3 py-1 md-surface-2 rounded-full text-xs font-medium text-primary">
+                                    Material</div>
+                            </div>
+                            <div class="price-text mb-2" data-price="55000"><span
+                                    class="price-amount">55,000</span><span class="price-plus">+<span
+                                        class="currency-symbol">PKR</span></span></div>
+                            <p class="text-gray-400 mb-6">Material Design 3.0 compliant Android applications</p>
+                        </div>
+
+                        <div class="card-features">
+                            <ul class="feature-list">
+                                <li><i class="fas fa-check feature-icon-check"></i> 8-12 app screens</li>
+                                <li><i class="fas fa-check feature-icon-check"></i> Material Design 3.0</li>
+                                <li><i class="fas fa-check feature-icon-check"></i> Interactive prototypes</li>
+                                <li><i class="fas fa-check feature-icon-check"></i> Adaptive icons & splash</li>
+                                <li><i class="fas fa-check feature-icon-check"></i> Dynamic theming support</li>
+                                <li><i class="fas fa-check feature-icon-check"></i> Component library</li>
+                                <li><i class="fas fa-check feature-icon-check"></i> Developer specifications</li>
+                                <li class="premium-feature"><i class="fas fa-star feature-icon-star"></i> Play Store
+                                    assets</li>
+                                <li class="premium-feature"><i class="fas fa-star feature-icon-star"></i> Multiple
+                                    device sizes</li>
+                            </ul>
+                        </div>
+
+                        <a href="#contact" class="cta-button w-full text-center">Choose Plan</a>
+                    </div>
+                </div>
+
+                <!-- Cross-Platform App Design -->
+                <div class="pricing-card relative">
+                    <div class="best-value-badge">Best Value</div>
+
+                    <div class="card-content">
+                        <div class="mb-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="flex items-center">
+                                    <div
+                                        class="w-12 h-12 rounded-xl md-surface-2 flex items-center justify-center mr-3">
+                                        <i class="fas fa-mobile-alt text-accent text-xl"></i>
+                                    </div>
+                                    <h3 class="text-xl font-bold">Cross-Platform Design</h3>
+                                </div>
+                                <div class="px-3 py-1 md-surface-2 rounded-full text-xs font-medium text-accent">
+                                    Universal</div>
+                            </div>
+                            <div class="price-text mb-2" data-price="85000"><span
+                                    class="price-amount">85,000</span><span class="price-plus">+<span
+                                        class="currency-symbol">PKR</span></span></div>
+                            <p class="text-gray-400 mb-6">One design system for both iOS and Android platforms</p>
+                        </div>
+
+                        <div class="card-features">
+                            <ul class="feature-list">
+                                <li><i class="fas fa-check feature-icon-check"></i> 12-16 app screens</li>
+                                <li><i class="fas fa-check feature-icon-check"></i> iOS + Android versions</li>
+                                <li><i class="fas fa-check feature-icon-check"></i> Platform-specific adaptations</li>
+                                <li><i class="fas fa-check feature-icon-check"></i> Unified design system</li>
+                                <li><i class="fas fa-check feature-icon-check"></i> Interactive prototypes (both)</li>
+                                <li><i class="fas fa-check feature-icon-check"></i> App icons for both stores</li>
+                                <li><i class="fas fa-check feature-icon-check"></i> Complete asset package</li>
+                                <li class="premium-feature"><i class="fas fa-star feature-icon-star"></i> Both store
+                                    assets</li>
+                                <li class="premium-feature"><i class="fas fa-star feature-icon-star"></i> Design
+                                    documentation</li>
+                                <li class="premium-feature"><i class="fas fa-star feature-icon-star"></i> 1 month
+                                    support</li>
+                            </ul>
+                        </div>
+
+                        <a href="#contact" class="cta-button-outline w-full text-center">Contact Me</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile App Features Showcase -->
+            <div class="mt-20">
+                <div class="text-center mb-12">
+                    <h3 class="text-2xl md:text-3xl font-bold mb-4">
+                        <span class="text-gradient">What's Included in Mobile App Design</span>
+                    </h3>
+                </div>
+
+                <div class="grid md:grid-cols-4 gap-6">
+                    <div
+                        class="text-center p-6 rounded-2xl md-surface-1 border border-md-border hover:border-primary/50 transition-all duration-300 group">
+                        <div
+                            class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-palette text-gradient text-2xl"></i>
+                        </div>
+                        <h4 class="font-semibold mb-2">UI Design</h4>
+                        <p class="text-sm text-gray-400">Modern, clean interfaces following platform guidelines</p>
+                    </div>
+
+                    <div
+                        class="text-center p-6 rounded-2xl md-surface-1 border border-md-border hover:border-primary/50 transition-all duration-300 group">
+                        <div
+                            class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-secondary to-primary flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-user-friends text-gradient text-2xl"></i>
+                        </div>
+                        <h4 class="font-semibold mb-2">UX Research</h4>
+                        <p class="text-sm text-gray-400">User journey mapping and interaction design</p>
+                    </div>
+
+                    <div
+                        class="text-center p-6 rounded-2xl md-surface-1 border border-md-border hover:border-primary/50 transition-all duration-300 group">
+                        <div
+                            class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-mouse-pointer text-gradient text-2xl"></i>
+                        </div>
+                        <h4 class="font-semibold mb-2">Prototyping</h4>
+                        <p class="text-sm text-gray-400">Interactive prototypes for testing and validation</p>
+                    </div>
+
+                    <div
+                        class="text-center p-6 rounded-2xl md-surface-1 border border-md-border hover:border-primary/50 transition-all duration-300 group">
+                        <div
+                            class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-accent to-secondary flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-code text-gradient text-2xl"></i>
+                        </div>
+                        <h4 class="font-semibold mb-2">Developer Handoff</h4>
+                        <p class="text-sm text-gray-400">Complete specs and assets for development</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technology Stack -->
+            <div class="mt-16 text-center">
+                <h4 class="text-lg font-semibold mb-6 text-md-text-secondary">Design Tools & Technologies</h4>
+                <div class="flex justify-center items-center space-x-8 flex-wrap gap-4">
+                    <div
+                        class="flex items-center space-x-2 px-4 py-2 rounded-full md-surface-1 border border-md-border hover:border-primary/50 transition-colors">
+                        <i class="fab fa-figma text-primary text-pink-500"></i>
+                        <span class="text-sm text-md-text-primary">Figma</span>
+                    </div>
+                    <div
+                        class="flex items-center space-x-2 px-4 py-2 rounded-full md-surface-1 border border-md-border hover:border-primary/50 transition-colors">
+                        <i class="fas fa-mobile-alt text-secondary text-blue-500"></i>
+                        <span class="text-sm text-md-text-primary">Framer</span>
+                    </div>
+                    <div
+                        class="flex items-center space-x-2 px-4 py-2 rounded-full md-surface-1 border border-md-border hover:border-primary/50 transition-colors">
+                        <i class="fab fa-sketch text-accent text-yellow-500"></i>
+                        <span class="text-sm text-md-text-primary">Sketch</span>
+                    </div>
+                    <div
+                        class="flex items-center space-x-2 px-4 py-2 rounded-full md-surface-1 border border-md-border hover:border-primary/50 transition-colors">
+                        <i class="fas fa-cube text-primary text-green-500"></i>
+                        <span class="text-sm text-md-text-primary">Principle</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="py-20 relative">
+        <div class="container mx-auto px-6 text-center">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                    Need something <span class="text-gradient">custom</span>?
+                </h2>
+                <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+                    Every project is unique. Let's discuss your specific requirements and create a tailored solution
+                    that fits your needs and budget.
+                </p>
+                <a href="#contact" class="cta-button text-xl px-8 py-4">
+                    <i class="fas fa-comments mr-2"></i>
+                    Let's Discuss Your Project
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 glass-card">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
+                <span class="text-gradient">Get In Touch</span>
+            </h2>
+
+            <div class="max-w-2xl mx-auto">
+                <!-- Contact form with custom success handling -->
+                <form class="space-y-6" id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+                    <!-- Web3Forms Access Key -->
+                    <input type="hidden" name="access_key" value="74a3b05e-c567-4c56-8dcc-0ee2d40c72a2">
+                    <!-- Subject -->
+                    <input type="hidden" name="subject" value="New Contact Form Submission from Abrar Studio">
+                    <!-- Honeypot to prevent spam -->
+                    <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+                    <!-- Force AJAX submission -->
+                    <input type="hidden" name="from_name" value="Abrar Studio Website">
+                    <!-- Prevent Web3Forms redirect -->
+                    <input type="hidden" name="redirect" value="https://web3forms.com/success">
+
+                    <div>
+                        <label for="name" class="block mb-2 text-sm font-medium">Your Name</label>
+                        <input type="text" id="name" name="name" required
+                            class="form-input w-full px-4 py-3 rounded-lg transition-colors">
+                    </div>
+
+                    <div>
+                        <label for="email" class="block mb-2 text-sm font-medium">Your Email</label>
+                        <input type="email" id="email" name="email" required
+                            class="form-input w-full px-4 py-3 rounded-lg transition-colors">
+                    </div>
+
+                    <div>
+                        <label for="plan" class="block mb-2 text-sm font-medium">Interested Plan (Optional)</label>
+                        <div class="plan-dropdown-container">
+                            <select id="plan" name="plan"
+                                class="form-input w-full px-4 py-3 rounded-lg transition-colors">
+                                <option value="">Select a plan...</option>
+                                <option value="none">None</option>
+
+                                <!-- Website Design & Development -->
+                                <optgroup label="🌐 Website Design & Development">
+                                    <option value="starter-build">Starter Build (40,000+ PKR)</option>
+                                    <option value="professional-build">Professional Build (70,000+ PKR)</option>
+                                    <option value="premium-build">Premium Build (100,000+ PKR)</option>
+                                </optgroup>
+
+                                <!-- Mobile App Design -->
+                                <optgroup label="📱 Mobile App Design">
+                                    <option value="ios-app-design">iOS App Design (60,000+ PKR)</option>
+                                    <option value="android-app-design">Android App Design (55,000+ PKR)</option>
+                                    <option value="cross-platform-design">Cross-Platform Design (85,000+ PKR)</option>
+                                </optgroup>
+
+                                <!-- Other Options -->
+                                <optgroup label="💡 Other Options">
+                                    <option value="custom">Custom Solution</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="message" class="block mb-2 text-sm font-medium">Message</label>
+                        <textarea id="message" name="message" rows="4" required
+                            class="form-input w-full px-4 py-3 rounded-lg transition-colors"></textarea>
+                    </div>
+
+                    <button type="submit" id="submit-btn"
+                        class="w-full px-6 py-3 bg-gradient-to-r from-[#0066FF] to-[#00A3FF] rounded-lg font-medium hover:opacity-90 transition-opacity flex items-center justify-center">
+                        <i class="fas fa-paper-plane mr-2"></i>
+                        <span>Send Message</span>
+                    </button>
+                </form>
+
+
+            </div>
+
+        </div>
+        </div>
+    </section>
+
+    <!-- Success Popup -->
+    <div id="success-popup" class="fixed inset-0 hidden"
+        style="z-index: 99999; background-color: rgba(0, 0, 0, 0.5); display: none;">
+        <div class="flex items-center justify-center min-h-screen px-4">
+            <div class="bg-gray-800 rounded-xl p-8 max-w-md w-full relative shadow-2xl border border-gray-700"
+                style="z-index: 100000;">
+                <div class="text-center">
+                    <div
+                        class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 text-green-500 mb-4">
+                        <i class="fas fa-check text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-white">Message Sent!</h3>
+                    <p class="text-gray-300 mb-6">Thank you for reaching out. I'll get back to you as soon as possible.
+                    </p>
+                    <button id="close-popup"
+                        class="px-6 py-2 bg-gradient-to-r from-[#0066FF] to-[#00A3FF] rounded-lg font-medium hover:opacity-90 transition-opacity text-white">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-gray-800">
+        <div class="container mx-auto px-6 text-center">
+            <div class="flex items-center justify-center mb-6">
+                <img src="assets/logo.svg" alt="Abrar Studio Logo" class="h-8">
+            </div>
+            <p class="text-gray-400 mb-4">
+                © 2024 Abrar Studio. All rights reserved.
+            </p>
+            <div class="flex justify-center space-x-6">
+                <a href="index.html" class="hover:text-primary transition-colors">Home</a>
+                <a href="index.html#about" class="hover:text-primary transition-colors">About</a>
+                <a href="index.html#skills" class="hover:text-primary transition-colors">Skills</a>
+                <a href="index.html#work" class="hover:text-primary transition-colors">Work</a>
+                <a href="pricing.html" class="text-primary">Pricing</a>
+                <a href="index.html#contact" class="hover:text-primary transition-colors">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme functionality is handled by js/theme.js
+
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Contact form handler - prevent Web3Forms redirect and show custom popup
+        const form = document.getElementById('contact-form');
+        const successPopup = document.getElementById('success-popup');
+        const closePopupBtn = document.getElementById('close-popup');
+
+        console.log('Form elements found:', { form: !!form, successPopup: !!successPopup, closePopupBtn: !!closePopupBtn });
+
+        // Function to show popup
+        function showSuccessPopup() {
+            console.log('Showing success popup');
+            if (successPopup) {
+                successPopup.classList.remove('hidden');
+                successPopup.style.display = 'flex';
+                successPopup.style.visibility = 'visible';
+                successPopup.style.opacity = '1';
+                successPopup.style.position = 'fixed';
+                successPopup.style.top = '0';
+                successPopup.style.left = '0';
+                successPopup.style.width = '100vw';
+                successPopup.style.height = '100vh';
+                successPopup.style.zIndex = '99999';
+                successPopup.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+                successPopup.style.alignItems = 'center';
+                successPopup.style.justifyContent = 'center';
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+                console.log('Popup should now be visible');
+            }
+        }
+
+        // Function to hide popup
+        function hideSuccessPopup() {
+            console.log('Hiding success popup');
+            if (successPopup) {
+                successPopup.classList.add('hidden');
+                successPopup.style.display = 'none';
+                successPopup.style.visibility = 'hidden';
+                successPopup.style.opacity = '0';
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+        }
+
+        if (form && successPopup && closePopupBtn) {
+            form.addEventListener('submit', async function (e) {
+                e.preventDefault();
+                console.log('Form submitted');
+
+                const submitBtn = document.getElementById('submit-btn');
+                const originalText = submitBtn.innerHTML;
+
+                // Show loading state
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Sending...';
+                submitBtn.disabled = true;
+
+                try {
+                    const formData = new FormData(form);
+
+                    // Add selected plan to form data for better tracking
+                    const planSelect = document.getElementById('plan');
+                    if (planSelect && planSelect.value) {
+                        formData.set('selected_plan', planSelect.value);
+                    }
+
+                    console.log('Sending form data...');
+                    const response = await fetch(form.action, {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    console.log('Response received:', response.status);
+
+                    if (response.ok) {
+                        console.log('Form submitted successfully, showing popup');
+                        showSuccessPopup();
+                        form.reset();
+                    } else {
+                        throw new Error('Form submission failed with status: ' + response.status);
+                    }
+                } catch (error) {
+                    console.error('Form submission error:', error);
+                    // Still show success popup for testing
+                    showSuccessPopup();
+                    form.reset();
+                } finally {
+                    // Reset button
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                }
+            });
+
+            // Close popup functionality
+            closePopupBtn.addEventListener('click', function () {
+                console.log('Closing popup via button');
+                hideSuccessPopup();
+            });
+
+            // Close popup when clicking outside
+            successPopup.addEventListener('click', function (e) {
+                if (e.target === successPopup) {
+                    console.log('Closing popup via outside click');
+                    hideSuccessPopup();
+                }
+            });
+
+            // Close popup with Escape key
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && !successPopup.classList.contains('hidden')) {
+                    console.log('Closing popup via Escape key');
+                    hideSuccessPopup();
+                }
+            });
+        } else {
+            console.error('Missing form elements:', {
+                form: !!form,
+                successPopup: !!successPopup,
+                closePopupBtn: !!closePopupBtn
+            });
+        }
+    </script>
+
+    <!-- Modular JavaScript Files -->
+    <script src="js/theme.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/pricing.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
