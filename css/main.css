@@ -44,21 +44,27 @@
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
-/* Material Design Light Theme Colors */
+/* Material Design Light Theme Colors - Exact Mirror of Dark Theme */
 :root.light-theme {
-    --md-background: #FAFAFA;
-    --md-surface: #FFFFFF;
-    --md-surface-1: #F5F5F5;
-    --md-surface-2: #EEEEEE;
-    --md-surface-3: #E0E0E0;
+    /* Light theme surfaces - EXACT inverse of dark theme hierarchy */
+    --md-background: #FAFAFA;    /* Inverted from #121212 */
+    --md-surface: #F1F1F1;      /* Inverted from #1E1E1E */
+    --md-surface-1: #DBDBDB;    /* Inverted from #242424 */
+    --md-surface-2: #D6D6D6;    /* Inverted from #292929 */
+    --md-surface-3: #D2D2D2;    /* Inverted from #2D2D2D */
     
-    /* Text Colors for Light Theme */
-    --md-text-primary: rgba(0, 0, 0, 0.87);
-    --md-text-secondary: rgba(0, 0, 0, 0.60);
+    /* Brand Colors - SAME as dark theme */
+    --primary: #0066FF;
+    --secondary: #00A3FF;
+    --accent: #f59e0b;
     
-    /* UI Colors for Light Theme */
-    --md-border: rgba(0, 0, 0, 0.12);
-    --md-shadow: rgba(0, 0, 0, 0.1);
+    /* Text Colors - EXACT inverse opacity of dark theme */
+    --md-text-primary: rgba(0, 0, 0, 0.87);    /* Inverted from rgba(255, 255, 255, 0.87) */
+    --md-text-secondary: rgba(0, 0, 0, 0.60);  /* Inverted from rgba(255, 255, 255, 0.60) */
+    
+    /* UI Colors - EXACT inverse of dark theme */
+    --md-border: rgba(0, 0, 0, 0.05);    /* Inverted from rgba(255, 255, 255, 0.05) */
+    --md-shadow: rgba(0, 0, 0, 0.3);     /* Same shadow intensity as dark theme */
 }
 
 /* ================================
@@ -266,24 +272,491 @@ nav {
 }
 
 /* ================================
-   7. Light Theme Overrides
+   7. Light Theme Overrides - Matching Dark Theme Feel
    ================================ */
 
-/* Fix text contrast issues in light theme */
+/* Core light theme surface improvements */
+:root.light-theme {
+    --md-background: #FAFAFA;
+    --md-surface: #FFFFFF;
+    --md-surface-1: #F8F9FA;
+    --md-surface-2: #F1F3F4;
+    --md-surface-3: #E8EAED;
+    
+    /* Enhanced text colors for better contrast */
+    --md-text-primary: rgba(0, 0, 0, 0.87);
+    --md-text-secondary: rgba(0, 0, 0, 0.65);
+    
+    /* UI Colors for Light Theme */
+    --md-border: rgba(0, 0, 0, 0.12);
+    --md-shadow: rgba(0, 0, 0, 0.08);
+}
+
+/* Glass card improvements for light theme */
+:root.light-theme .glass-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+}
+
+/* Text hierarchy improvements - matching dark theme structure */
 :root.light-theme .text-gray-300 {
-    color: rgba(0, 0, 0, 0.75) !important;
+    color: rgba(0, 0, 0, 0.8) !important;
 }
 
 :root.light-theme .text-gray-400 {
-    color: rgba(0, 0, 0, 0.65) !important;
+    color: rgba(0, 0, 0, 0.7) !important;
 }
 
 :root.light-theme .text-gray-500 {
-    color: rgba(0, 0, 0, 0.55) !important;
+    color: rgba(0, 0, 0, 0.65) !important;
+}
+
+:root.light-theme .text-gray-600 {
+    color: rgba(0, 0, 0, 0.6) !important;
 }
 
 :root.light-theme .text-white {
     color: rgba(0, 0, 0, 0.87) !important;
+}
+
+/* Enhanced heading hierarchy */
+:root.light-theme h1,
+:root.light-theme h2,
+:root.light-theme h3,
+:root.light-theme h4,
+:root.light-theme h5,
+:root.light-theme h6 {
+    color: rgba(0, 0, 0, 0.9) !important;
+    font-weight: inherit;
+}
+
+:root.light-theme p {
+    color: rgba(0, 0, 0, 0.8) !important;
+}
+
+:root.light-theme .text-lg {
+    color: rgba(0, 0, 0, 0.8) !important;
+}
+
+:root.light-theme .text-xl {
+    color: rgba(0, 0, 0, 0.85) !important;
+}
+
+:root.light-theme .text-2xl {
+    color: rgba(0, 0, 0, 0.9) !important;
+}
+
+:root.light-theme .text-3xl {
+    color: rgba(0, 0, 0, 0.9) !important;
+}
+
+/* Surface improvements to match dark theme feel */
+:root.light-theme .md-surface-1 {
+    background-color: var(--md-surface-1);
+    border: 1px solid var(--md-border);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+:root.light-theme .md-surface-2 {
+    background-color: var(--md-surface-2);
+    border: 1px solid var(--md-border);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+:root.light-theme .md-surface-3 {
+    background-color: var(--md-surface-3);
+    border: 1px solid var(--md-border);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* Specific component text fixes */
+:root.light-theme .typewriter-subtitle {
+    color: rgba(0, 0, 0, 0.7) !important;
+}
+
+:root.light-theme .counter {
+    color: var(--primary) !important;
+}
+
+/* Badge and tag improvements */
+:root.light-theme .bg-blue-500\/20 {
+    background-color: rgba(0, 102, 255, 0.15) !important;
+}
+
+:root.light-theme .text-blue-400 {
+    color: rgba(0, 102, 255, 0.8) !important;
+}
+
+:root.light-theme .bg-green-500\/20 {
+    background-color: rgba(16, 185, 129, 0.15) !important;
+}
+
+:root.light-theme .text-green-400 {
+    color: rgba(16, 185, 129, 0.8) !important;
+}
+
+:root.light-theme .bg-purple-500\/20 {
+    background-color: rgba(139, 92, 246, 0.15) !important;
+}
+
+:root.light-theme .text-purple-400 {
+    color: rgba(139, 92, 246, 0.8) !important;
+}
+
+:root.light-theme .bg-orange-500\/20 {
+    background-color: rgba(249, 115, 22, 0.15) !important;
+}
+
+:root.light-theme .text-orange-400 {
+    color: rgba(249, 115, 22, 0.8) !important;
+}
+
+:root.light-theme .bg-red-500\/20 {
+    background-color: rgba(239, 68, 68, 0.15) !important;
+}
+
+:root.light-theme .text-red-400 {
+    color: rgba(239, 68, 68, 0.8) !important;
+}
+
+:root.light-theme .bg-yellow-500\/20 {
+    background-color: rgba(245, 158, 11, 0.15) !important;
+}
+
+:root.light-theme .text-yellow-400 {
+    color: rgba(245, 158, 11, 0.8) !important;
+}
+
+/* ================================
+   Navigation Improvements - Fixed Active Tab Logic
+   ================================ */
+
+/* Dark theme navigation */
+nav a {
+    color: var(--md-text-primary) !important;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+nav a:hover {
+    color: var(--md-text-primary) !important;
+    opacity: 0.8;
+}
+
+/* Active tab should ALWAYS be blue in both themes */
+nav a.text-primary {
+    color: var(--primary) !important;
+    font-weight: 600 !important;
+}
+
+nav a.text-primary:hover {
+    color: var(--primary) !important;
+    opacity: 0.9;
+}
+
+/* Light theme navigation - non-active links */
+:root.light-theme nav a:not(.text-primary) {
+    color: rgba(0, 0, 0, 0.8) !important;
+}
+
+:root.light-theme nav a:not(.text-primary):hover {
+    color: rgba(0, 0, 0, 0.9) !important;
+}
+
+/* Active tab remains blue in light theme */
+:root.light-theme nav a.text-primary {
+    color: var(--primary) !important;
+    font-weight: 600 !important;
+}
+
+:root.light-theme nav a.text-primary:hover {
+    color: var(--primary) !important;
+    opacity: 0.9;
+}
+
+/* Navigation active indicator */
+nav a.text-primary::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    background: var(--primary);
+    border-radius: 50%;
+    opacity: 0.8;
+}
+
+/* Button and border fixes for light theme */
+:root.light-theme .border-gray-600 {
+    border-color: rgba(0, 0, 0, 0.15) !important;
+}
+
+:root.light-theme .border-gray-800 {
+    border-color: rgba(0, 0, 0, 0.15) !important;
+}
+
+:root.light-theme .bg-gray-700 {
+    background-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+:root.light-theme .bg-gray-800 {
+    background-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Hover effects for light theme */
+:root.light-theme .hover\:bg-gray-800:hover {
+    background-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+:root.light-theme .hover\:text-white:hover {
+    color: var(--primary) !important;
+}
+
+:root.light-theme .hover\:text-primary:hover {
+    color: var(--primary) !important;
+}
+
+/* Mobile menu fixes for light theme */
+:root.light-theme #mobile-menu {
+    background-color: var(--md-surface) !important;
+    border: 1px solid var(--md-border) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+:root.light-theme #mobile-menu a {
+    color: rgba(0, 0, 0, 0.8) !important;
+}
+
+:root.light-theme #mobile-menu a:hover {
+    color: var(--primary) !important;
+}
+
+/* Footer improvements for light theme */
+:root.light-theme footer {
+    background-color: var(--md-surface-1) !important;
+}
+
+:root.light-theme footer.border-t {
+    border-color: var(--md-border) !important;
+}
+
+:root.light-theme footer a {
+    color: rgba(0, 0, 0, 0.6) !important;
+}
+
+:root.light-theme footer a:hover {
+    color: var(--primary) !important;
+}
+
+:root.light-theme footer p {
+    color: rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Icon fixes for light theme */
+:root.light-theme .fa-chevron-down {
+    color: rgba(0, 0, 0, 0.5) !important;
+}
+
+:root.light-theme a:hover .fa-chevron-down {
+    color: var(--primary) !important;
+}
+
+:root.light-theme .fab.fa-apple {
+    color: #333 !important;
+}
+
+:root.light-theme .fas.fa-bars {
+    color: rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Social media icons for light theme */
+:root.light-theme .social-icon {
+    color: rgba(0, 0, 0, 0.7) !important;
+}
+
+:root.light-theme .social-icon:hover {
+    color: white !important;
+}
+
+/* Hero section improvements for light theme */
+:root.light-theme .hero-section h1 {
+    color: rgba(0, 0, 0, 0.9) !important;
+}
+
+:root.light-theme .hero-section p {
+    color: rgba(0, 0, 0, 0.7) !important;
+}
+
+/* About section improvements for light theme */
+:root.light-theme .about-section h2,
+:root.light-theme .about-section h3 {
+    color: rgba(0, 0, 0, 0.9) !important;
+}
+
+:root.light-theme .about-section p {
+    color: rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Skills section improvements for light theme */
+:root.light-theme .skills-section h2,
+:root.light-theme .skills-section h3 {
+    color: rgba(0, 0, 0, 0.9) !important;
+}
+
+:root.light-theme .skills-section p {
+    color: rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Work section improvements for light theme */
+:root.light-theme .work-section h2,
+:root.light-theme .work-section h3 {
+    color: rgba(0, 0, 0, 0.9) !important;
+}
+
+:root.light-theme .work-section p {
+    color: rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Contact section improvements for light theme */
+:root.light-theme .contact-section h2,
+:root.light-theme .contact-section h3 {
+    color: rgba(0, 0, 0, 0.9) !important;
+}
+
+:root.light-theme .contact-section p {
+    color: rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Project overlay text should remain white for readability */
+:root.light-theme .project-overlay h3 {
+    color: white !important;
+}
+
+:root.light-theme .project-overlay p {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Skill bars and progress indicators */
+:root.light-theme .skill-bar,
+:root.light-theme .h-2.bg-gray-700 {
+    background-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* ================================
+   Skill Progress Bars - Fixed for Dark Theme
+   ================================ */
+
+.skill-progress-container {
+    margin-bottom: 1rem;
+}
+
+.skill-bar {
+    width: 100%;
+    height: 8px;
+    background-color: var(--md-surface-2);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid var(--md-border);
+}
+
+.skill-progress {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 4px;
+    width: 0%;
+    transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0, 102, 255, 0.2);
+}
+
+.skill-progress::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transform: translateX(-100%);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Animate progress bars when they come into view */
+.skill-progress.animate {
+    animation: fillProgress 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes fillProgress {
+    from {
+        width: 0%;
+    }
+    to {
+        width: var(--target-width);
+    }
+}
+
+/* Dark theme specific improvements */
+.skill-bar {
+    background-color: var(--md-surface-2);
+    border: 1px solid var(--md-border);
+}
+
+/* Light theme skill progress bars */
+:root.light-theme .skill-bar {
+    background-color: rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+:root.light-theme .skill-progress {
+    box-shadow: 0 2px 4px rgba(0, 102, 255, 0.15);
+}
+
+:root.light-theme .skill-progress::after {
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+}
+
+/* Button improvements for light theme */
+:root.light-theme button {
+    color: rgba(0, 0, 0, 0.8) !important;
+}
+
+:root.light-theme button:hover {
+    color: var(--primary) !important;
+}
+
+/* Testimonials section improvements for light theme */
+:root.light-theme .testimonials-section h2 {
+    color: rgba(0, 0, 0, 0.9) !important;
+}
+
+:root.light-theme .testimonials-section p {
+    color: rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Pricing section improvements for light theme */
+:root.light-theme .pricing-section h1,
+:root.light-theme .pricing-section h2,
+:root.light-theme .pricing-section h3 {
+    color: rgba(0, 0, 0, 0.9) !important;
+}
+
+:root.light-theme .pricing-section p {
+    color: rgba(0, 0, 0, 0.7) !important;
 }
 
 /* Form input styles for theme compatibility */
@@ -372,6 +845,296 @@ textarea::placeholder {
     transform: translateY(-1px) scale(0.95);
 }
 
+/* ================================
+   Additional UI Improvements
+   ================================ */
+
+/* Smooth transitions for all interactive elements */
+a, button, input, textarea, select {
+    transition: all 0.3s ease;
+}
+
+/* Focus states for accessibility */
+a:focus, button:focus, input:focus, textarea:focus, select:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* Loading states */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid var(--primary);
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Error states */
+.error {
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2) !important;
+}
+
+.error-message {
+    color: #ef4444;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* Success states */
+.success {
+    border-color: #10b981 !important;
+    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2) !important;
+}
+
+.success-message {
+    color: #10b981;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* Improved button styles */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white !important;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 102, 255, 0.3);
+    color: white !important;
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+}
+
+.btn-secondary:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* ================================
+   Gradient Button Text Visibility Fix
+   ================================ */
+
+/* Fix gradient button text visibility - COMPREHENSIVE FIX */
+.bg-gradient-to-r,
+.bg-gradient-to-l,
+.bg-gradient-to-t,
+.bg-gradient-to-b,
+.bg-gradient-to-br,
+.bg-gradient-to-bl,
+.bg-gradient-to-tr,
+.bg-gradient-to-tl,
+button[class*="bg-gradient"],
+a[class*="bg-gradient"],
+.cta-button,
+.btn-primary {
+    color: white !important;
+}
+
+.bg-gradient-to-r *,
+.bg-gradient-to-l *,
+.bg-gradient-to-t *,
+.bg-gradient-to-b *,
+.bg-gradient-to-br *,
+.bg-gradient-to-bl *,
+.bg-gradient-to-tr *,
+.bg-gradient-to-tl *,
+button[class*="bg-gradient"] *,
+a[class*="bg-gradient"] *,
+.cta-button *,
+.btn-primary * {
+    color: white !important;
+}
+
+.bg-gradient-to-r:hover,
+.bg-gradient-to-l:hover,
+.bg-gradient-to-t:hover,
+.bg-gradient-to-b:hover,
+.bg-gradient-to-br:hover,
+.bg-gradient-to-bl:hover,
+.bg-gradient-to-tr:hover,
+.bg-gradient-to-tl:hover,
+button[class*="bg-gradient"]:hover,
+a[class*="bg-gradient"]:hover,
+.cta-button:hover,
+.btn-primary:hover {
+    color: white !important;
+}
+
+.bg-gradient-to-r:hover *,
+.bg-gradient-to-l:hover *,
+.bg-gradient-to-t:hover *,
+.bg-gradient-to-b:hover *,
+.bg-gradient-to-br:hover *,
+.bg-gradient-to-bl:hover *,
+.bg-gradient-to-tr:hover *,
+.bg-gradient-to-tl:hover *,
+button[class*="bg-gradient"]:hover *,
+a[class*="bg-gradient"]:hover *,
+.cta-button:hover *,
+.btn-primary:hover * {
+    color: white !important;
+}
+
+/* Ensure gradient buttons maintain white text in ALL themes */
+:root.light-theme .bg-gradient-to-r,
+:root.light-theme .bg-gradient-to-l,
+:root.light-theme .bg-gradient-to-t,
+:root.light-theme .bg-gradient-to-b,
+:root.light-theme .bg-gradient-to-br,
+:root.light-theme .bg-gradient-to-bl,
+:root.light-theme .bg-gradient-to-tr,
+:root.light-theme .bg-gradient-to-tl,
+:root.light-theme button[class*="bg-gradient"],
+:root.light-theme a[class*="bg-gradient"],
+:root.light-theme .cta-button,
+:root.light-theme .btn-primary {
+    color: white !important;
+}
+
+:root.light-theme .bg-gradient-to-r *,
+:root.light-theme .bg-gradient-to-l *,
+:root.light-theme .bg-gradient-to-t *,
+:root.light-theme .bg-gradient-to-b *,
+:root.light-theme .bg-gradient-to-br *,
+:root.light-theme .bg-gradient-to-bl *,
+:root.light-theme .bg-gradient-to-tr *,
+:root.light-theme .bg-gradient-to-tl *,
+:root.light-theme button[class*="bg-gradient"] *,
+:root.light-theme a[class*="bg-gradient"] *,
+:root.light-theme .cta-button *,
+:root.light-theme .btn-primary * {
+    color: white !important;
+}
+
+:root.light-theme .bg-gradient-to-r:hover,
+:root.light-theme .bg-gradient-to-l:hover,
+:root.light-theme .bg-gradient-to-t:hover,
+:root.light-theme .bg-gradient-to-b:hover,
+:root.light-theme .bg-gradient-to-br:hover,
+:root.light-theme .bg-gradient-to-bl:hover,
+:root.light-theme .bg-gradient-to-tr:hover,
+:root.light-theme .bg-gradient-to-tl:hover,
+:root.light-theme button[class*="bg-gradient"]:hover,
+:root.light-theme a[class*="bg-gradient"]:hover,
+:root.light-theme .cta-button:hover,
+:root.light-theme .btn-primary:hover {
+    color: white !important;
+}
+
+:root.light-theme .bg-gradient-to-r:hover *,
+:root.light-theme .bg-gradient-to-l:hover *,
+:root.light-theme .bg-gradient-to-t:hover *,
+:root.light-theme .bg-gradient-to-b:hover *,
+:root.light-theme .bg-gradient-to-br:hover *,
+:root.light-theme .bg-gradient-to-bl:hover *,
+:root.light-theme .bg-gradient-to-tr:hover *,
+:root.light-theme .bg-gradient-to-tl:hover *,
+:root.light-theme button[class*="bg-gradient"]:hover *,
+:root.light-theme a[class*="bg-gradient"]:hover *,
+:root.light-theme .cta-button:hover *,
+:root.light-theme .btn-primary:hover * {
+    color: white !important;
+}
+
+/* Override any conflicting styles */
+:root.light-theme button,
+:root.light-theme a {
+    color: rgba(0, 0, 0, 0.8) !important;
+}
+
+/* But keep gradient buttons white */
+:root.light-theme button[class*="bg-gradient"],
+:root.light-theme a[class*="bg-gradient"],
+:root.light-theme .cta-button,
+:root.light-theme .btn-primary,
+:root.light-theme button[class*="from-"],
+:root.light-theme a[class*="from-"] {
+    color: white !important;
+}
+
+:root.light-theme button[class*="bg-gradient"] *,
+:root.light-theme a[class*="bg-gradient"] *,
+:root.light-theme .cta-button *,
+:root.light-theme .btn-primary *,
+:root.light-theme button[class*="from-"] *,
+:root.light-theme a[class*="from-"] * {
+    color: white !important;
+}
+
+/* Improved card styles */
+.card {
+    background: var(--md-surface-1);
+    border: 1px solid var(--md-border);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary);
+}
+
+/* Improved typography */
+.text-balance {
+    text-wrap: balance;
+}
+
+.text-pretty {
+    text-wrap: pretty;
+}
+
+/* Scroll progress indicator */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    z-index: 9999;
+    transition: width 0.1s ease;
+}
+
 /* Responsive adjustments for scroll to top button */
 @media (max-width: 768px) {
     .scroll-to-top {
@@ -381,4 +1144,1598 @@ textarea::placeholder {
         height: 45px;
         font-size: 18px;
     }
+    
+    /* Mobile-specific improvements */
+    .btn {
+        padding: 0.625rem 1.25rem;
+        font-size: 0.875rem;
+    }
+    
+    .card {
+        padding: 1rem;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    :root {
+        --md-border: rgba(255, 255, 255, 0.3);
+    }
+    
+    :root.light-theme {
+        --md-border: rgba(0, 0, 0, 0.3);
+    }
+    
+    .text-gradient {
+        background: none;
+        color: var(--primary);
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .blob {
+        animation: none;
+    }
+    
+    .testimonials-track {
+        animation: none;
+    }
+}
+
+/* ================================
+   Additional Light Theme Fixes
+   ================================ */
+
+/* Fix specific text elements that might have poor contrast */
+:root.light-theme .text-sm {
+    color: rgba(0, 0, 0, 0.8) !important;
+}
+
+:root.light-theme .text-xs {
+    color: rgba(0, 0, 0, 0.75) !important;
+}
+
+/* Enhanced contrast for all text elements in light theme */
+:root.light-theme .text-base {
+    color: rgba(0, 0, 0, 0.85) !important;
+}
+
+:root.light-theme .font-light {
+    color: rgba(0, 0, 0, 0.8) !important;
+}
+
+:root.light-theme .font-normal {
+    color: rgba(0, 0, 0, 0.85) !important;
+}
+
+:root.light-theme .font-medium {
+    color: rgba(0, 0, 0, 0.9) !important;
+}
+
+:root.light-theme .font-semibold {
+    color: rgba(0, 0, 0, 0.95) !important;
+}
+
+:root.light-theme .font-bold {
+    color: rgba(0, 0, 0, 0.95) !important;
+}
+
+/* Fix all gray text variants for better contrast */
+:root.light-theme .text-gray-100 {
+    color: rgba(0, 0, 0, 0.95) !important;
+}
+
+:root.light-theme .text-gray-200 {
+    color: rgba(0, 0, 0, 0.9) !important;
+}
+
+:root.light-theme .text-gray-300 {
+    color: rgba(0, 0, 0, 0.85) !important;
+}
+
+:root.light-theme .text-gray-400 {
+    color: rgba(0, 0, 0, 0.75) !important;
+}
+
+:root.light-theme .text-gray-500 {
+    color: rgba(0, 0, 0, 0.7) !important;
+}
+
+:root.light-theme .text-gray-600 {
+    color: rgba(0, 0, 0, 0.65) !important;
+}
+
+:root.light-theme .text-gray-700 {
+    color: rgba(0, 0, 0, 0.8) !important;
+}
+
+:root.light-theme .text-gray-800 {
+    color: rgba(0, 0, 0, 0.9) !important;
+}
+
+:root.light-theme .text-gray-900 {
+    color: rgba(0, 0, 0, 0.95) !important;
+}
+
+/* Fix white text to be dark in light theme */
+:root.light-theme .text-white {
+    color: rgba(0, 0, 0, 0.95) !important;
+}
+
+/* Ensure proper contrast for all headings */
+:root.light-theme h1,
+:root.light-theme h2,
+:root.light-theme h3,
+:root.light-theme h4,
+:root.light-theme h5,
+:root.light-theme h6 {
+    color: rgba(0, 0, 0, 0.95) !important;
+}
+
+/* Fix paragraph text */
+:root.light-theme p {
+    color: rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Fix span elements */
+:root.light-theme span {
+    color: inherit !important;
+}
+
+/* Fix list items */
+:root.light-theme li {
+    color: rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Fix div text content */
+:root.light-theme div {
+    color: inherit;
+}
+
+/* Specific component text fixes */
+:root.light-theme .hero-section .text-lg {
+    color: rgba(0, 0, 0, 0.8) !important;
+}
+
+:root.light-theme .hero-section .text-2xl {
+    color: rgba(0, 0, 0, 0.9) !important;
+}
+
+:root.light-theme .hero-section .text-4xl,
+:root.light-theme .hero-section .text-6xl {
+    color: rgba(0, 0, 0, 0.95) !important;
+}
+
+/* Fix badge and status indicators */
+:root.light-theme .bg-blue-500\/10 {
+    background-color: rgba(0, 102, 255, 0.1) !important;
+    border-color: rgba(0, 102, 255, 0.2) !important;
+}
+
+:root.light-theme .text-blue-400 {
+    color: rgba(0, 102, 255, 0.9) !important;
+}
+
+/* Fix skill progress text */
+:root.light-theme .skill-card .text-xl {
+    color: rgba(0, 0, 0, 0.9) !important;
+}
+
+:root.light-theme .skill-card .text-sm {
+    color: rgba(0, 0, 0, 0.75) !important;
+}
+
+/* Fix counter text */
+:root.light-theme .counter {
+    color: var(--primary) !important;
+}
+
+/* Fix typewriter subtitle */
+:root.light-theme .typewriter-subtitle {
+    color: rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Fix social media icons text */
+:root.light-theme .social-icon {
+    color: rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Fix form labels and inputs */
+:root.light-theme label {
+    color: rgba(0, 0, 0, 0.85) !important;
+}
+
+:root.light-theme input::placeholder,
+:root.light-theme textarea::placeholder {
+    color: rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Fix button text (except gradient buttons) */
+:root.light-theme button:not([class*="bg-gradient"]):not(.cta-button):not(.btn-primary) {
+    color: rgba(0, 0, 0, 0.85) !important;
+}
+
+/* Fix link text */
+:root.light-theme a:not([class*="bg-gradient"]):not(.cta-button):not(.btn-primary) {
+    color: var(--primary) !important;
+}
+
+:root.light-theme a:not([class*="bg-gradient"]):not(.cta-button):not(.btn-primary):hover {
+    color: var(--secondary) !important;
+}
+
+/* Fix navigation text specifically */
+:root.light-theme nav a:not(.text-primary) {
+    color: rgba(0, 0, 0, 0.8) !important;
+}
+
+:root.light-theme nav a:not(.text-primary):hover {
+    color: rgba(0, 0, 0, 0.95) !important;
+}
+
+/* Ensure active nav links remain blue */
+:root.light-theme nav a.text-primary {
+    color: var(--primary) !important;
+    font-weight: 600 !important;
+}
+
+/* Fix mobile menu text */
+:root.light-theme #mobile-menu a {
+    color: rgba(0, 0, 0, 0.8) !important;
+}
+
+:root.light-theme #mobile-menu a:hover {
+    color: var(--primary) !important;
+}
+
+:root.light-theme #mobile-menu a.text-primary {
+    color: var(--primary) !important;
+    font-weight: 600 !important;
+}
+
+/* Fix card content text */
+:root.light-theme .card h3,
+:root.light-theme .project-card h3,
+:root.light-theme .skill-card h3,
+:root.light-theme .testimonial-card h3 {
+    color: rgba(0, 0, 0, 0.9) !important;
+}
+
+:root.light-theme .card p,
+:root.light-theme .project-card p,
+:root.light-theme .skill-card p,
+:root.light-theme .testimonial-card p {
+    color: rgba(0, 0, 0, 0.75) !important;
+}
+
+/* Fix pricing card text */
+:root.light-theme .pricing-card h3 {
+    color: rgba(0, 0, 0, 0.9) !important;
+}
+
+:root.light-theme .pricing-card .text-4xl,
+:root.light-theme .pricing-card .text-5xl {
+    color: rgba(0, 0, 0, 0.95) !important;
+}
+
+:root.light-theme .pricing-card .feature-list li {
+    color: rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Fix work section project overlays - keep white for readability */
+:root.light-theme .project-overlay h3,
+:root.light-theme .project-overlay p {
+    color: white !important;
+}
+
+/* Fix contact section text */
+:root.light-theme .contact-section h2,
+:root.light-theme .contact-section h3 {
+    color: rgba(0, 0, 0, 0.95) !important;
+}
+
+:root.light-theme .contact-section p {
+    color: rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Fix footer text */
+:root.light-theme footer {
+    color: rgba(0, 0, 0, 0.7) !important;
+}
+
+:root.light-theme footer a {
+    color: rgba(0, 0, 0, 0.6) !important;
+}
+
+:root.light-theme footer a:hover {
+    color: var(--primary) !important;
+}
+
+:root.light-theme footer p {
+    color: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Fix icon colors */
+:root.light-theme .fa-chevron-down {
+    color: rgba(0, 0, 0, 0.6) !important;
+}
+
+:root.light-theme a:hover .fa-chevron-down {
+    color: var(--primary) !important;
+}
+
+:root.light-theme .fas.fa-bars {
+    color: rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Fix skill tags - ensure they exist in both themes */
+.skill-tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background-color: rgba(0, 102, 255, 0.1);
+    color: var(--primary);
+    border: 1px solid rgba(0, 102, 255, 0.2);
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.skill-tag:hover {
+    background-color: var(--primary);
+    color: white;
+    transform: translateY(-1px);
+}
+
+/* Light theme skill tags */
+:root.light-theme .skill-tag {
+    background-color: rgba(0, 102, 255, 0.08) !important;
+    color: rgba(0, 102, 255, 0.9) !important;
+    border: 1px solid rgba(0, 102, 255, 0.15) !important;
+}
+
+:root.light-theme .skill-tag:hover {
+    background-color: var(--primary) !important;
+    color: white !important;
+}
+
+/* Fix testimonial author text */
+:root.light-theme .testimonial-card .font-semibold {
+    color: rgba(0, 0, 0, 0.9) !important;
+}
+
+:root.light-theme .testimonial-card .text-sm {
+    color: rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Fix any remaining low contrast elements */
+:root.light-theme .opacity-60 {
+    opacity: 0.8 !important;
+}
+
+:root.light-theme .opacity-70 {
+    opacity: 0.9 !important;
+}
+
+:root.light-theme .opacity-80 {
+    opacity: 0.95 !important;
+}
+
+/* Fix link colors in light theme */
+:root.light-theme a:not(.btn):not(.social-icon) {
+    color: var(--primary) !important;
+}
+
+:root.light-theme a:not(.btn):not(.social-icon):hover {
+    color: var(--secondary) !important;
+}
+
+/* Fix card backgrounds and borders in light theme */
+:root.light-theme .card,
+:root.light-theme .project-card,
+:root.light-theme .skill-card,
+:root.light-theme .testimonial-card {
+    background-color: var(--md-surface) !important;
+    border-color: var(--md-border) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+}
+
+:root.light-theme .card:hover,
+:root.light-theme .project-card:hover,
+:root.light-theme .skill-card:hover,
+:root.light-theme .testimonial-card:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Fix navigation active states */
+:root.light-theme nav a.text-primary,
+:root.light-theme nav a[href="pricing.html"] {
+    color: var(--primary) !important;
+    font-weight: 600 !important;
+}
+
+/* Fix mobile menu button */
+:root.light-theme #menu-toggle {
+    color: rgba(0, 0, 0, 0.8) !important;
+}
+
+:root.light-theme #menu-toggle:hover {
+    color: var(--primary) !important;
+}
+
+/* Fix success popup in light theme */
+:root.light-theme #success-popup .bg-gray-800 {
+    background-color: var(--md-surface) !important;
+    border: 1px solid var(--md-border) !important;
+    color: var(--md-text-primary) !important;
+}
+
+:root.light-theme #success-popup .text-white {
+    color: rgba(0, 0, 0, 0.9) !important;
+}
+
+:root.light-theme #success-popup .text-gray-300 {
+    color: rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Fix pricing page specific elements */
+:root.light-theme .pricing-card .text-gray-400 {
+    color: rgba(0, 0, 0, 0.65) !important;
+}
+
+:root.light-theme .pricing-card .feature-list li {
+    color: rgba(0, 0, 0, 0.75) !important;
+}
+
+:root.light-theme .pricing-card .feature-icon-check {
+    color: var(--primary) !important;
+}
+
+:root.light-theme .pricing-card .feature-icon-star,
+:root.light-theme .pricing-card .feature-icon-globe {
+    color: var(--accent) !important;
+}
+
+/* Fix currency selector in light theme */
+:root.light-theme #currency-selector {
+    background-color: var(--md-surface-1) !important;
+    color: var(--md-text-primary) !important;
+    border-color: var(--md-border) !important;
+}
+
+:root.light-theme #currency-selector option {
+    background-color: var(--md-surface) !important;
+    color: var(--md-text-primary) !important;
+}
+
+/* Fix dropdown arrow colors in light theme */
+:root.light-theme .plan-dropdown-container select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23666666' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e") !important;
+}
+
+/* Fix skill tabs in light theme */
+:root.light-theme .skill-tab {
+    color: rgba(0, 0, 0, 0.7) !important;
+}
+
+:root.light-theme .skill-tab.active {
+    color: var(--primary) !important;
+    background-color: var(--md-surface-2) !important;
+}
+
+:root.light-theme .skill-tab:hover {
+    color: rgba(0, 0, 0, 0.9) !important;
+    background-color: var(--md-surface-1) !important;
+}
+
+/* Fix testimonial navigation buttons */
+:root.light-theme .testimonial-nav {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    color: rgba(0, 0, 0, 0.8) !important;
+    border-color: var(--md-border) !important;
+}
+
+:root.light-theme .testimonial-nav:hover {
+    background-color: var(--primary) !important;
+    color: white !important;
+}
+
+/* Fix contact info items */
+:root.light-theme .contact-info-item .text-gray-400 {
+    color: rgba(0, 0, 0, 0.65) !important;
+}
+
+:root.light-theme .contact-info-item:hover .md-surface-2 {
+    background-color: var(--primary) !important;
+    color: white !important;
+}
+
+/* Fix scroll progress indicator visibility */
+:root.light-theme .scroll-progress {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Fix loading spinner colors */
+:root.light-theme .loading::after {
+    border-color: var(--primary) !important;
+    border-top-color: transparent !important;
+}
+
+/* Fix error and success message colors for light theme */
+:root.light-theme .error-message {
+    color: #dc2626 !important;
+}
+
+:root.light-theme .success-message {
+    color: #059669 !important;
+}
+
+/* Fix placeholder text contrast */
+:root.light-theme input::placeholder,
+:root.light-theme textarea::placeholder,
+:root.light-theme select::placeholder {
+    color: rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Fix disabled form elements */
+:root.light-theme input:disabled,
+:root.light-theme textarea:disabled,
+:root.light-theme select:disabled {
+    background-color: rgba(0, 0, 0, 0.05) !important;
+    color: rgba(0, 0, 0, 0.4) !important;
+    cursor: not-allowed !important;
+}
+
+/* Fix focus states for better accessibility */
+:root.light-theme input:focus,
+:root.light-theme textarea:focus,
+:root.light-theme select:focus {
+    box-shadow: 0 0 0 2px rgba(0, 102, 255, 0.2) !important;
+    border-color: var(--primary) !important;
+}
+
+/* Fix button focus states */
+:root.light-theme button:focus,
+:root.light-theme .btn:focus {
+    box-shadow: 0 0 0 2px rgba(0, 102, 255, 0.2) !important;
+}
+
+/* Fix link focus states */
+:root.light-theme a:focus {
+    outline-color: var(--primary) !important;
+}
+
+/* Improve readability of small text */
+:root.light-theme .text-xs,
+:root.light-theme .text-sm {
+    font-weight: 500 !important;
+}
+
+/* Fix any remaining contrast issues */
+:root.light-theme .opacity-60 {
+    opacity: 0.8 !important;
+}
+
+:root.light-theme .opacity-70 {
+    opacity: 0.9 !important;
+}
+
+:root.light-theme .opacity-80 {
+    opacity: 1 !important;
+}
+
+/* ================================
+   Fix Gradient Button Text Visibility
+   ================================ */
+
+/* Fix gradient button text visibility */
+.bg-gradient-to-r,
+[class*="bg-gradient-to-r"] {
+    color: white !important;
+}
+
+.bg-gradient-to-r *,
+[class*="bg-gradient-to-r"] * {
+    color: white !important;
+}
+
+/* Ensure gradient buttons have visible text */
+.bg-gradient-to-r.from-\[#0066FF\].to-\[#00A3FF\],
+.bg-gradient-to-r.from-\[\#0066FF\].to-\[\#00A3FF\] {
+    color: white !important;
+}
+
+.bg-gradient-to-r.from-\[#0066FF\].to-\[#00A3FF\] *,
+.bg-gradient-to-r.from-\[\#0066FF\].to-\[\#00A3FF\] * {
+    color: white !important;
+}
+
+/* Fix all gradient buttons */
+button[class*="bg-gradient"],
+a[class*="bg-gradient"],
+.magnetic-button,
+.ripple-button {
+    color: white !important;
+}
+
+button[class*="bg-gradient"] *,
+a[class*="bg-gradient"] *,
+.magnetic-button *,
+.ripple-button * {
+    color: white !important;
+}
+
+/* ================================
+   Fix Navbar Active States
+   ================================ */
+
+/* Navbar active tab should be blue, others should have proper contrast */
+:root.light-theme nav a {
+    color: rgba(0, 0, 0, 0.7) !important;
+}
+
+:root.light-theme nav a:hover {
+    color: rgba(0, 0, 0, 0.9) !important;
+}
+
+:root.light-theme nav a.text-primary,
+:root.light-theme nav a[href="pricing.html"] {
+    color: var(--primary) !important;
+}
+
+:root nav a.text-primary,
+:root nav a[href="pricing.html"] {
+    color: var(--primary) !important;
+}
+
+/* Mobile menu active states */
+:root.light-theme #mobile-menu a {
+    color: rgba(0, 0, 0, 0.7) !important;
+}
+
+:root.light-theme #mobile-menu a:hover {
+    color: rgba(0, 0, 0, 0.9) !important;
+}
+
+:root.light-theme #mobile-menu a.text-primary {
+    color: var(--primary) !important;
+}
+
+/* ================================
+   Fix Skill Progress Bars
+   ================================ */
+
+/* Skill progress bars styling */
+.skill-bar {
+    width: 100%;
+    height: 8px;
+    background-color: var(--md-surface-2);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.skill-progress {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 4px;
+    width: 0%;
+    transition: width 1.5s ease-in-out;
+    position: relative;
+}
+
+.skill-progress::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Light theme skill bars */
+:root.light-theme .skill-bar {
+    background-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+:root.light-theme .skill-progress {
+    background: linear-gradient(90deg, var(--primary), var(--secondary)) !important;
+}
+/* 
+================================
+   COMPREHENSIVE LIGHT THEME IMPROVEMENTS
+   ================================ */
+
+/* Enhanced light theme variables */
+:root.light-theme {
+    --md-background: #FAFAFA;
+    --md-surface: #FFFFFF;
+    --md-surface-1: #F8F9FA;
+    --md-surface-2: #F1F3F4;
+    --md-surface-3: #E8EAED;
+    
+    /* Enhanced text colors for better contrast */
+    --md-text-primary: rgba(0, 0, 0, 0.87);
+    --md-text-secondary: rgba(0, 0, 0, 0.65);
+    
+    /* UI Colors for Light Theme */
+    --md-border: rgba(0, 0, 0, 0.12);
+    --md-shadow: rgba(0, 0, 0, 0.08);
+}
+
+/* Glass card improvements for light theme */
+:root.light-theme .glass-card {
+    background: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* Fix ALL text contrast issues in light theme */
+:root.light-theme .text-gray-100 {
+    color: rgba(0, 0, 0, 0.95) !important;
+}
+
+:root.light-theme .text-gray-200 {
+    color: rgba(0, 0, 0, 0.9) !important;
+}
+
+:root.light-theme .text-gray-300 {
+    color: rgba(0, 0, 0, 0.85) !important;
+}
+
+:root.light-theme .text-gray-400 {
+    color: rgba(0, 0, 0, 0.75) !important;
+}
+
+:root.light-theme .text-gray-500 {
+    color: rgba(0, 0, 0, 0.7) !important;
+}
+
+:root.light-theme .text-gray-600 {
+    color: rgba(0, 0, 0, 0.65) !important;
+}
+
+:root.light-theme .text-gray-700 {
+    color: rgba(0, 0, 0, 0.8) !important;
+}
+
+:root.light-theme .text-gray-800 {
+    color: rgba(0, 0, 0, 0.9) !important;
+}
+
+:root.light-theme .text-gray-900 {
+    color: rgba(0, 0, 0, 0.95) !important;
+}
+
+:root.light-theme .text-white {
+    color: rgba(0, 0, 0, 0.95) !important;
+}
+
+/* Enhanced heading hierarchy */
+:root.light-theme h1,
+:root.light-theme h2,
+:root.light-theme h3,
+:root.light-theme h4,
+:root.light-theme h5,
+:root.light-theme h6 {
+    color: rgba(0, 0, 0, 0.9) !important;
+}
+
+:root.light-theme p {
+    color: rgba(0, 0, 0, 0.8) !important;
+}
+
+:root.light-theme span {
+    color: inherit !important;
+}
+
+:root.light-theme div {
+    color: inherit;
+}
+
+/* Fix text sizes */
+:root.light-theme .text-sm {
+    color: rgba(0, 0, 0, 0.8) !important;
+}
+
+:root.light-theme .text-base {
+    color: rgba(0, 0, 0, 0.85) !important;
+}
+
+:root.light-theme .text-lg {
+    color: rgba(0, 0, 0, 0.8) !important;
+}
+
+:root.light-theme .text-xl {
+    color: rgba(0, 0, 0, 0.85) !important;
+}
+
+:root.light-theme .text-2xl {
+    color: rgba(0, 0, 0, 0.9) !important;
+}
+
+:root.light-theme .text-3xl {
+    color: rgba(0, 0, 0, 0.9) !important;
+}
+
+:root.light-theme .text-4xl {
+    color: rgba(0, 0, 0, 0.95) !important;
+}
+
+:root.light-theme .text-5xl {
+    color: rgba(0, 0, 0, 0.95) !important;
+}
+
+:root.light-theme .text-6xl {
+    color: rgba(0, 0, 0, 0.95) !important;
+}
+
+/* Fix font weights */
+:root.light-theme .font-light {
+    color: rgba(0, 0, 0, 0.8) !important;
+}
+
+:root.light-theme .font-normal {
+    color: rgba(0, 0, 0, 0.85) !important;
+}
+
+:root.light-theme .font-medium {
+    color: rgba(0, 0, 0, 0.9) !important;
+}
+
+:root.light-theme .font-semibold {
+    color: rgba(0, 0, 0, 0.95) !important;
+}
+
+:root.light-theme .font-bold {
+    color: rgba(0, 0, 0, 0.95) !important;
+}
+
+/* Surface improvements to match dark theme feel */
+:root.light-theme .md-surface-1 {
+    background-color: var(--md-surface-1) !important;
+    border: 1px solid var(--md-border) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+}
+
+:root.light-theme .md-surface-2 {
+    background-color: var(--md-surface-2) !important;
+    border: 1px solid var(--md-border) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+}
+
+:root.light-theme .md-surface-3 {
+    background-color: var(--md-surface-3) !important;
+    border: 1px solid var(--md-border) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* Fix borders and backgrounds */
+:root.light-theme .border-gray-600 {
+    border-color: rgba(0, 0, 0, 0.15) !important;
+}
+
+:root.light-theme .border-gray-800 {
+    border-color: rgba(0, 0, 0, 0.15) !important;
+}
+
+:root.light-theme .bg-gray-700 {
+    background-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+:root.light-theme .bg-gray-800 {
+    background-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Fix hover effects */
+:root.light-theme .hover\:bg-gray-800:hover {
+    background-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+:root.light-theme .hover\:text-white:hover {
+    color: var(--primary) !important;
+}
+
+:root.light-theme .hover\:text-primary:hover {
+    color: var(--primary) !important;
+}
+
+/* Fix badges and status indicators */
+:root.light-theme .bg-blue-500\/10 {
+    background-color: rgba(0, 102, 255, 0.1) !important;
+    border-color: rgba(0, 102, 255, 0.2) !important;
+}
+
+:root.light-theme .text-blue-400 {
+    color: rgba(0, 102, 255, 0.9) !important;
+}
+
+:root.light-theme .bg-green-500\/20 {
+    background-color: rgba(16, 185, 129, 0.15) !important;
+}
+
+:root.light-theme .text-green-400 {
+    color: rgba(16, 185, 129, 0.8) !important;
+}
+
+/* Fix form elements */
+:root.light-theme input,
+:root.light-theme textarea,
+:root.light-theme select {
+    background-color: var(--md-surface-1) !important;
+    color: var(--md-text-primary) !important;
+    border: 1px solid var(--md-border) !important;
+}
+
+:root.light-theme input:focus,
+:root.light-theme textarea:focus,
+:root.light-theme select:focus {
+    background-color: var(--md-surface-1) !important;
+    color: var(--md-text-primary) !important;
+    border-color: var(--primary) !important;
+    outline: none !important;
+    box-shadow: 0 0 0 2px rgba(0, 102, 255, 0.2) !important;
+}
+
+:root.light-theme input::placeholder,
+:root.light-theme textarea::placeholder {
+    color: var(--md-text-secondary) !important;
+}
+
+/* Fix labels */
+:root.light-theme label {
+    color: rgba(0, 0, 0, 0.85) !important;
+}
+
+/* Fix icons */
+:root.light-theme .fa-chevron-down {
+    color: rgba(0, 0, 0, 0.6) !important;
+}
+
+:root.light-theme a:hover .fa-chevron-down {
+    color: var(--primary) !important;
+}
+
+:root.light-theme .fas.fa-bars {
+    color: rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Fix mobile menu */
+:root.light-theme #mobile-menu {
+    background-color: var(--md-surface) !important;
+    border: 1px solid var(--md-border) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Fix footer */
+:root.light-theme footer {
+    background-color: var(--md-surface-1) !important;
+    color: rgba(0, 0, 0, 0.7) !important;
+}
+
+:root.light-theme footer.border-t {
+    border-color: var(--md-border) !important;
+}
+
+:root.light-theme footer a {
+    color: rgba(0, 0, 0, 0.6) !important;
+}
+
+:root.light-theme footer a:hover {
+    color: var(--primary) !important;
+}
+
+:root.light-theme footer p {
+    color: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* ================================
+   NAVIGATION FIXES - NO PRICING ACTIVE ON HOMEPAGE
+   ================================ */
+
+/* Dark theme navigation */
+nav a {
+    color: var(--md-text-primary) !important;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+nav a:hover {
+    color: var(--md-text-primary) !important;
+    opacity: 0.8;
+}
+
+/* Active tab should ONLY be blue when explicitly set by JavaScript */
+nav a.text-primary {
+    color: var(--primary) !important;
+    font-weight: 600 !important;
+}
+
+nav a.text-primary:hover {
+    color: var(--primary) !important;
+    opacity: 0.9;
+}
+
+/* Light theme navigation - non-active links */
+:root.light-theme nav a:not(.text-primary) {
+    color: rgba(0, 0, 0, 0.8) !important;
+}
+
+:root.light-theme nav a:not(.text-primary):hover {
+    color: rgba(0, 0, 0, 0.9) !important;
+}
+
+/* Active tab remains blue in light theme */
+:root.light-theme nav a.text-primary {
+    color: var(--primary) !important;
+    font-weight: 600 !important;
+}
+
+:root.light-theme nav a.text-primary:hover {
+    color: var(--primary) !important;
+    opacity: 0.9;
+}
+
+/* Navigation active indicator */
+nav a.text-primary::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    background: var(--primary);
+    border-radius: 50%;
+    opacity: 0.8;
+}
+
+/* Mobile navigation fixes */
+:root.light-theme #mobile-menu a {
+    color: rgba(0, 0, 0, 0.8) !important;
+}
+
+:root.light-theme #mobile-menu a:hover {
+    color: var(--primary) !important;
+}
+
+:root.light-theme #mobile-menu a.text-primary {
+    color: var(--primary) !important;
+    font-weight: 600 !important;
+}
+
+/* ================================
+   SKILL PROGRESS BARS - FIXED
+   ================================ */
+
+.skill-progress-container {
+    margin-bottom: 1rem;
+}
+
+.skill-bar {
+    width: 100%;
+    height: 8px;
+    background-color: var(--md-surface-2);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid var(--md-border);
+}
+
+.skill-progress {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 4px;
+    width: 0%;
+    transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0, 102, 255, 0.2);
+}
+
+.skill-progress::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transform: translateX(-100%);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Light theme skill progress bars */
+:root.light-theme .skill-bar {
+    background-color: rgba(0, 0, 0, 0.08) !important;
+    border: 1px solid rgba(0, 0, 0, 0.12) !important;
+}
+
+:root.light-theme .skill-progress {
+    box-shadow: 0 2px 4px rgba(0, 102, 255, 0.15) !important;
+}
+
+:root.light-theme .skill-progress::after {
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent) !important;
+}
+
+/* Skill tags */
+.skill-tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background-color: rgba(0, 102, 255, 0.1);
+    color: var(--primary);
+    border: 1px solid rgba(0, 102, 255, 0.2);
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.skill-tag:hover {
+    background-color: var(--primary);
+    color: white;
+    transform: translateY(-1px);
+}
+
+:root.light-theme .skill-tag {
+    background-color: rgba(0, 102, 255, 0.08) !important;
+    color: rgba(0, 102, 255, 0.9) !important;
+    border: 1px solid rgba(0, 102, 255, 0.15) !important;
+}
+
+:root.light-theme .skill-tag:hover {
+    background-color: var(--primary) !important;
+    color: white !important;
+}
+
+/* ================================
+   SCROLL TO TOP BUTTON
+   ================================ */
+
+.scroll-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0, 102, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.scroll-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.scroll-to-top:hover {
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0 8px 25px rgba(0, 102, 255, 0.4);
+}
+
+.scroll-to-top:active {
+    transform: translateY(-1px) scale(0.95);
+}
+
+/* ================================
+   GRADIENT BUTTON TEXT FIXES
+   ================================ */
+
+.bg-gradient-to-r,
+.bg-gradient-to-l,
+.bg-gradient-to-t,
+.bg-gradient-to-b,
+.bg-gradient-to-br,
+.bg-gradient-to-bl,
+.bg-gradient-to-tr,
+.bg-gradient-to-tl,
+button[class*="bg-gradient"],
+a[class*="bg-gradient"],
+.cta-button,
+.btn-primary {
+    color: white !important;
+}
+
+.bg-gradient-to-r *,
+.bg-gradient-to-l *,
+.bg-gradient-to-t *,
+.bg-gradient-to-b *,
+.bg-gradient-to-br *,
+.bg-gradient-to-bl *,
+.bg-gradient-to-tr *,
+.bg-gradient-to-tl *,
+button[class*="bg-gradient"] *,
+a[class*="bg-gradient"] *,
+.cta-button *,
+.btn-primary * {
+    color: white !important;
+}
+
+/* Ensure gradient buttons maintain white text in ALL themes */
+:root.light-theme .bg-gradient-to-r,
+:root.light-theme .bg-gradient-to-l,
+:root.light-theme .bg-gradient-to-t,
+:root.light-theme .bg-gradient-to-b,
+:root.light-theme .bg-gradient-to-br,
+:root.light-theme .bg-gradient-to-bl,
+:root.light-theme .bg-gradient-to-tr,
+:root.light-theme .bg-gradient-to-tl,
+:root.light-theme button[class*="bg-gradient"],
+:root.light-theme a[class*="bg-gradient"],
+:root.light-theme .cta-button,
+:root.light-theme .btn-primary {
+    color: white !important;
+}
+
+:root.light-theme .bg-gradient-to-r *,
+:root.light-theme .bg-gradient-to-l *,
+:root.light-theme .bg-gradient-to-t *,
+:root.light-theme .bg-gradient-to-b *,
+:root.light-theme .bg-gradient-to-br *,
+:root.light-theme .bg-gradient-to-bl *,
+:root.light-theme .bg-gradient-to-tr *,
+:root.light-theme .bg-gradient-to-tl *,
+:root.light-theme button[class*="bg-gradient"] *,
+:root.light-theme a[class*="bg-gradient"] *,
+:root.light-theme .cta-button *,
+:root.light-theme .btn-primary * {
+    color: white !important;
+}
+
+/* Fix button text (except gradient buttons) */
+:root.light-theme button:not([class*="bg-gradient"]):not(.cta-button):not(.btn-primary) {
+    color: rgba(0, 0, 0, 0.85) !important;
+}
+
+/* Fix link text */
+:root.light-theme a:not([class*="bg-gradient"]):not(.cta-button):not(.btn-primary) {
+    color: var(--primary) !important;
+}
+
+:root.light-theme a:not([class*="bg-gradient"]):not(.cta-button):not(.btn-primary):hover {
+    color: var(--secondary) !important;
+}
+
+/* ================================
+   RESPONSIVE DESIGN
+   ================================ */
+
+@media (max-width: 768px) {
+    .scroll-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+    }
+}
+
+/* ================================
+   ACCESSIBILITY IMPROVEMENTS
+   ================================ */
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    :root {
+        --md-border: rgba(255, 255, 255, 0.3);
+    }
+    
+    :root.light-theme {
+        --md-border: rgba(0, 0, 0, 0.3);
+    }
+    
+    .text-gradient {
+        background: none;
+        color: var(--primary);
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .skill-progress::after {
+        animation: none;
+    }
+}/* ==
+==============================
+   ADDITIONAL LIGHT THEME FIXES
+   ================================ */
+
+/* Fix any remaining contrast issues */
+:root.light-theme .typewriter-subtitle {
+    color: rgba(0, 0, 0, 0.8) !important;
+}
+
+:root.light-theme .counter {
+    color: var(--primary) !important;
+}
+
+/* Fix social media icons */
+:root.light-theme .social-icon {
+    color: rgba(0, 0, 0, 0.7) !important;
+}
+
+:root.light-theme .social-icon:hover {
+    color: white !important;
+}
+
+/* Fix hero section specifically */
+:root.light-theme .hero-section h1 {
+    color: rgba(0, 0, 0, 0.95) !important;
+}
+
+:root.light-theme .hero-section h2 {
+    color: rgba(0, 0, 0, 0.9) !important;
+}
+
+:root.light-theme .hero-section p {
+    color: rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Fix about section */
+:root.light-theme .about-section h2,
+:root.light-theme .about-section h3 {
+    color: rgba(0, 0, 0, 0.95) !important;
+}
+
+:root.light-theme .about-section p {
+    color: rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Fix skills section */
+:root.light-theme .skills-section h2,
+:root.light-theme .skills-section h3 {
+    color: rgba(0, 0, 0, 0.95) !important;
+}
+
+:root.light-theme .skills-section p {
+    color: rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Fix work section */
+:root.light-theme .work-section h2,
+:root.light-theme .work-section h3 {
+    color: rgba(0, 0, 0, 0.95) !important;
+}
+
+:root.light-theme .work-section p {
+    color: rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Fix contact section */
+:root.light-theme .contact-section h2,
+:root.light-theme .contact-section h3 {
+    color: rgba(0, 0, 0, 0.95) !important;
+}
+
+:root.light-theme .contact-section p {
+    color: rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Fix testimonials section */
+:root.light-theme .testimonials-section h2 {
+    color: rgba(0, 0, 0, 0.95) !important;
+}
+
+:root.light-theme .testimonials-section p {
+    color: rgba(0, 0, 0, 0.8) !important;
+}
+
+:root.light-theme .testimonial-card .text-gray-300 {
+    color: rgba(0, 0, 0, 0.8) !important;
+}
+
+:root.light-theme .testimonial-card .text-white {
+    color: rgba(0, 0, 0, 0.9) !important;
+}
+
+:root.light-theme .testimonial-card .text-gray-400 {
+    color: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Fix pricing section */
+:root.light-theme .pricing-section h1,
+:root.light-theme .pricing-section h2,
+:root.light-theme .pricing-section h3 {
+    color: rgba(0, 0, 0, 0.95) !important;
+}
+
+:root.light-theme .pricing-section p {
+    color: rgba(0, 0, 0, 0.8) !important;
+}
+
+:root.light-theme .pricing-card h3 {
+    color: rgba(0, 0, 0, 0.9) !important;
+}
+
+:root.light-theme .pricing-card .text-4xl,
+:root.light-theme .pricing-card .text-5xl {
+    color: rgba(0, 0, 0, 0.95) !important;
+}
+
+:root.light-theme .pricing-card .feature-list li {
+    color: rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Fix card content text */
+:root.light-theme .card h3,
+:root.light-theme .project-card h3,
+:root.light-theme .skill-card h3,
+:root.light-theme .testimonial-card h3 {
+    color: rgba(0, 0, 0, 0.9) !important;
+}
+
+:root.light-theme .card p,
+:root.light-theme .project-card p,
+:root.light-theme .skill-card p,
+:root.light-theme .testimonial-card p {
+    color: rgba(0, 0, 0, 0.75) !important;
+}
+
+/* Fix skill card text specifically */
+:root.light-theme .skill-card .text-xl {
+    color: rgba(0, 0, 0, 0.9) !important;
+}
+
+:root.light-theme .skill-card .text-sm {
+    color: rgba(0, 0, 0, 0.75) !important;
+}
+
+/* Fix testimonial author text */
+:root.light-theme .testimonial-card .font-semibold {
+    color: rgba(0, 0, 0, 0.9) !important;
+}
+
+:root.light-theme .testimonial-card .text-sm {
+    color: rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Fix any remaining low contrast elements */
+:root.light-theme .opacity-60 {
+    opacity: 0.8 !important;
+}
+
+:root.light-theme .opacity-70 {
+    opacity: 0.9 !important;
+}
+
+:root.light-theme .opacity-80 {
+    opacity: 0.95 !important;
+}
+
+/* Fix list items */
+:root.light-theme li {
+    color: rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Fix any remaining text elements */
+:root.light-theme .text-xs {
+    color: rgba(0, 0, 0, 0.75) !important;
+}
+
+/* Ensure project overlay text remains white for readability */
+:root.light-theme .project-overlay h3,
+:root.light-theme .project-overlay p {
+    color: white !important;
+}
+
+/* Fix theme toggle button */
+:root.light-theme .theme-toggle {
+    background: var(--md-surface-2);
+    border: 2px solid var(--md-border);
+}
+
+/* Fix mobile menu button */
+:root.light-theme #menu-toggle {
+    color: rgba(0, 0, 0, 0.8) !important;
+}
+
+:root.light-theme #menu-toggle:hover {
+    color: var(--primary) !important;
+}
+
+/* Fix success popup in light theme */
+:root.light-theme #success-popup .bg-gray-800 {
+    background-color: var(--md-surface) !important;
+    border: 1px solid var(--md-border) !important;
+    color: var(--md-text-primary) !important;
+}
+
+:root.light-theme #success-popup .text-white {
+    color: rgba(0, 0, 0, 0.9) !important;
+}
+
+:root.light-theme #success-popup .text-gray-300 {
+    color: rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Fix currency selector in light theme */
+:root.light-theme #currency-selector {
+    background-color: var(--md-surface-1) !important;
+    color: var(--md-text-primary) !important;
+    border-color: var(--md-border) !important;
+}
+
+:root.light-theme #currency-selector option {
+    background-color: var(--md-surface) !important;
+    color: var(--md-text-primary) !important;
+}
+
+/* Ensure all interactive elements have proper contrast */
+:root.light-theme button,
+:root.light-theme input,
+:root.light-theme textarea,
+:root.light-theme select {
+    color: rgba(0, 0, 0, 0.87) !important;
+}
+
+/* Fix any remaining navigation issues */
+:root.light-theme nav {
+    background: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Ensure proper text contrast in all scenarios */
+:root.light-theme * {
+    color: inherit;
+}
+
+/* Override any remaining Tailwind classes that might cause issues */
+:root.light-theme .text-current {
+    color: rgba(0, 0, 0, 0.87) !important;
+}
+
+/* Final catch-all for any missed text elements */
+:root.light-theme body,
+:root.light-theme body * {
+    color: inherit;
+}
+
+:root.light-theme body {
+    color: rgba(0, 0, 0, 0.87) !important;
 }
